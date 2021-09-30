@@ -14,10 +14,12 @@ public class Account {
         this.isAdmin = isAdmin;
     }
 
+    // ! Maybe needs refactoring to functions
     public void updatePassword(String uuid, String password) {
 
     }
 
+    // ! Maybe needs refactoring to functions
     public void updateBalance(String uuid, double balance) {
 
     }
