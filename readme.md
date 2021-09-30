@@ -1,3 +1,5 @@
+# Banking Application
+****
 # Requirements diagrams
 Max: 40p, <br>
 Grade 6: 38p, <br>
@@ -13,7 +15,7 @@ Grade 5: 30p
 1. Rough at beginning [ ]
 2. Detailed in the end [ ]
 
-
+****
 # Requirements code
 1. Runnable [ ]
 2. Exception-handling [ ]
@@ -32,11 +34,13 @@ Grade 5: 30p
       1. Calc / data / I/O stuff
    5. Clean code [ ]
 
+****
 # Documentation
 1. Design [ ]
 2. Planning [ ]
 3. Test cases [ ]
 
+****
 # Extra stuff
 1. Presentable to class [ ]
 
