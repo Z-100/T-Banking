@@ -6,11 +6,11 @@ Grade 6: 38p, <br>
 Grade 5: 30p
 
 ## Use cases
-1. Exists [ ]
+1. Exists [:heavy_check_mark:]
 ## Sequence diagram
 1. Exists [ ]
 ## Class diagram
-1. Exists [ ]
+1. Exists [:heavy_check_mark:]
 ## Sketch
 1. Rough at beginning [ ]
 2. Detailed in the end [ ]
