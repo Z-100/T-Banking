@@ -1,4 +1,4 @@
-package java.ch.zeiter.marvin;
+package ch.zeiter.marvin;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

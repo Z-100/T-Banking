@@ -1,4 +1,4 @@
-package main.java.ch.zeiter.marvin;
+package ch.zeiter.marvin;
 
 public class Main {
 
