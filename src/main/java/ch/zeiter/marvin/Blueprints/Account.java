@@ -14,14 +14,6 @@ public class Account {
         this.isAdmin = isAdmin;
     }
 
-    public void updatePassword(String uuid, String password) {
-
-    }
-
-    public void updateBalance(String uuid, double balance) {
-
-    }
-
     public String getUuid() {
         return this.uuid;
     }
