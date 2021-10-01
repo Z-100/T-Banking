@@ -4,14 +4,19 @@ import ch.zeiter.marvin.Blueprints.Transaction;
 
 public class TransactionHandler {
 
-    private Transaction transaction;
-
-    public TransactionHandler(Transaction transaction) {
-        this.transaction = transaction;
+    public String newTransaction(double amountOfMoney) {
+        if (verifyTransaction(new Transaction(amountOfMoney, /*Replace with balance of logged user*/ 0, 0)))
+            return "Transaction successful";
+        else
+            return "Something went wrong";
     }
 
-    public boolean verifyTransaction() {
-        return true;
+    private boolean verifyTransaction(Transaction transaction) {
+        double oldBalance = transaction.getBalanceTwo();
+        transaction.setBalanceTwo( /*Replace with logged user acc*/
+                transaction.getBalanceTwo() + transaction.getBalanceOne());
+
+        return transaction.getBalanceTwo() - transaction.getBalanceOne() == oldBalance;
     }
 
 }
