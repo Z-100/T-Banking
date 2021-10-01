@@ -1,0 +1,9 @@
+[
+  {
+    "uuid": "aaa",
+    "iban": "aaa",
+    "password": "aaa",
+    "balance": 69.420,
+    "isAdmin": true
+  }
+]
