@@ -8,7 +8,7 @@ Grade 5: 30p
 ## Use cases
 1. Exists [:heavy_check_mark:]
 ## Sequence diagram
-1. Exists [ ]
+1. Exists [:heavy_check_mark:]
 ## Class diagram
 1. Exists [:heavy_check_mark:]
 ## Sketch
