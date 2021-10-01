@@ -1,5 +1,7 @@
 package ch.zeiter.marvin.io;
 
+import ch.zeiter.marvin.Blueprints.Transaction;
+import ch.zeiter.marvin.functions.TransactionHandler;
 import ch.zeiter.marvin.other.RegisteredAccounts;
 import ch.zeiter.marvin.other.UserChoice;
 
@@ -8,6 +10,7 @@ import java.util.Scanner;
 public class Cli {
 
     private RegisteredAccounts registeredAccounts;
+    private TransactionHandler transactionHandler;
 
     private final Scanner scanner;
 
@@ -22,6 +25,7 @@ public class Cli {
     }
 
     public void init(String bankName) {
+         TODO Change system for an admin
         while (true) {
             int modifier;
             if (!this.isLogged) {
@@ -47,10 +51,7 @@ public class Cli {
                 case WITHDRAW -> withdraw();
                 case DEPOSIT -> deposit();
                 case TRANSFER -> transfer();
-                case LOGOUT -> {
-                    logout();
-                    return;
-                }
+                case LOGOUT -> logout();
             }
         }
     }
@@ -59,12 +60,13 @@ public class Cli {
         int accessCounter = 5;
 
         while (true) {
-            System.out.println("\n-----LOGIN-----\n" +
-                    "Enter IBAN");
+            System.out.println("\n-----LOGIN-----\nEnter IBAN");
             String inputIban = this.scanner.nextLine();
+
             System.out.println("Enter password");
             String inputPassword = this.scanner.nextLine();
 
+            //TODO Change to accountpw from json
             if (inputIban.equals("5") && inputPassword.equals("5")) {
                 this.isLogged = true;
                 break;
@@ -98,7 +100,8 @@ public class Cli {
         while (true) {
             System.out.print("Password: ");
             String inputPassword = this.scanner.nextLine();
-            if (inputPassword.contains("")) {//add sum regex
+
+            if (inputPassword.contains("")) {//TODO add sum regex
                 System.out.println(this.registeredAccounts.
                         addRegisteredAccount(inputPassword));
                 break;
@@ -108,8 +111,13 @@ public class Cli {
         }
     }
 
-    private void withdraw() {
+    public void withdraw() {
+        System.out.println("\n----WITHDRAW----\n" +
+                "Enter amount of money to be withdrawn");
+        double withdrawAmount = Double.parseDouble(this.scanner.nextLine());
 
+        transactionHandler = new TransactionHandler();
+        System.out.println(transactionHandler.newTransaction((-1) * withdrawAmount));
     }
 
     private void deposit() {

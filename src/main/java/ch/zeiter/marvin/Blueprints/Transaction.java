@@ -1,10 +1,19 @@
 package ch.zeiter.marvin.Blueprints;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class Transaction {
 
-    private final double balanceOne;
-    private final double balanceTwo;
-    private final double transferAmount;
+    @Getter
+    @Setter
+    private double balanceOne;
+    @Getter
+    @Setter
+    private double balanceTwo;
+    @Getter
+    @Setter
+    private double transferAmount;
 
 
     public Transaction(double balanceOne, double balanceTwo, double transferAmount) {

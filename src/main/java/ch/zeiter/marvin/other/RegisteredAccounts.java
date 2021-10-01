@@ -14,6 +14,12 @@ public class RegisteredAccounts {
         this.saveJson = new SaveJson();
     }
 
+    /**
+     * Method which creates and sends a newly created account to SaveJson
+     *
+     * @param inputPassword The password, the account later will be using
+     * @return Message for the user
+     */
     public String addRegisteredAccount(String inputPassword) {
         try {
             this.saveJson.saveToJson(new Account(
