@@ -121,7 +121,12 @@ public class Cli {
     }
 
     private void deposit() {
+        System.out.println("\n----DEPOSIT----\n" +
+                "Enter amount of money to be deposited");
+        double depositAmount = Double.parseDouble(this.scanner.nextLine());
 
+        transactionHandler = new TransactionHandler();
+        System.out.println(transactionHandler.newTransaction(depositAmount));
     }
 
     private void transfer() {
