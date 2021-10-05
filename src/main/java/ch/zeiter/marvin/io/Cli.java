@@ -120,7 +120,7 @@ public class Cli {
         }
     }
 
-    public void withdraw() {
+    private void withdraw() {
         System.out.println("\n----WITHDRAW----\n" +
                 "Enter amount of money to be withdrawn");
         double withdrawAmount = Double.parseDouble(this.scanner.nextLine());
@@ -143,6 +143,7 @@ public class Cli {
     }
 
     private void logout() {
-        // * Destroy singleton here
+        this.userSession = null;
+        System.out.println("You have been logged out");
     }
 }
