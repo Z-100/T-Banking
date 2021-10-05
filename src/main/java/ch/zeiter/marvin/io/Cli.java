@@ -1,6 +1,7 @@
 package ch.zeiter.marvin.io;
 
 import ch.zeiter.marvin.Blueprints.Account;
+import ch.zeiter.marvin.functions.ListAccountsForApproval;
 import ch.zeiter.marvin.functions.Login;
 import ch.zeiter.marvin.functions.TransactionHandler;
 import ch.zeiter.marvin.other.RegisteredAccounts;
@@ -19,11 +20,14 @@ public class Cli {
     private UserChoice choice;
     private UserSession userSession;
 
+    private boolean awaitingApproval;
+
 
     public Cli() {
         this.registeredAccounts = new RegisteredAccounts();
         this.scanner = new Scanner(System.in);
         this.userSession = null;
+        this.awaitingApproval = false;
     }
 
     public void init(String bankName) {
@@ -43,6 +47,8 @@ public class Cli {
                             "[3] Deposit\n" +
                             "[4] Transfer\n" +
                             "[5] Log out\n", bankName);
+                    if (userSession.getLoggedUser().isAdmin())
+                        System.out.print("[5] Approve Accounts");
                 }
 
                 this.choice = UserChoice.values()[
@@ -55,6 +61,7 @@ public class Cli {
                     case DEPOSIT -> deposit();
                     case TRANSFER -> transfer();
                     case LOGOUT -> logout();
+                    case APPROVE -> approve();
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Enter valid stuff");
@@ -76,8 +83,10 @@ public class Cli {
             Account account = login.loginCheck(inputIban, inputPassword);
 
             if (account != null) {
-                this.userSession = UserSession.session(account);
-                login = null; // ? "Deletes" login object, as it's not used anymore
+                if (account.isApproved()) {
+                    this.userSession = UserSession.session(account);
+                    login = null; // ? "Deletes" login object, as it's not used anymore
+                }
                 break;
             } else if (accessCounter <= 0) {
                 System.exit(0); // ? Exits program
@@ -90,32 +99,37 @@ public class Cli {
     }
 
     private void register() {
-        System.out.println("\n-----REGISTER-----\n" +
-                "By proceeding you agree with\n" +
-                "our terms and agreements\n\n" +
-                "Write 'continue', to continue");
+        if (this.awaitingApproval)
+            System.out.println("Please wait until your account has been approved");
+        else {
+            System.out.println("\n-----REGISTER-----\n" +
+                    "By proceeding you agree with\n" +
+                    "our terms and agreements\n\n" +
+                    "Write 'continue', to continue");
 
-        String termsAndAgreementAccepted = this.scanner.nextLine();
-        if (!termsAndAgreementAccepted.equals("continue"))
-            System.exit(0); // TODO Change this to something different
+            String termsAndAgreementAccepted = this.scanner.nextLine();
+            if (!termsAndAgreementAccepted.equals("continue"))
+                System.exit(0); // TODO Change this to something different
 
-        System.out.println("Please choose a password\n" +
-                "1. 8-32 characters\n" +
-                "2. Must at least have:\n\t" +
-                "i.   One letter\n\t" +
-                "ii.  One Number\n\t" +
-                "iii. One special character");
+            System.out.println("Please choose a password\n" +
+                    "1. 8-32 characters\n" +
+                    "2. Must at least have:\n\t" +
+                    "i.   One letter\n\t" +
+                    "ii.  One Number\n\t" +
+                    "iii. One special character");
 
-        while (true) {
-            System.out.print("Password: ");
-            String inputPassword = this.scanner.nextLine();
+            while (true) {
+                System.out.print("Password: ");
+                String inputPassword = this.scanner.nextLine();
 
-            if (inputPassword.contains("")) {//TODO add sum regex
-                System.out.println(this.registeredAccounts.
-                        addRegisteredAccount(inputPassword));
-                break;
-            } else {
-                System.out.println("Enter valid password\n");
+                if (inputPassword.contains("")) {//TODO add sum regex
+                    System.out.println(this.registeredAccounts.
+                            addRegisteredAccount(inputPassword));
+                    this.awaitingApproval = true;
+                    break;
+                } else {
+                    System.out.println("Enter valid password\n");
+                }
             }
         }
     }
@@ -144,5 +158,18 @@ public class Cli {
 
     private void logout() {
         // * Destroy singleton here
+    }
+
+    private void approve() {
+        System.out.println("\nAll accounts waiting for approval\n");
+
+        ListAccountsForApproval lafa = new ListAccountsForApproval();
+        lafa.listAll();
+
+        System.out.println("""
+                Enter index to approve single account\n
+                Enter 'all' to approve every account\n
+                Enter nothing to approve no account""");
+        String approveIndex = this.scanner.nextLine();
     }
 }
