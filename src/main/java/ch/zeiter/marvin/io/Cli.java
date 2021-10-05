@@ -1,62 +1,69 @@
 package ch.zeiter.marvin.io;
 
-import ch.zeiter.marvin.Blueprints.Transaction;
+import ch.zeiter.marvin.Blueprints.Account;
+import ch.zeiter.marvin.functions.Login;
 import ch.zeiter.marvin.functions.TransactionHandler;
 import ch.zeiter.marvin.other.RegisteredAccounts;
 import ch.zeiter.marvin.other.UserChoice;
+import ch.zeiter.marvin.other.UserSession;
 
 import java.util.Scanner;
 
 public class Cli {
 
-    private RegisteredAccounts registeredAccounts;
+    private final RegisteredAccounts registeredAccounts;
     private TransactionHandler transactionHandler;
 
     private final Scanner scanner;
 
-    private boolean isLogged; // ! Change to singleton session
     private UserChoice choice;
+    private UserSession userSession;
 
 
     public Cli() {
         this.registeredAccounts = new RegisteredAccounts();
         this.scanner = new Scanner(System.in);
-        this.isLogged = false;
+        this.userSession = null;
     }
 
     public void init(String bankName) {
-         TODO Change system for an admin
+        //   TODO Change system for an admin
         while (true) {
-            int modifier;
-            if (!this.isLogged) {
-                System.out.printf("-----%s-----\n" +
-                        "[0] Login\n" +
-                        "[1] Register\n", bankName);
+            try {
+                int modifier;
+                if (this.userSession == null) {
+                    System.out.printf("-----%s-----\n" +
+                            "[0] Login\n" +
+                            "[1] Register\n", bankName);
 
 
-            } else if (this.isLogged) {
-                System.out.printf("----%s----\n" +
-                        "[2] Withdraw\n" +
-                        "[3] Deposit\n" +
-                        "[4] Transfer\n" +
-                        "[5] Log out\n", bankName);
-            }
+                } else {
+                    System.out.printf("----%s----\n" +
+                            "[2] Withdraw\n" +
+                            "[3] Deposit\n" +
+                            "[4] Transfer\n" +
+                            "[5] Log out\n", bankName);
+                }
 
-            this.choice = UserChoice.values()[
-                    Integer.parseInt(this.scanner.nextLine())];
+                this.choice = UserChoice.values()[
+                        Integer.parseInt(this.scanner.nextLine())];
 
-            switch (this.choice) {
-                case LOGIN -> login();
-                case REGISTER -> register();
-                case WITHDRAW -> withdraw();
-                case DEPOSIT -> deposit();
-                case TRANSFER -> transfer();
-                case LOGOUT -> logout();
+                switch (this.choice) {
+                    case LOGIN -> login();
+                    case REGISTER -> register();
+                    case WITHDRAW -> withdraw();
+                    case DEPOSIT -> deposit();
+                    case TRANSFER -> transfer();
+                    case LOGOUT -> logout();
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Enter valid stuff");
             }
         }
     }
 
     private void login() {
+        Login login = new Login();
         int accessCounter = 5;
 
         while (true) {
@@ -66,12 +73,14 @@ public class Cli {
             System.out.println("Enter password");
             String inputPassword = this.scanner.nextLine();
 
-            //TODO Change to accountpw from json
-            if (inputIban.equals("5") && inputPassword.equals("5")) {
-                this.isLogged = true;
+            Account account = login.loginCheck(inputIban, inputPassword);
+
+            if (account != null) {
+                this.userSession = UserSession.session(account);
+                login = null; // ? "Deletes" login object, as it's not used anymore
                 break;
             } else if (accessCounter <= 0) {
-                System.exit(0);
+                System.exit(0); // ? Exits program
             } else {
                 System.out.println("\nEither IBAN or password is wrong\n");
                 accessCounter--;

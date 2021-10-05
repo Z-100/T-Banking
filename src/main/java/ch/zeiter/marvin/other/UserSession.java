@@ -15,7 +15,6 @@ public class UserSession {
     public static UserSession session(Account account) {
         if (userSession == null)
             userSession = new UserSession(account);
-
         return userSession;
     }
 

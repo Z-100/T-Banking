@@ -13,29 +13,26 @@ public class Json {
 
     private ArrayList<Account> accounts;
 
-    private JSONParser jsonParser;
+    private final JSONParser jsonParser;
 
     public Json() {
         accounts = new ArrayList<>();
         jsonParser = new JSONParser();
     }
 
-    public void saveToJson(Account newAccount, ArrayList<Account> newAccounts, String inputStream)
+    /**
+     * Method used to save Accounts to the specified jsonfile
+     *
+     * @param newAccount Used for registering
+     * @param inputStream Path to the json file
+     * @throws IOException Thrown exception
+     * @throws ParseException Thrown exception
+     */
+    public void saveToJson(Account newAccount, String inputStream)
             throws IOException, ParseException {
 
-        JSONArray results = (JSONArray) jsonParser.parse(new InputStreamReader(
-                getClass().getClassLoader().getResourceAsStream(inputStream)));
-
-        results.forEach(objObject -> {
-            JSONObject jsnObj = (JSONObject) objObject;
-            this.accounts.add(new Account(
-                    (String) jsnObj.get("uuid"),
-                    (String) jsnObj.get("iban"),
-                    (String) jsnObj.get("password"),
-                    (double) jsnObj.get("balance"),
-                    (boolean) jsnObj.get("isAdmin")
-            ));
-        });
+        this.accounts.clear();
+        this.accounts = getFromJson(inputStream);
         this.accounts.add(newAccount);
 
         JSONArray accounts = new JSONArray();
@@ -46,7 +43,7 @@ public class Json {
             account.put("iban", acc.getIban());
             account.put("password", acc.getPassword());
             account.put("balance", acc.getBalance());
-            account.put("isAdmin", acc.getIsAdmin());
+            account.put("isAdmin", acc.isAdmin());
             accounts.add(account);
         });
 
@@ -55,13 +52,25 @@ public class Json {
         fileWriter.flush();
     }
 
-    public void getFromJson(Account newAccount, String inputStream)
+    /**
+     * Method used to get Objects of the type Account from the specified inputStream
+     *
+     * @param inputStream Path to the json file
+     * @return An Arraylist filled with all accounts in jsonfile
+     * @throws IOException Thrown exception
+     * @throws ParseException Thrown exception
+     */
+    public ArrayList<Account> getFromJson(String inputStream)
             throws IOException, ParseException {
+
+        this.accounts.clear();
+
         JSONArray results = (JSONArray) jsonParser.parse(new InputStreamReader(
                 getClass().getClassLoader().getResourceAsStream(inputStream)));
 
         results.forEach(objObject -> {
             JSONObject jsnObj = (JSONObject) objObject;
+
             this.accounts.add(new Account(
                     (String) jsnObj.get("uuid"),
                     (String) jsnObj.get("iban"),
@@ -70,6 +79,6 @@ public class Json {
                     (boolean) jsnObj.get("isAdmin")
             ));
         });
-        this.accounts.add(newAccount);
+        return this.accounts;
     }
 }
