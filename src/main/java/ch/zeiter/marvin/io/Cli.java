@@ -154,6 +154,7 @@ public class Cli {
     }
 
     private void logout() {
-        // * Destroy singleton here
+        this.userSession = null;
+        System.out.println("You have been logged out");
     }
 }
