@@ -1,6 +1,5 @@
 package ch.zeiter.marvin.other;
 
-import ch.zeiter.marvin.Blueprints.Account;
 import ch.zeiter.marvin.functions.CreateAccount;
 import ch.zeiter.marvin.functions.Json;
 import org.json.simple.parser.ParseException;
@@ -27,7 +26,6 @@ public class RegisteredAccounts {
      * @return Message for the user
      */
     public String addRegisteredAccount(String inputPassword) {
-
         try {
             this.json.saveToJson(createAccount.createAccount(inputPassword),
                     "Accounts/registeredAccounts.json");

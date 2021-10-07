@@ -80,6 +80,7 @@ public class Cli {
                 login = null; // ? "Deletes" login object, as it's not used anymore
                 break;
             } else if (accessCounter <= 0) {
+                System.out.println("Too many attempts, try again later");
                 System.exit(0); // ? Exits program
             } else {
                 System.out.println("\nEither IBAN or password is wrong\n");
