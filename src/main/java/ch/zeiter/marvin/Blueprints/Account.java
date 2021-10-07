@@ -17,6 +17,9 @@ public class Account {
     private double balance;
     @Getter
     private final boolean isAdmin;
+    @Getter
+    @Setter
+    private boolean isApproved;
 
     /**
      * Constructor for the Account class
@@ -26,12 +29,14 @@ public class Account {
      * @param password User defined, changeable password
      * @param balance adjustable balance of the account
      * @param isAdmin determines if an account has admin rights or not.
+     * @param isApproved determines if an account is registered or a user
      */
-    public Account(String uuid, String iban, String password, double balance, boolean isAdmin) {
+    public Account(String uuid, String iban, String password, double balance, boolean isAdmin, boolean isApproved) {
         this.uuid = uuid;
         this.iban = iban;
         this.password = password;
         this.balance = balance;
         this.isAdmin = isAdmin;
+        this.isApproved = isApproved;
     }
 }

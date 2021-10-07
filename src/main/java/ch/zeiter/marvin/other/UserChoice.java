@@ -2,5 +2,5 @@ package ch.zeiter.marvin.other;
 
 public enum UserChoice {
 
-    LOGIN, REGISTER, WITHDRAW, DEPOSIT, TRANSFER, LOGOUT
+    LOGIN, REGISTER, BALANCE, WITHDRAW, DEPOSIT, TRANSFER, LOGOUT;
 }
