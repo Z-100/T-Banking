@@ -1,10 +1,10 @@
 [
   {
-    "uuid": "test",
-    "iban": "test",
     "password": "test",
-    "balance": 69.420,
+    "balance": 15789.0,
+    "iban": "test",
     "isAdmin": true,
-    "isApproved": true
+    "isApproved": true,
+    "uuid": "test"
   }
 ]

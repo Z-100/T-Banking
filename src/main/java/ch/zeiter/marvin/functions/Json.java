@@ -23,33 +23,39 @@ public class Json {
     /**
      * Method used to save Accounts to the specified jsonfile
      *
-     * @param newAccount  Used for registering
+     * @param jsonAccount  Used for registering
      * @param inputStream Path to the json file
      * @throws IOException    Thrown exception
      * @throws ParseException Thrown exception
      */
-    public void saveToJson(Account newAccount, String inputStream)
+    public void saveToJson(Account jsonAccount, String inputStream)
             throws IOException, ParseException {
 
         this.accounts.clear();
         this.accounts = getFromJson(inputStream);
-        this.accounts.add(newAccount);
+// ! add back if needed        this.accounts.add(jsonAccount);
 
-        JSONArray accounts = new JSONArray();
+        JSONArray jsonArrayAccounts = new JSONArray();
 
         this.accounts.forEach(acc -> {
+            if (acc.getUuid().equals(jsonAccount.getUuid())) {
+                acc.setBalance(jsonAccount.getBalance());
+            }
+
             JSONObject account = new JSONObject();
+
             account.put("uuid", acc.getUuid());
             account.put("iban", acc.getIban());
             account.put("password", acc.getPassword());
             account.put("balance", acc.getBalance());
             account.put("isAdmin", acc.isAdmin());
             account.put("isApproved", acc.isApproved());
-            accounts.add(account);
+
+            jsonArrayAccounts.add(account);
         });
 
         FileWriter fileWriter = new FileWriter("src/main/resources/" + inputStream);
-        fileWriter.write(accounts.toJSONString());
+        fileWriter.write(jsonArrayAccounts.toJSONString());
         fileWriter.flush();
     }
 
