@@ -10,8 +10,6 @@ import ch.zeiter.marvin.io.Cli;
 
 public class Main {
 
-    public static Cli cli = new Cli();
-
     /**
      * Method used to start the program
      * @param args Starting argument
@@ -19,6 +17,7 @@ public class Main {
     public static void main(String[] args) {
         String name = "TBZ E-Banking";
 
+        Cli cli = new Cli();
         cli.init(name);
     }
 }

@@ -136,8 +136,9 @@ public class Cli {
                 "Enter amount of money to be withdrawn");
         double withdrawAmount = Double.parseDouble(this.scanner.nextLine());
 
-        transactionHandler = new TransactionHandler();
+        transactionHandler = new TransactionHandler(this.userSession);
         System.out.println(transactionHandler.newTransaction((-1) * withdrawAmount));
+        transactionHandler = null;
     }
 
     private void deposit() {
@@ -145,8 +146,9 @@ public class Cli {
                 "Enter amount of money to be deposited");
         double depositAmount = Double.parseDouble(this.scanner.nextLine());
 
-        transactionHandler = new TransactionHandler();
+        transactionHandler = new TransactionHandler(this.userSession);
         System.out.println(transactionHandler.newTransaction(depositAmount));
+        transactionHandler = null;
     }
 
     private void transfer() {
