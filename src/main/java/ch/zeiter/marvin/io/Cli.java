@@ -1,13 +1,16 @@
 package ch.zeiter.marvin.io;
 
 import ch.zeiter.marvin.Blueprints.Account;
+import ch.zeiter.marvin.functions.Json;
+import ch.zeiter.marvin.functions.ListAccountsForApproval;
 import ch.zeiter.marvin.functions.Login;
 import ch.zeiter.marvin.functions.TransactionHandler;
 import ch.zeiter.marvin.other.RegisteredAccounts;
-import ch.zeiter.marvin.other.UserChoice;
 import ch.zeiter.marvin.other.UserSession;
 import lombok.Getter;
+import org.json.simple.parser.ParseException;
 
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,12 +19,16 @@ public class Cli {
 
     private final RegisteredAccounts registeredAccounts;
     private TransactionHandler transactionHandler;
+    private final Json json;
 
     private final Scanner scanner;
 
-    private UserChoice choice;
+//    private UserChoice choice;
+    private int choice;
     @Getter
     private UserSession userSession;
+
+    private boolean awaitingApproval;
 
 
     /**
@@ -29,8 +36,10 @@ public class Cli {
      */
     public Cli() {
         this.registeredAccounts = new RegisteredAccounts();
+        this.json = new Json();
         this.scanner = new Scanner(System.in);
         this.userSession = null;
+        this.awaitingApproval = false;
     }
 
     /**
@@ -66,12 +75,12 @@ public class Cli {
                 "[0] Login\n" +
                 "[1] Register\n", bankName);
 
-        this.choice = UserChoice.values()[
-                Integer.parseInt(this.scanner.nextLine())];
+        this.choice = Integer.parseInt(this.scanner.nextLine()); /* UserChoice.values()[
+                Integer.parseInt(this.scanner.nextLine())];*/
 
         switch (this.choice) {
-            case LOGIN -> login();
-            case REGISTER -> register();
+            case 0 -> login();
+            case 1 -> register();
             default -> throw new Exception();
         }
     }
@@ -89,14 +98,14 @@ public class Cli {
                 "[2] Transfer\n" +
                 "[3] Log out\n", bankName);
 
-        this.choice = UserChoice.values()[
-                Integer.parseInt(this.scanner.nextLine()) - 2];
+        this.choice = Integer.parseInt(this.scanner.nextLine()); /*UserChoice.values()[
+                Integer.parseInt(this.scanner.nextLine()) - 2];*/
 
         switch (this.choice) {
-            case WITHDRAW -> withdraw();
-            case DEPOSIT -> deposit();
-            case TRANSFER -> transfer();
-            case LOGOUT -> logout();
+            case 0 -> withdraw();
+            case 1 -> deposit();
+            case 2 -> transfer();
+            case 3 -> logout();
             default -> throw new Exception();
         }
     }
@@ -110,22 +119,23 @@ public class Cli {
     private void cliPageAdmin(String bankName) throws Exception {
         System.out.printf("----%s----\n" +
                 "[0] Create account\n" +
-                "[1] Approve account" +
+                "[1] Approve account\n" +
                 "[2] View statistics\n" +
                 "[3] Update password\n" +
                 "[4] Log out\n" +
-                "[5] Delete account", bankName);
+                "[5] Delete account\n", bankName);
 
-        this.choice = UserChoice.values()[
-                Integer.parseInt(this.scanner.nextLine())];
+        this.choice = Integer.parseInt(this.scanner.nextLine()); /*UserChoice.values()[
+                Integer.parseInt(this.scanner.nextLine())];*/
 
         // TODO make it work
         switch (this.choice) {
-            case CREATE -> withdraw();
-            case APPROVE -> deposit();
-            case STATS -> transfer();
-            case LOGOUT -> logout();
-            case DELETE -> logout();
+            case 0 -> createAccount();
+            case 1 -> approveAccount();
+            case 2 -> viewStats();
+            case 3 -> updatePassword();
+            case 4 -> logout();
+            case 5 -> deleteAccount();
             default -> throw new Exception();
         }
     }
@@ -144,8 +154,10 @@ public class Cli {
             Account account = login.loginCheck(inputIban, inputPassword);
 
             if (account != null) {
-                this.userSession = UserSession.session(account);
-                login = null; // ? "Deletes" login object, as it's not used anymore
+                if (account.isApproved()) {
+                    this.userSession = UserSession.session(account);
+                    login = null; // ? "Deletes" login object, as it's not used anymore
+                }
                 break;
             } else if (accessCounter <= 0) {
                 System.out.println("Too many attempts, try again later");
@@ -159,10 +171,13 @@ public class Cli {
     }
 
     private void register() {
-        System.out.println("\n-----REGISTER-----\n" +
-                "By proceeding you agree with\n" +
-                "our terms and agreements\n\n" +
-                "Write 'continue', to continue");
+        if (this.awaitingApproval)
+            System.out.println("Please wait until your account has been approved");
+        else {
+            System.out.println("\n-----REGISTER-----\n" +
+                    "By proceeding you agree with\n" +
+                    "our terms and agreements\n\n" +
+                    "Write 'continue', to continue");
 
         String termsAndAgreementAccepted = this.scanner.nextLine();
         if (!termsAndAgreementAccepted.equals("continue"))
@@ -188,10 +203,12 @@ public class Cli {
 
             if (matcher.matches()) {
                 System.out.println(this.registeredAccounts.
-                        addRegisteredAccount(inputPassword));
+                        addRegisteredAccount(inputPassword, "Accounts/registeredAccounts.json"));
+                this.awaitingApproval = true;
                 break;
-            } else {
-                System.out.println("Enter valid password\n");
+                } else {
+                    System.out.println("Enter valid password\n");
+                }
             }
         }
     }
@@ -229,6 +246,68 @@ public class Cli {
     private void logout() {
         this.userSession = null;
         System.out.println("You have been logged out");
-      System.exit(0);
+        System.exit(0);
+    }
+
+    private void approveAccount() {
+        System.out.println("\nAll accounts waiting for approval\n");
+
+        ListAccountsForApproval lafa = new ListAccountsForApproval();
+        lafa.listAll();
+
+        System.out.println("""
+                \nEnter index to approve single account\n
+                Enter 'all' to approve every account\n
+                Enter nothing to approve no account""");
+        String approveIndex = this.scanner.nextLine();
+
+    }
+
+    private void deleteAccount() {
+
+    }
+
+    private void updatePassword() {
+
+    }
+
+    private void createAccount() {
+        System.out.println("Please choose a password\n" +
+                "1. 8-32 characters\n" +
+                "2. Must at least have:\n\t" +
+                "i.   One letter (UPPER & lower)\n\t" +
+                "ii.  One Number\n\t" +
+                "iii. One special character");
+
+        Pattern pattern = Pattern.compile(
+                "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
+        Matcher matcher;
+
+        while (true) {
+            System.out.print("Password: ");
+            String inputPassword = this.scanner.nextLine();
+
+            matcher = pattern.matcher(inputPassword);
+
+            if (matcher.matches()) {
+                System.out.println(this.registeredAccounts.addRegisteredAccount(inputPassword, "Accounts/accounts.json"));
+                break;
+            } else {
+                System.out.println("Enter valid password\n");
+            }
+        }
+    }
+
+    private void viewStats() {
+        try {
+            int accountsRegistered = this.json.getFromJson("Accounts/accounts.json").size();
+            int accountsUnregistered = this.json.getFromJson("Accounts/registeredAccounts.json").size();
+            System.out.printf("\nTotal count of accounts registered:\t %d\n" +
+                    "Total count of accounts unregistered:\t %d\n\n",
+                    accountsRegistered, accountsUnregistered);
+
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
     }
 }

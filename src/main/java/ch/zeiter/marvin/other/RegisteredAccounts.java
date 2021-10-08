@@ -25,10 +25,9 @@ public class RegisteredAccounts {
      * @param inputPassword The password, the account later will be using
      * @return Message for the user
      */
-    public String addRegisteredAccount(String inputPassword) {
+    public String addRegisteredAccount(String inputPassword, String path) {
         try {
-            this.json.saveToJson(createAccount.createAccount(inputPassword),
-                    "Accounts/registeredAccounts.json");
+            this.json.saveToJson(createAccount.createAccount(inputPassword), path);
 
             return "Account successfully registered. Waiting approval";
         } catch (IOException | ParseException e) {
