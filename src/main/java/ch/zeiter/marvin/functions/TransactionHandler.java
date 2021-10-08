@@ -2,7 +2,7 @@ package ch.zeiter.marvin.functions;
 
 import ch.zeiter.marvin.Blueprints.Account;
 import ch.zeiter.marvin.Blueprints.Transaction;
-import ch.zeiter.marvin.Main;
+import ch.zeiter.marvin.other.UserSession;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -17,9 +17,9 @@ public class TransactionHandler {
     /**
      * The constructor
      */
-    public TransactionHandler() {
+    public TransactionHandler(UserSession userSession) {
         this.json = new Json();
-        this.account = Main.cli.getUserSession().getLoggedUser();
+        this.account = userSession.getLoggedUser();
     }
 
     /**
@@ -56,5 +56,4 @@ public class TransactionHandler {
 
         return account.getBalance() - transaction.getBalanceOne() == this.oldBalance;
     }
-
 }
