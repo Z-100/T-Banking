@@ -1,22 +1,24 @@
 package ch.zeiter.marvin.Blueprints;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TransactionTest {
 
-    @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
-
     @Test
-    void verifyTransaction() {
+    void returnsCorrectInformation() {
+        double balanceOne = 69420;
+        double balanceTwo = 420;
+        double transferAmount = 6.9;
+
+        Transaction transaction = new Transaction(balanceOne, balanceTwo, transferAmount);
+
+        Assertions.assertAll(
+                () -> assertEquals(transaction.getBalanceOne(), balanceOne),
+                () -> assertEquals(transaction.getBalanceTwo(), balanceTwo),
+                () -> assertEquals(transaction.getTransferAmount(), transferAmount)
+        );
     }
 }

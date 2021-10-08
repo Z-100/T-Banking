@@ -1,26 +1,30 @@
 package ch.zeiter.marvin.functions;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import ch.zeiter.marvin.other.AccountPropertyGenerator;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CreateAccountTest {
 
-    @BeforeEach
-    void setUp() {
-    }
+    CreateAccount createAccount = new CreateAccount();
 
-    @AfterEach
-    void tearDown() {
-    }
-
-    @Test
-    void registerAccount() {
-    }
+    @Mock
+    AccountPropertyGenerator apg = createAccount.getAcg();
 
     @Test
     void createAccount() {
+
+        String password = "password";
+
+        var result = createAccount.createAccount(password);
+
+        Assertions.assertAll(
+                () -> assertEquals(apg.getUuid(), result.getUuid()),
+                () -> assertEquals(apg.getIBan(), result.getIban()),
+                () -> assertEquals(password, result.getPassword())
+        );
     }
 }
