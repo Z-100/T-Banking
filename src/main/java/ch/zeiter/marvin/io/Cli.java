@@ -34,33 +34,47 @@ public class Cli {
             try {
                 int modifier;
                 if (this.userSession == null) {
-                    System.out.printf("-----%s-----\n" +
-                            "[0] Login\n" +
-                            "[1] Register\n", bankName);
-
-
+                    loginPage(bankName);
                 } else {
-                    System.out.printf("----%s----\n" +
-                            "[2] Withdraw\n" +
-                            "[3] Deposit\n" +
-                            "[4] Transfer\n" +
-                            "[5] Log out\n", bankName);
+                    cliPage(bankName);
                 }
-
-                this.choice = UserChoice.values()[
-                        Integer.parseInt(this.scanner.nextLine())];
-
-                switch (this.choice) {
-                    case LOGIN -> login();
-                    case REGISTER -> register();
-                    case WITHDRAW -> withdraw();
-                    case DEPOSIT -> deposit();
-                    case TRANSFER -> transfer();
-                    case LOGOUT -> logout();
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Enter valid stuff");
+            } catch (Exception e) {
+                System.out.println("Enter valid stuff" + e);
             }
+        }
+    }
+
+    private void loginPage(String bankName) throws Exception {
+        System.out.printf("-----%s-----\n" +
+                "[0] Login\n" +
+                "[1] Register\n", bankName);
+
+        this.choice = UserChoice.values()[
+                Integer.parseInt(this.scanner.nextLine())];
+
+        switch (this.choice) {
+            case LOGIN -> login();
+            case REGISTER -> register();
+            default -> throw new Exception();
+        }
+    }
+
+    private void cliPage(String bankName) throws Exception {
+        System.out.printf("----%s----\n" +
+                "[0] Withdraw\n" +
+                "[1] Deposit\n" +
+                "[2] Transfer\n" +
+                "[3] Log out\n", bankName);
+
+        this.choice = UserChoice.values()[
+                Integer.parseInt(this.scanner.nextLine())];
+
+        switch (this.choice) {
+            case WITHDRAW -> withdraw();
+            case DEPOSIT -> deposit();
+            case TRANSFER -> transfer();
+            case LOGOUT -> logout();
+            default -> throw new Exception();
         }
     }
 
