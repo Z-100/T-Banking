@@ -22,28 +22,41 @@ public class Cli {
     private UserSession userSession;
 
 
+    /**
+     * The constructor
+     */
     public Cli() {
         this.registeredAccounts = new RegisteredAccounts();
         this.scanner = new Scanner(System.in);
         this.userSession = null;
     }
 
+    /**
+     * Method used to start CLI interface process for the user
+     *
+     * @param bankName The applications name
+     */
     public void init(String bankName) {
         //   TODO Change system for an admin
         while (true) {
             try {
                 int modifier;
-                if (this.userSession == null) {
+                if (this.userSession == null)
                     loginPage(bankName);
-                } else {
+                else
                     cliPage(bankName);
-                }
             } catch (Exception e) {
                 System.out.println("Enter valid stuff" + e);
             }
         }
     }
 
+    /**
+     * The login / register page process
+     *
+     * @param bankName The applications name
+     * @throws Exception Thrown when user enters invalid choice
+     */
     private void loginPage(String bankName) throws Exception {
         System.out.printf("-----%s-----\n" +
                 "[0] Login\n" +
@@ -59,6 +72,12 @@ public class Cli {
         }
     }
 
+    /**
+     * The CLI interface process
+     *
+     * @param bankName The applications name
+     * @throws Exception Thrown when user enters invalid choice
+     */
     private void cliPage(String bankName) throws Exception {
         System.out.printf("----%s----\n" +
                 "[0] Withdraw\n" +
