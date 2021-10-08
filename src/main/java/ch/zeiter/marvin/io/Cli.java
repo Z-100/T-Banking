@@ -44,7 +44,10 @@ public class Cli {
                 if (this.userSession == null)
                     loginPage(bankName);
                 else
-                    cliPage(bankName);
+                    if (this.userSession.getLoggedUser().isAdmin())
+                        cliPageAdmin(bankName);
+                    else
+                        cliPageUser(bankName);
             } catch (Exception e) {
                 System.out.println("Enter valid stuff" + e);
             }
@@ -78,7 +81,7 @@ public class Cli {
      * @param bankName The applications name
      * @throws Exception Thrown when user enters invalid choice
      */
-    private void cliPage(String bankName) throws Exception {
+    private void cliPageUser(String bankName) throws Exception {
         System.out.printf("----%s----\n" +
                 "[0] Withdraw\n" +
                 "[1] Deposit\n" +
@@ -86,13 +89,42 @@ public class Cli {
                 "[3] Log out\n", bankName);
 
         this.choice = UserChoice.values()[
-                Integer.parseInt(this.scanner.nextLine())];
+                Integer.parseInt(this.scanner.nextLine()) - 2];
 
         switch (this.choice) {
             case WITHDRAW -> withdraw();
             case DEPOSIT -> deposit();
             case TRANSFER -> transfer();
             case LOGOUT -> logout();
+            default -> throw new Exception();
+        }
+    }
+
+    /**
+     * The CLI interface process
+     *
+     * @param bankName The applications name
+     * @throws Exception Thrown when user enters invalid choice
+     */
+    private void cliPageAdmin(String bankName) throws Exception {
+        System.out.printf("----%s----\n" +
+                "[0] Create account\n" +
+                "[1] Approve account" +
+                "[2] View statistics\n" +
+                "[3] Update password\n" +
+                "[4] Log out\n" +
+                "[5] Delete account", bankName);
+
+        this.choice = UserChoice.values()[
+                Integer.parseInt(this.scanner.nextLine())];
+
+        // TODO make it work
+        switch (this.choice) {
+            case CREATE -> withdraw();
+            case APPROVE -> deposit();
+            case STATS -> transfer();
+            case LOGOUT -> logout();
+            case DELETE -> logout();
             default -> throw new Exception();
         }
     }
