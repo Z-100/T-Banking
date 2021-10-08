@@ -2,15 +2,18 @@ package ch.zeiter.marvin.functions;
 
 import ch.zeiter.marvin.Blueprints.Account;
 import ch.zeiter.marvin.other.AccountPropertyGenerator;
+import lombok.Getter;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 
 public class CreateAccount {
 
+    @Getter
+    private AccountPropertyGenerator acg = new AccountPropertyGenerator();
+
     public Account createAccount(String inputPassword) {
 
-        AccountPropertyGenerator acg = new AccountPropertyGenerator();
         Json json = new Json();
 
         try {

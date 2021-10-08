@@ -93,19 +93,25 @@ public class Cli {
      */
     private void cliPageUser(String bankName) throws Exception {
         System.out.printf("----%s----\n" +
-                "[0] Withdraw\n" +
-                "[1] Deposit\n" +
-                "[2] Transfer\n" +
-                "[3] Log out\n", bankName);
+                "[0] View balance\n" +
+                "[1] Withdraw\n" +
+                "[2] Deposit\n" +
+                "[3] Transfer\n" +
+                "[4] Update password\n" +
+                "[5] Log out\n" +
+                "[6] Delete account\n", bankName);
 
         this.choice = Integer.parseInt(this.scanner.nextLine()); /*UserChoice.values()[
                 Integer.parseInt(this.scanner.nextLine()) - 2];*/
 
         switch (this.choice) {
-            case 0 -> withdraw();
-            case 1 -> deposit();
-            case 2 -> transfer();
-            case 3 -> logout();
+            case 0 -> balance();
+            case 1 -> withdraw();
+            case 2 -> deposit();
+            case 3 -> transfer();
+            case 4 -> updatePassword();
+            case 5 -> logout();
+            case 6 -> deleteAccount();
             default -> throw new Exception();
         }
     }
