@@ -6,6 +6,7 @@ import ch.zeiter.marvin.functions.TransactionHandler;
 import ch.zeiter.marvin.other.RegisteredAccounts;
 import ch.zeiter.marvin.other.UserChoice;
 import ch.zeiter.marvin.other.UserSession;
+import lombok.Getter;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -19,6 +20,7 @@ public class Cli {
     private final Scanner scanner;
 
     private UserChoice choice;
+    @Getter
     private UserSession userSession;
 
 
@@ -37,7 +39,6 @@ public class Cli {
      * @param bankName The applications name
      */
     public void init(String bankName) {
-        //   TODO Change system for an admin
         while (true) {
             try {
                 int modifier;
@@ -147,6 +148,7 @@ public class Cli {
                 login = null; // ? "Deletes" login object, as it's not used anymore
                 break;
             } else if (accessCounter <= 0) {
+                System.out.println("Too many attempts, try again later");
                 System.exit(0); // ? Exits program
             } else {
                 System.out.println("\nEither IBAN or password is wrong\n");
@@ -194,7 +196,13 @@ public class Cli {
         }
     }
 
-    public void withdraw() {
+    private void balance() {
+        System.out.printf("\n----BALANCE----\n" +
+                "Your current account balance is:\n" +
+                "%s", this.userSession.getLoggedUser().getBalance());
+    }
+
+    private void withdraw() {
         System.out.println("\n----WITHDRAW----\n" +
                 "Enter amount of money to be withdrawn");
         double withdrawAmount = Double.parseDouble(this.scanner.nextLine());
@@ -217,6 +225,8 @@ public class Cli {
     }
 
     private void logout() {
-        // * Destroy singleton here
+        this.userSession = null;
+        System.out.println("You have been logged out");
+      System.exit(0);
     }
 }
