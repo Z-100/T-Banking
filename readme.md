@@ -17,19 +17,19 @@ Grade 5: 30p
 
 ****
 # Requirements code
-1. Runnable [ ]
-2. Exception-handling [ ]
-3. I/O is user friendly [ ]
-   1. Files as datasource [ ]
+1. Runnable [:heavy_check_mark:]
+2. Exception-handling [:heavy_check_mark:]
+3. I/O is user friendly [:heavy_check_mark:]
+   1. Files as datasource [:heavy_check_mark:]
       1. json, txt, dat
-4. JavaDoc 0 / 100% (must be at least 80%) [ ]
+4. JavaDoc 0 / 100% (must be at least 80%) [:heavy_check_mark:]
    1. @param, descriptions
-5. JUnit (Min. 1 class & 2 methods) [ ]
-   1. 100% coverage [ ]
+5. JUnit 100% coverage [ ]
+   1. Min. 1 class & 2 methods [:heavy_check_mark:]
 6. Object-oriented stuff [ ]
-   1. Encapsulation / Information-hiding[ ]
+   1. Encapsulation / Information-hiding[:heavy_check_mark:]
    2. Delegation [ ]
-   3. Aggregations / Composition [ ]
+   3. Aggregations / Composition [:heavy_check_mark:]
    4. Well-structured [ ]
       1. Calc / data / I/O stuff
    5. Clean code [ ]
