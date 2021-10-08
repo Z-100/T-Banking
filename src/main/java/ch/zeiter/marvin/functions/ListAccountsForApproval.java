@@ -13,7 +13,7 @@ public class ListAccountsForApproval {
         try {
             ArrayList<Account> accounts = json.getFromJson("Accounts/registeredAccounts.json");
             for (int i = 0; i < accounts.size(); i++) {
-                System.out.println(i + accounts.get(i).getUuid());
+                System.out.printf("\n[%d] -> %s", i,  accounts.get(i).getUuid());
             }
         } catch (IOException | ParseException e) {
             e.printStackTrace();
