@@ -8,6 +8,8 @@ import ch.zeiter.marvin.other.UserChoice;
 import ch.zeiter.marvin.other.UserSession;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Cli {
 
@@ -97,20 +99,27 @@ public class Cli {
 
         String termsAndAgreementAccepted = this.scanner.nextLine();
         if (!termsAndAgreementAccepted.equals("continue"))
-            System.exit(0); // TODO Change this to something different
+            System.exit(0);
+
 
         System.out.println("Please choose a password\n" +
                 "1. 8-32 characters\n" +
                 "2. Must at least have:\n\t" +
-                "i.   One letter\n\t" +
+                "i.   One letter (UPPER & lower)\n\t" +
                 "ii.  One Number\n\t" +
                 "iii. One special character");
+
+        Pattern pattern = Pattern.compile(
+                "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
+        Matcher matcher;
 
         while (true) {
             System.out.print("Password: ");
             String inputPassword = this.scanner.nextLine();
 
-            if (inputPassword.contains("")) {//TODO add sum regex
+            matcher = pattern.matcher(inputPassword);
+
+            if (matcher.matches()) {
                 System.out.println(this.registeredAccounts.
                         addRegisteredAccount(inputPassword));
                 break;
