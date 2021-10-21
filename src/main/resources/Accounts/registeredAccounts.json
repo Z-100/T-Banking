@@ -1,50 +1,26 @@
 [
   {
+    "password": "aaa",
+    "balance": 15789.0,
+    "iban": "aaa",
+    "isAdmin": true,
+    "isApproved": true,
+    "uuid": "aaa"
+  },
+  {
     "password": "bbb",
-    "balance": 0.0,
+    "balance": 15284.0,
     "iban": "bbb",
     "isAdmin": false,
-    "isApproved": false,
+    "isApproved": true,
     "uuid": "bbb"
   },
   {
-    "password": "qeweqwe",
+    "password": "WhyDoIHaveToDoThis69$",
     "balance": 0.0,
-    "iban": "231004514",
+    "iban": "566043147",
     "isAdmin": false,
     "isApproved": false,
-    "uuid": "20f9ae68-8465-4187-971b-12d58d3721c5"
-  },
-  {
-    "password": "SANANAS",
-    "balance": 0.0,
-    "iban": "360903388",
-    "isAdmin": false,
-    "isApproved": false,
-    "uuid": "b1ce1aff-8476-4a4c-b36b-52b4dcd7e2df"
-  },
-  {
-    "password": "aaaa",
-    "balance": 0.0,
-    "iban": "34190089",
-    "isAdmin": false,
-    "isApproved": false,
-    "uuid": "b5304744-9e48-474c-8fd9-bf3c1affd222"
-  },
-  {
-    "password": "asfssdfs",
-    "balance": 0.0,
-    "iban": "198475498",
-    "isAdmin": false,
-    "isApproved": false,
-    "uuid": "fc753927-e5d3-48bc-a372-7c126b606a8f"
-  },
-  {
-    "password": "SANANAS",
-    "balance": 0.0,
-    "iban": "679493719",
-    "isAdmin": false,
-    "isApproved": false,
-    "uuid": "c3f72593-9319-4dfd-9ca6-86b6acbc695d"
+    "uuid": "d653889e-f61b-4954-b157-d2c24796f7ee"
   }
 ]

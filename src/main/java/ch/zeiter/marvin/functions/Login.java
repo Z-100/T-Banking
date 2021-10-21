@@ -1,7 +1,6 @@
 package ch.zeiter.marvin.functions;
 
 import ch.zeiter.marvin.Blueprints.Account;
-import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,7 +43,7 @@ public class Login {
     private ArrayList<Account> getAccountFromJson() {
         try {
             return json.getFromJson("Accounts/accounts.json");
-        } catch (IOException | ParseException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             return null;
         }

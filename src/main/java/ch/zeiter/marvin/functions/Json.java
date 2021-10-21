@@ -23,17 +23,19 @@ public class Json {
     /**
      * Method used to save Accounts to the specified jsonfile
      *
-     * @param jsonAccount  Used for registering
+     * @param jsonAccount Used for registering
      * @param inputStream Path to the json file
      * @throws IOException    Thrown exception
      * @throws ParseException Thrown exception
      */
-    public void saveToJson(Account jsonAccount, String inputStream)
+    public void saveToJson(Account jsonAccount, String inputStream, boolean newUser)
             throws IOException, ParseException {
 
         this.accounts.clear();
         this.accounts = getFromJson(inputStream);
-// ! add back if needed        this.accounts.add(jsonAccount);
+
+        if (newUser)
+            this.accounts.add(jsonAccount);
 
         JSONArray jsonArrayAccounts = new JSONArray();
 
@@ -68,12 +70,18 @@ public class Json {
      * @throws ParseException Thrown exception
      */
     public ArrayList<Account> getFromJson(String inputStream)
-            throws IOException, ParseException {
+            throws IOException {
 
         this.accounts.clear();
+        JSONArray results;
 
-        JSONArray results = (JSONArray) jsonParser.parse(new InputStreamReader(
-                getClass().getClassLoader().getResourceAsStream(inputStream)));
+        try {
+            results = (JSONArray) jsonParser.parse(new InputStreamReader(
+                    getClass().getClassLoader().getResourceAsStream(inputStream)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
 
         results.forEach(objObject -> {
             JSONObject jsnObj = (JSONObject) objObject;

@@ -1,7 +1,6 @@
 package ch.zeiter.marvin.functions;
 
 import ch.zeiter.marvin.Blueprints.Account;
-import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ public class ListAccountsForApproval {
             for (int i = 0; i < accounts.size(); i++) {
                 System.out.printf("\n[%d] -> %s", i,  accounts.get(i).getUuid());
             }
-        } catch (IOException | ParseException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

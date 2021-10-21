@@ -23,11 +23,12 @@ public class RegisteredAccounts {
      * Method which creates and sends a newly created account to SaveJson
      *
      * @param inputPassword The password, the account later will be using
+     * @param path The path to the file
      * @return Message for the user
      */
     public String addRegisteredAccount(String inputPassword, String path) {
         try {
-            this.json.saveToJson(createAccount.createAccount(inputPassword), path);
+            this.json.saveToJson(createAccount.createAccount(inputPassword), path, true);
 
             return "Account successfully registered. Waiting approval";
         } catch (IOException | ParseException e) {
