@@ -28,7 +28,7 @@ public class RegisteredAccounts {
      */
     public String addRegisteredAccount(String inputPassword, String path) {
         try {
-            this.jsonActions.saveToJson(createAccount.createAccount(inputPassword), path, true);
+            this.jsonActions.saveToJson(createAccount.createAccount(inputPassword), path, "newUser");
 
             return "Account successfully registered. Waiting approval";
         } catch (IOException | ParseException e) {

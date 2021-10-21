@@ -1,21 +1,57 @@
 package ch.zeiter.marvin.functions;
 
-import ch.zeiter.marvin.Blueprints.Account;
+import ch.zeiter.marvin.other.UserSession;
+import org.json.simple.parser.ParseException;
 
-@Deprecated
+import java.io.IOException;
+import java.util.Scanner;
+
 public class AccountHandler {
 
-    private Account account;
+    private final Scanner scanner;
+    private final JsonActions jsonActions;
 
-    public AccountHandler(Account account) {
-        this.account = account;
+    public AccountHandler(Scanner scanner, JsonActions jsonActions) {
+        this.scanner = scanner;
+        this.jsonActions = jsonActions;
     }
 
-    public void updatePassword(String uuid, String password) {
+    public boolean deleteAccountConfirmation(UserSession userSession) {
+        String[] really = new String[]{
+                "\nDo you really wanna do this?",
+                "You wanna delete your account?",
+                "Like actually? It will be gone forever"};
+
+        System.out.println("""
+                Enter your password to delete your account
+                Enter nothing to keep your account""");
+        String password = scanner.nextLine();
+
+        if (password.equals(userSession.getLoggedUser().getPassword())) {
+            for (String rly : really) {
+                System.out.println(rly + "\nIf so, enter 'yes'");
+                String yes = scanner.nextLine();
+
+                if (!yes.equals("yes"))
+                    return false;
+            }
+            return deleteAccount(userSession);
+        }
+        return false;
+    }
+
+    public void updatePassword(UserSession userSession) {
 
     }
 
-    public void updateBalance(String uuid, double balance) {
-
+    private boolean deleteAccount(UserSession userSession) {
+        try {
+            jsonActions.saveToJson(userSession.getLoggedUser(),
+                    "Accounts/accounts.json", "deleteUser");
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }

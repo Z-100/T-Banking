@@ -12,26 +12,31 @@ import java.util.regex.Pattern;
 
 public class Cli {
 
-    @Getter
-    private final RegisteredAccounts registeredAccounts;
 
     private final Scanner scanner;
 
-    //    private UserChoice choice;
+    private boolean awaitingApproval;
     private int choice;
+
+    //    private UserChoice choice;
     @Getter
     private UserSession userSession;
-
-    private boolean awaitingApproval;
+    @Getter
+    private final RegisteredAccounts registeredAccounts;
+    private final JsonActions jsonActions;
+    private final AccountHandler accountHandler;
 
     /**
      * The constructor
      */
     public Cli() {
-        this.registeredAccounts = new RegisteredAccounts();
         this.scanner = new Scanner(System.in);
-        this.userSession = null;
         this.awaitingApproval = false;
+        this.userSession = null;
+        this.registeredAccounts = new RegisteredAccounts();
+        jsonActions = new JsonActions();
+        this.accountHandler = new AccountHandler(
+                this.scanner, this.jsonActions);
     }
 
     /**
@@ -103,9 +108,12 @@ public class Cli {
             case 1 -> userAction.withdraw();
             case 2 -> userAction.deposit();
             case 3 -> userAction.transfer();
-            case 4 -> updatePassword();
-            case 5 -> logout();
-            case 6 -> deleteAccount();
+            case 4 -> accountHandler.updatePassword(this.userSession);
+            case 5 -> logout("You have been logged out");
+            case 6 -> {
+                if (accountHandler.deleteAccountConfirmation(this.userSession))
+                    logout("Your account has been deleted");
+            }
             default -> throw new Exception();
         }
     }
@@ -135,15 +143,18 @@ public class Cli {
             case 0 -> adminAction.createAccount();
             case 1 -> adminAction.approveAccount();
             case 2 -> adminAction.viewStats();
-            case 3 -> updatePassword();
-            case 4 -> logout();
-            case 5 -> deleteAccount();
+            case 3 -> accountHandler.updatePassword(this.userSession);
+            case 4 -> logout("You have been logged out");
+            case 5 -> {
+                if (accountHandler.deleteAccountConfirmation(this.userSession))
+                    logout("Your account has been deleted");
+            }
             default -> throw new Exception();
         }
     }
 
     private void login() {
-        Login login = new Login();
+        Login login = new Login(this.jsonActions);
         int accessCounter = 5;
 
         while (true) {
@@ -215,17 +226,9 @@ public class Cli {
         }
     }
 
-    private void logout() {
+    private void logout(String message) {
         this.userSession = null;
-        System.out.println("You have been logged out");
+        System.out.println(message);
         System.exit(0);
-    }
-
-    private void deleteAccount() {
-
-    }
-
-    private void updatePassword() {
-
     }
 }

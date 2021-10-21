@@ -29,14 +29,18 @@ public class JsonActions {
      * @throws IOException Thrown exception
      * @throws ParseException Thrown exception
      */
-    public void saveToJson(Account jsonAccount, String inputStream, boolean newUser)
+    public void saveToJson(Account jsonAccount, String inputStream, String action)
             throws IOException, ParseException {
 
         this.accounts.clear();
         this.accounts = getFromJson(inputStream);
 
-        if (newUser)
+        if (action.equals("newUser"))
             this.accounts.add(jsonAccount);
+        else if (action.equals("deleteUser")) {
+            this.accounts.removeIf(acc ->
+                    acc.getUuid().equals(jsonAccount.getUuid()));
+        }
 
         JSONArray jsonArrayAccounts = new JSONArray();
 
