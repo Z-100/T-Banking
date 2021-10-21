@@ -25,6 +25,8 @@ public class Cli {
     private final RegisteredAccounts registeredAccounts;
     private final JsonActions jsonActions;
 
+    private final Pattern pattern;
+
     /**
      * The constructor
      */
@@ -34,6 +36,8 @@ public class Cli {
         this.userSession = null;
         this.registeredAccounts = new RegisteredAccounts();
         jsonActions = new JsonActions();
+        this.pattern = Pattern.compile(
+                "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
     }
 
     /**
@@ -107,7 +111,7 @@ public class Cli {
             case 1 -> userAction.withdraw();
             case 2 -> userAction.deposit();
             case 3 -> userAction.transfer();
-            case 4 -> accountHandler.updatePasswordConfirmation();
+            case 4 -> accountHandler.updatePasswordConfirmation(this.pattern);
             case 5 -> logout("You have been logged out");
             case 6 -> {
                 if (accountHandler.deleteAccountConfirmation(this.userSession))
@@ -146,7 +150,7 @@ public class Cli {
             case 0 -> adminAction.createAccount();
             case 1 -> adminAction.approveAccount();
             case 2 -> adminAction.viewStats();
-            case 3 -> accountHandler.updatePasswordConfirmation();
+            case 3 -> accountHandler.updatePasswordConfirmation(this.pattern);
             case 4 -> logout("You have been logged out");
             case 5 -> {
                 if (accountHandler.deleteAccountConfirmation(this.userSession))
@@ -201,16 +205,14 @@ public class Cli {
             if (!termsAndAgreementAccepted.equals("continue"))
                 System.exit(0);
 
+            System.out.println("""
+                    Please choose a password
+                    1. 8-32 characters
+                    2. Must at least have:
+                    \ti.   One letter (UPPER & lower)
+                    \tii.  One Number
+                    \tiii. One special character""");
 
-            System.out.println("Please choose a password\n" +
-                    "1. 8-32 characters\n" +
-                    "2. Must at least have:\n\t" +
-                    "i.   One letter (UPPER & lower)\n\t" +
-                    "ii.  One Number\n\t" +
-                    "iii. One special character");
-
-            Pattern pattern = Pattern.compile(
-                    "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
             Matcher matcher;
 
             while (true) {

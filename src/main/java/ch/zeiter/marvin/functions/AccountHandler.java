@@ -1,16 +1,17 @@
 package ch.zeiter.marvin.functions;
 
 import ch.zeiter.marvin.other.UserSession;
-
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
-
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AccountHandler {
 
     private final Scanner scanner;
+
     private final UserSession userSession;
     private final JsonActions jsonActions;
 
@@ -55,25 +56,38 @@ public class AccountHandler {
         return true;
     }
                            
-    public void updatePasswordConfirmation() {
-        System.out.println("""
-                Enter your current password""");
+    public void updatePasswordConfirmation(Pattern pattern) {
+        System.out.println("Enter your current password");
         String currentPassword = scanner.nextLine();
 
         if (currentPassword.equals(
                 this.userSession.getLoggedUser().getPassword())) {
 
             System.out.println("""
-                    Enter new password""");
+                    Please choose a password
+                    1. 8-32 characters
+                    2. Must at least have:
+                    \ti.   One letter (UPPER & lower)
+                    \tii.  One Number
+                    \tiii. One special character""");
+
+            System.out.println("Enter new password");
             String newPassword = scanner.nextLine();
-            System.out.println("""
-                    Repeat new password""");
-            String newPasswordConfirm = scanner.nextLine();
+
+            Matcher matcher = pattern.matcher(newPassword);
 
             if (newPassword.equals(currentPassword)) {
                 System.out.println("New password cannot be old password");
                 return;
-            } else if (!newPassword.equals(newPasswordConfirm)) {
+            } else if (!matcher.matches()) {
+                System.out.println("Enter valid password");
+                return;
+            }
+
+            System.out.println("Repeat new password");
+            String newPasswordConfirm = scanner.nextLine();
+
+            if (!newPassword.equals(newPasswordConfirm)) {
                 System.out.println("Passwords entered did not match");
                 return;
             }
