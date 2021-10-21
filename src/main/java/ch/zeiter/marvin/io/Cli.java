@@ -113,10 +113,8 @@ public class Cli {
             case 3 -> userAction.transfer();
             case 4 -> accountHandler.updatePasswordConfirmation(this.pattern);
             case 5 -> logout("You have been logged out");
-            case 6 -> {
-                if (accountHandler.deleteAccountConfirmation(this.userSession))
-                    logout("Your account has been deleted");
-            }
+            case 6 -> logout(accountHandler.deleteAccountConfirmation( // * The ? is showing off my knowledge once again
+                    this.userSession) ? "Your account has been deleted" : "");
             default -> throw new Exception();
         }
         userAction = null;
@@ -152,10 +150,8 @@ public class Cli {
             case 2 -> adminAction.viewStats();
             case 3 -> accountHandler.updatePasswordConfirmation(this.pattern);
             case 4 -> logout("You have been logged out");
-            case 5 -> {
-                if (accountHandler.deleteAccountConfirmation(this.userSession))
-                    logout("Your account has been deleted");
-            }
+            case 5 -> logout(accountHandler.deleteAccountConfirmation(
+                    this.userSession) ? "Your account has been deleted" : "");
             default -> throw new Exception();
         }
         adminAction = null;

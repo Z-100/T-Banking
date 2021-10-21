@@ -35,23 +35,22 @@ public class JsonActions {
         this.accounts.clear();
         this.accounts = getFromJson(inputStream);
 
-        if (action.equals("newUser"))
-            this.accounts.add(jsonAccount);
-        else if (action.equals("deleteUser")) {
-            this.accounts.removeIf(acc ->
+        switch (action) {
+            case "newUser" -> this.accounts.add(jsonAccount);
+            case "deleteUser" -> this.accounts.removeIf(acc ->
                     acc.getUuid().equals(jsonAccount.getUuid()));
-        } else if (action.equals("changeUser")) {
-            this.accounts.removeIf(acc ->
-                    acc.getUuid().equals(jsonAccount.getUuid()));
-            this.accounts.add(jsonAccount);
+            case "changeUser" -> {
+                this.accounts.removeIf(acc ->
+                        acc.getUuid().equals(jsonAccount.getUuid()));
+                this.accounts.add(jsonAccount);
+            }
         }
 
         JSONArray jsonArrayAccounts = new JSONArray();
 
         this.accounts.forEach(acc -> {
-            if (acc.getUuid().equals(jsonAccount.getUuid())) {
+            if (acc.getUuid().equals(jsonAccount.getUuid()))
                 acc.setBalance(jsonAccount.getBalance());
-            }
 
             JSONObject account = new JSONObject();
 
@@ -76,7 +75,6 @@ public class JsonActions {
      * @param inputStream Path to the json file
      * @return An Arraylist filled with all accounts in jsonfile
      * @throws IOException Thrown exception
-     * @throws ParseException Thrown exception
      */
     public ArrayList<Account> getFromJson(String inputStream)
             throws IOException {
