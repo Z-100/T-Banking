@@ -44,7 +44,7 @@ public class TransactionHandler {
 
         if (transactionSuccess) {
             try {
-                jsonActions.saveToJson(this.account, "Accounts/accounts.json", false);
+                jsonActions.saveToJson(this.account, "Accounts/accounts.json", "idkICanTypeWhatEverIWant");
                 return "Transaction successful";
             } catch (IOException | ParseException e) {
                 e.printStackTrace();

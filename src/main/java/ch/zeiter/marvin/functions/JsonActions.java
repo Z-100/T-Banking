@@ -29,7 +29,7 @@ public class JsonActions {
      * @throws IOException Thrown exception
      * @throws ParseException Thrown exception
      */
-    public void saveToJson(Account jsonAccount, String inputStream, boolean newUser)
+    public void saveToJson(Account jsonAccount, String inputStream, String action)
             throws IOException, ParseException {
 
         this.accounts.clear();

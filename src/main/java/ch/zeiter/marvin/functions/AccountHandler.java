@@ -2,6 +2,10 @@ package ch.zeiter.marvin.functions;
 
 import ch.zeiter.marvin.other.UserSession;
 
+import org.json.simple.parser.ParseException;
+
+import java.io.IOException;
+
 import java.util.Scanner;
 
 public class AccountHandler {
@@ -16,6 +20,41 @@ public class AccountHandler {
         this.jsonActions = jsonActions;
     }
 
+    public boolean deleteAccountConfirmation(UserSession userSession) {
+        String[] really = new String[]{
+                "\nDo you really wanna do this?",
+                "You wanna delete your account?",
+                "Like actually? It will be gone forever"};
+
+        System.out.println("""
+                Enter your password to delete your account
+                Enter nothing to keep your account""");
+        String password = scanner.nextLine();
+
+        if (password.equals(userSession.getLoggedUser().getPassword())) {
+            for (String rly : really) {
+                System.out.println(rly + "\nIf so, enter 'yes'");
+                String yes = scanner.nextLine();
+
+                if (!yes.equals("yes"))
+                    return false;
+            }
+            return deleteAccount(userSession);
+        }
+        return false;
+    }
+
+    private boolean deleteAccount(UserSession userSession) {
+        try {
+            jsonActions.saveToJson(userSession.getLoggedUser(),
+                    "Accounts/accounts.json", "deleteUser");
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+                           
     public void updatePasswordConfirmation() {
         System.out.println("""
                 Enter your current password""");

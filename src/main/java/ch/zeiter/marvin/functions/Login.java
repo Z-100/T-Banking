@@ -13,9 +13,9 @@ public class Login {
     /**
      * Constructor of Login
      */
-    public Login() {
-         jsonActions = new JsonActions();
-         accounts = getAccountFromJson();
+    public Login(JsonActions jsonActions) {
+        this.jsonActions = jsonActions;
+        accounts = getAccountFromJson();
     }
 
     /**
