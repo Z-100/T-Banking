@@ -6,5 +6,21 @@
     "isAdmin": true,
     "isApproved": true,
     "uuid": "test"
+  },
+  {
+    "password": "hans",
+    "balance": 15284.0,
+    "iban": "hans",
+    "isAdmin": false,
+    "isApproved": true,
+    "uuid": "hans"
+  },
+  {
+    "password": "JoeMomma69$$$",
+    "balance": 0.0,
+    "iban": "238104749",
+    "isAdmin": false,
+    "isApproved": false,
+    "uuid": "f98fba8b-f7a7-4260-b6d2-c4947f054af7"
   }
 ]
