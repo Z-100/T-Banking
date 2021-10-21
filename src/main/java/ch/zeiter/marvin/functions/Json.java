@@ -25,7 +25,7 @@ public class Json {
      *
      * @param jsonAccount Used for registering
      * @param inputStream Path to the json file
-     * @throws IOException    Thrown exception
+     * @throws IOException Thrown exception
      * @throws ParseException Thrown exception
      */
     public void saveToJson(Account jsonAccount, String inputStream, boolean newUser)
@@ -66,7 +66,7 @@ public class Json {
      *
      * @param inputStream Path to the json file
      * @return An Arraylist filled with all accounts in jsonfile
-     * @throws IOException    Thrown exception
+     * @throws IOException Thrown exception
      * @throws ParseException Thrown exception
      */
     public ArrayList<Account> getFromJson(String inputStream)

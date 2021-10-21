@@ -15,7 +15,13 @@ public class Transaction {
     @Setter
     private double transferAmount;
 
-
+    /**
+     * The constructor
+     *
+     * @param balanceOne The first balance to be changed
+     * @param balanceTwo The second balance to be changed
+     * @param transferAmount The amount of money to be transferred
+     */
     public Transaction(double balanceOne, double balanceTwo, double transferAmount) {
         this.balanceOne = balanceOne;
         this.balanceTwo = balanceTwo;
