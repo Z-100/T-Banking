@@ -35,8 +35,16 @@ public class JsonActions {
         this.accounts.clear();
         this.accounts = getFromJson(inputStream);
 
-        if (newUser)
+        if (action.equals("newUser"))
             this.accounts.add(jsonAccount);
+        else if (action.equals("deleteUser")) {
+            this.accounts.removeIf(acc ->
+                    acc.getUuid().equals(jsonAccount.getUuid()));
+        } else if (action.equals("changeUser")) {
+            this.accounts.removeIf(acc ->
+                    acc.getUuid().equals(jsonAccount.getUuid()));
+            this.accounts.add(jsonAccount);
+        }
 
         JSONArray jsonArrayAccounts = new JSONArray();
 
