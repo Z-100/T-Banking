@@ -24,7 +24,6 @@ public class Cli {
     @Getter
     private final RegisteredAccounts registeredAccounts;
     private final JsonActions jsonActions;
-    private final AccountHandler accountHandler;
 
     /**
      * The constructor
@@ -35,8 +34,6 @@ public class Cli {
         this.userSession = null;
         this.registeredAccounts = new RegisteredAccounts();
         jsonActions = new JsonActions();
-        this.accountHandler = new AccountHandler(
-                this.scanner, this.jsonActions);
     }
 
     /**
@@ -90,6 +87,8 @@ public class Cli {
     private void cliPageUser(String bankName) throws Exception {
         UserAction userAction = new UserAction(
                 this.userSession, this.scanner);
+        AccountHandler accountHandler = new AccountHandler(
+                this.scanner, this.userSession, this.jsonActions);
 
         System.out.printf("----%s----\n" +
                 "[0] View balance\n" +
@@ -108,7 +107,7 @@ public class Cli {
             case 1 -> userAction.withdraw();
             case 2 -> userAction.deposit();
             case 3 -> userAction.transfer();
-            case 4 -> accountHandler.updatePassword(this.userSession);
+            case 4 -> accountHandler.updatePasswordConfirmation();
             case 5 -> logout("You have been logged out");
             case 6 -> {
                 if (accountHandler.deleteAccountConfirmation(this.userSession))
@@ -116,6 +115,8 @@ public class Cli {
             }
             default -> throw new Exception();
         }
+        userAction = null;
+        accountHandler = null;
     }
 
     /**
@@ -127,6 +128,8 @@ public class Cli {
     private void cliPageAdmin(String bankName) throws Exception {
         AdminAction adminAction = new AdminAction(
                 this.scanner, this.registeredAccounts);
+        AccountHandler accountHandler = new AccountHandler(
+                this.scanner, this.userSession, this.jsonActions);
 
         System.out.printf("----%s----\n" +
                 "[0] Create account\n" +
@@ -143,7 +146,7 @@ public class Cli {
             case 0 -> adminAction.createAccount();
             case 1 -> adminAction.approveAccount();
             case 2 -> adminAction.viewStats();
-            case 3 -> accountHandler.updatePassword(this.userSession);
+            case 3 -> accountHandler.updatePasswordConfirmation();
             case 4 -> logout("You have been logged out");
             case 5 -> {
                 if (accountHandler.deleteAccountConfirmation(this.userSession))
@@ -151,6 +154,8 @@ public class Cli {
             }
             default -> throw new Exception();
         }
+        adminAction = null;
+        accountHandler = null;
     }
 
     private void login() {

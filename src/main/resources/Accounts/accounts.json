@@ -22,13 +22,5 @@
     "isAdmin": false,
     "isApproved": false,
     "uuid": "f98fba8b-f7a7-4260-b6d2-c4947f054af7"
-  },
-  {
-    "password": "de",
-    "balance": 100000.0,
-    "iban": "de",
-    "isAdmin": false,
-    "isApproved": true,
-    "uuid": "de"
   }
 ]

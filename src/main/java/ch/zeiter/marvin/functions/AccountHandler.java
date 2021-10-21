@@ -77,13 +77,13 @@ public class AccountHandler {
                 System.out.println("Passwords entered did not match");
                 return;
             }
-
-            updatePassword();
+            updatePassword(newPassword);
         }
     }
 
-    private void updatePassword() {
+    private void updatePassword(String newPassword) {
         try {
+            userSession.getLoggedUser().setPassword(newPassword);
             jsonActions.saveToJson(userSession.getLoggedUser(),
                     "Accounts/accounts.json", "changeUser");
         } catch (IOException | ParseException e) {
