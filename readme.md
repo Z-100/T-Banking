@@ -21,7 +21,7 @@ Grade 5: 30p
 2. Exception-handling [:heavy_check_mark:]
 3. I/O is user friendly [:heavy_check_mark:]
    1. Files as datasource [:heavy_check_mark:]
-      1. json, txt, dat
+      1. jsonActions, txt, dat
 4. JavaDoc 0 / 100% (must be at least 80%) [:heavy_check_mark:]
    1. @param, descriptions
 5. JUnit 100% coverage [ ]

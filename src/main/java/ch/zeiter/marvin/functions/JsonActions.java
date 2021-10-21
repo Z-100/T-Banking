@@ -8,14 +8,15 @@ import org.json.simple.parser.ParseException;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class Json {
+public class JsonActions {
 
     private ArrayList<Account> accounts;
 
     private final JSONParser jsonParser;
 
-    public Json() {
+    public JsonActions() {
         accounts = new ArrayList<>();
         jsonParser = new JSONParser();
     }
@@ -77,7 +78,8 @@ public class Json {
 
         try {
             results = (JSONArray) jsonParser.parse(new InputStreamReader(
-                    getClass().getClassLoader().getResourceAsStream(inputStream)));
+                    Objects.requireNonNull( // ? Crash as soon as possible
+                            getClass().getClassLoader().getResourceAsStream(inputStream))));
         } catch (ParseException e) {
             e.printStackTrace();
             return null;

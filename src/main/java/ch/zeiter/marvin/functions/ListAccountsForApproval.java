@@ -8,9 +8,9 @@ import java.util.ArrayList;
 public class ListAccountsForApproval {
 
     public void listAll() {
-        Json json = new Json();
+        JsonActions jsonActions = new JsonActions();
         try {
-            ArrayList<Account> accounts = json.getFromJson("Accounts/registeredAccounts.json");
+            ArrayList<Account> accounts = jsonActions.getFromJson("Accounts/registeredAccounts.json");
             for (int i = 0; i < accounts.size(); i++) {
                 System.out.printf("\n[%d] -> %s", i,  accounts.get(i).getUuid());
             }

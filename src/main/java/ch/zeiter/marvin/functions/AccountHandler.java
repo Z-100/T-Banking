@@ -2,6 +2,7 @@ package ch.zeiter.marvin.functions;
 
 import ch.zeiter.marvin.Blueprints.Account;
 
+@Deprecated
 public class AccountHandler {
 
     private Account account;

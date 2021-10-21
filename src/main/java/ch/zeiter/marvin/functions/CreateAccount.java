@@ -19,14 +19,15 @@ public class CreateAccount {
      * @return The newly created account
      */
     public Account createAccount(String inputPassword) {
-        Json json = new Json();
+        JsonActions jsonActions = new JsonActions();
 
         // * Could be done without the predicate initialization, but I want to show off my knowledge
         Predicate<Account> ibanPredicate = acc -> acc.getIban().equals(acg.getIBan());
         Predicate<Account> uuidPredicate = acc -> acc.getUuid().equals(acg.getUuid());
 
         try {
-            json.getFromJson("Accounts/accounts.json").stream()
+            // * Could also be done without streams, but I still want to show off my knowledge
+            jsonActions.getFromJson("Accounts/accounts.json").stream()
                     .filter(ibanPredicate)
                     .filter(uuidPredicate)
                     .forEach(acc -> acg = new AccountPropertyGenerator());

@@ -10,7 +10,7 @@ import java.util.function.Function;
 
 public class TransactionHandler {
 
-    private final Json json;
+    private final JsonActions jsonActions;
     private final Account account;
 
     private double oldBalance;
@@ -19,7 +19,7 @@ public class TransactionHandler {
      * The constructor
      */
     public TransactionHandler(UserSession userSession) {
-        this.json = new Json();
+        this.jsonActions = new JsonActions();
         this.account = userSession.getLoggedUser();
     }
 
@@ -44,7 +44,7 @@ public class TransactionHandler {
 
         if (transactionSuccess) {
             try {
-                json.saveToJson(this.account, "Accounts/accounts.json", false);
+                jsonActions.saveToJson(this.account, "Accounts/accounts.json", false);
                 return "Transaction successful";
             } catch (IOException | ParseException e) {
                 e.printStackTrace();

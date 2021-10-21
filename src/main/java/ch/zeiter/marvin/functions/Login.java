@@ -7,14 +7,14 @@ import java.util.ArrayList;
 
 public class Login {
 
-    private final Json json;
+    private final JsonActions jsonActions;
     private final ArrayList<Account> accounts;
 
     /**
      * Constructor of Login
      */
     public Login() {
-         json = new Json();
+         jsonActions = new JsonActions();
          accounts = getAccountFromJson();
     }
 
@@ -42,7 +42,7 @@ public class Login {
      */
     private ArrayList<Account> getAccountFromJson() {
         try {
-            return json.getFromJson("Accounts/accounts.json");
+            return jsonActions.getFromJson("Accounts/accounts.json");
         } catch (IOException e) {
             e.printStackTrace();
             return null;

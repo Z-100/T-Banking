@@ -11,12 +11,12 @@ public class AdminAction {
 
     private final Scanner scanner;
 
-    private final Json json;
+    private final JsonActions jsonActions;
     private RegisteredAccounts registeredAccounts;
 
     public AdminAction(Scanner scanner, RegisteredAccounts registeredAccounts) {
         this.scanner = scanner;
-        this.json = new Json();
+        this.jsonActions = new JsonActions();
         this.registeredAccounts = registeredAccounts;
     }
 
@@ -62,8 +62,8 @@ public class AdminAction {
 
     public void viewStats() {
         try {
-            int accountsRegistered = this.json.getFromJson("Accounts/accounts.json").size();
-            int accountsUnregistered = this.json.getFromJson("Accounts/registeredAccounts.json").size();
+            int accountsRegistered = this.jsonActions.getFromJson("Accounts/accounts.json").size();
+            int accountsUnregistered = this.jsonActions.getFromJson("Accounts/registeredAccounts.json").size();
             System.out.printf("\nTotal count of accounts registered:\t %d\n" +
                             "Total count of accounts unregistered:\t %d\n\n",
                     accountsRegistered, accountsUnregistered);
