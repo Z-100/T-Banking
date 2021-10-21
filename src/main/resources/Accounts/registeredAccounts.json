@@ -1,19 +1,11 @@
 [
   {
-    "password": "aaa",
-    "balance": 15789.0,
-    "iban": "aaa",
-    "isAdmin": true,
-    "isApproved": true,
-    "uuid": "aaa"
-  },
-  {
-    "password": "bbb",
-    "balance": 15284.0,
-    "iban": "bbb",
+    "password": "Qwertz123456$",
+    "balance": 0.0,
+    "iban": "79582381",
     "isAdmin": false,
     "isApproved": true,
-    "uuid": "bbb"
+    "uuid": "e653459e-f65b-4954-b157-d2c24648f7ue"
   },
   {
     "password": "WhyDoIHaveToDoThis69$",

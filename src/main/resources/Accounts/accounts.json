@@ -1,22 +1,22 @@
 [
   {
-    "password": "test",
-    "balance": 15789.0,
-    "iban": "test",
+    "password": "admin",
+    "balance": 1000000.0,
+    "iban": "admin",
     "isAdmin": true,
     "isApproved": true,
-    "uuid": "test"
+    "uuid": "admin"
   },
   {
-    "password": "hans",
-    "balance": 15284.0,
-    "iban": "hans",
+    "password": "nadmin",
+    "balance": 100000.0,
+    "iban": "nadmin",
     "isAdmin": false,
     "isApproved": true,
-    "uuid": "hans"
+    "uuid": "nadmin"
   },
   {
-    "password": "JoeMomma69$$$",
+    "password": "6Secure$Password9",
     "balance": 0.0,
     "iban": "238104749",
     "isAdmin": false,
