@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="500" maxWidth="500" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" scaleShape="false" style="-fx-background-color: #1c1c1c;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.zeiter.marvin.controller.RegisterController">
+    <top>
+        <HBox prefHeight="65.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets />
+            </BorderPane.margin>
+            <children>
+                <Label fx:id="registerbtn1" style="-fx-text-fill: #adadad;" text="Register a New Account">
+                    <font>
+                        <Font size="35.0" />
+                    </font>
+                    <HBox.margin>
+                        <Insets left="125.0" top="10.0" />
+                    </HBox.margin>
+                </Label>
+            </children>
+        </HBox>
+    </top>
+    <center>
+        <VBox prefHeight="204.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+            <children>
+            <Label fx:id="registerbtn2" prefHeight="186.0" prefWidth="316.0" style="-fx-text-fill: #adadad;" text="Please choose a password&#10;                    1. 8-32 characters&#10;                    2. Must at least have:&#10;                    &#9;i.   One letter (UPPER &amp; lower)&#10;                    &#9;ii.  One Number&#10;                    &#9;iii. One special character">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+                <PasswordField fx:id="createPasswordField" prefHeight="52.0" prefWidth="316.0" promptText="Create a password..." style="-fx-background-color: #3b3b3b; -fx-text-fill: #E2E2E2;">
+                    <VBox.margin>
+                        <Insets bottom="10.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="System Italic" size="18.0" />
+                    </font>
+                </PasswordField>
+                <HBox prefHeight="42.0" prefWidth="316.0">
+                    <children>
+                        <Button fx:id="registerButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" style="-fx-text-fill: #adadad; -fx-background-color: #3b3b3b;" text="Register">
+                            <font>
+                                <Font size="18.0" />
+                            </font></Button>
+                        <Label fx:id="loginInsteadButton" style="-fx-text-fill: #adadad;" text="Log In instead">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="10.0" top="5.0" />
+                            </HBox.margin>
+                        </Label>
+                    </children>
+                </HBox>
+                <Label fx:id="check" style="-fx-text-fill: #FF3F4C;" />
+            </children>
+            <BorderPane.margin>
+                <Insets top="40.0" />
+            </BorderPane.margin>
+        </VBox>
+    </center>
+    <bottom>
+        <HBox prefHeight="47.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <children>
+            </children>
+        </HBox>
+    </bottom>
+    <left>
+        <Pane prefHeight="180.0" prefWidth="123.0" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets right="20.0" />
+            </BorderPane.margin>
+        </Pane>
+    </left>
+    <right>
+        <Pane prefHeight="180.0" prefWidth="121.0" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets left="20.0" />
+            </BorderPane.margin>
+        </Pane>
+    </right>
+</BorderPane>

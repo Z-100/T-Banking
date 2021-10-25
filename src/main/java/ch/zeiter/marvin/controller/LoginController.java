@@ -20,9 +20,13 @@ public class LoginController {
 	@FXML
 	private Button loginBtn;
 	@FXML
-	private Label registerbtn;
+	private Label registerBtn;
 
 	public void init(Stage primaryStage) {
+
+		loginBtn.setText("Enter iBan");
+
+
 
 		AtomicInteger i = new AtomicInteger();
 
@@ -37,7 +41,7 @@ public class LoginController {
 			i.getAndIncrement();
 		});
 
-		registerbtn.setOnMouseClicked(mouseEvent -> {
+		registerBtn.setOnMouseClicked(mouseEvent -> {
 			//TODO add logic to change page
 		});
 	}
