@@ -9,15 +9,13 @@ class TransactionTest {
 
     @Test
     void returnsCorrectInformation() {
-        double balanceOne = 69420;
-        double balanceTwo = 420;
+        String iBan = "420";
         double transferAmount = 6.9;
 
-        Transaction transaction = new Transaction(balanceOne, balanceTwo, transferAmount);
+        Transaction transaction = new Transaction(iBan, transferAmount);
 
         Assertions.assertAll(
-                () -> assertEquals(transaction.getBalanceOne(), balanceOne),
-                () -> assertEquals(transaction.getBalanceTwo(), balanceTwo),
+                () -> assertEquals(transaction.getIBan(), iBan),
                 () -> assertEquals(transaction.getTransferAmount(), transferAmount)
         );
     }

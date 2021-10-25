@@ -1,19 +1,19 @@
 [
   {
     "password": "nadmin",
-    "balance": 100000.0,
+    "balance": 1000.0,
     "iban": "nadmin",
     "isAdmin": false,
     "isApproved": true,
     "uuid": "nadmin"
   },
   {
-    "password": "6Secure$Password9",
-    "balance": 0.0,
-    "iban": "238104749",
+    "password": "123",
+    "balance": 750.0,
+    "iban": "123",
     "isAdmin": false,
     "isApproved": false,
-    "uuid": "f98fba8b-f7a7-4260-b6d2-c4947f054af7"
+    "uuid": "123"
   },
   {
     "password": "admin",

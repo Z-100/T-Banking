@@ -94,14 +94,16 @@ public class Cli {
         AccountHandler accountHandler = new AccountHandler(
                 this.scanner, this.userSession, this.jsonActions);
 
-        System.out.printf("----%s----\n" +
-                "[0] View balance\n" +
-                "[1] Withdraw\n" +
-                "[2] Deposit\n" +
-                "[3] Transfer\n" +
-                "[4] Update password\n" +
-                "[5] Log out\n" +
-                "[6] Delete account\n", bankName);
+        System.out.printf("""
+                ----%s----
+                [0] View balance
+                [1] Withdraw
+                [2] Deposit
+                [3] Transfer
+                [4] Update password
+                [5] Log out
+                [6] Delete account
+                """, bankName);
 
         this.choice = Integer.parseInt(this.scanner.nextLine()); /*UserChoice.values()[
                 Integer.parseInt(this.scanner.nextLine()) - 2];*/
@@ -113,8 +115,8 @@ public class Cli {
             case 3 -> userAction.transfer();
             case 4 -> accountHandler.updatePasswordConfirmation(this.pattern);
             case 5 -> logout("You have been logged out");
-            case 6 -> logout(accountHandler.deleteAccountConfirmation( // * The ? is showing off my knowledge once again
-                    this.userSession) ? "Your account has been deleted" : "");
+            case 6 -> logout(accountHandler.deleteAccountConfirmation() ?
+                    "Your account has been deleted" : "");
             default -> throw new Exception();
         }
         userAction = null;
@@ -133,13 +135,15 @@ public class Cli {
         AccountHandler accountHandler = new AccountHandler(
                 this.scanner, this.userSession, this.jsonActions);
 
-        System.out.printf("----%s----\n" +
-                "[0] Create account\n" +
-                "[1] Approve account\n" +
-                "[2] View statistics\n" +
-                "[3] Update password\n" +
-                "[4] Log out\n" +
-                "[5] Delete account\n", bankName);
+        System.out.printf("""
+                ----%s----
+                [0] Create account
+                [1] Approve account
+                [2] View statistics
+                [3] Update password
+                [4] Log out
+                [5] Delete account
+                """, bankName);
 
         this.choice = Integer.parseInt(this.scanner.nextLine()); /*UserChoice.values()[
                 Integer.parseInt(this.scanner.nextLine())];*/
@@ -150,8 +154,8 @@ public class Cli {
             case 2 -> adminAction.viewStats();
             case 3 -> accountHandler.updatePasswordConfirmation(this.pattern);
             case 4 -> logout("You have been logged out");
-            case 5 -> logout(accountHandler.deleteAccountConfirmation(
-                    this.userSession) ? "Your account has been deleted" : "");
+            case 5 -> logout(accountHandler.deleteAccountConfirmation() ?
+                    "Your account has been deleted" : "");
             default -> throw new Exception();
         }
         adminAction = null;
