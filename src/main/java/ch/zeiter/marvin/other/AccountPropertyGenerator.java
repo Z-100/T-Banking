@@ -5,6 +5,9 @@ import lombok.Getter;
 import java.util.Random;
 import java.util.UUID;
 
+/**
+ * Creates
+ */
 public class AccountPropertyGenerator {
 
     @Getter

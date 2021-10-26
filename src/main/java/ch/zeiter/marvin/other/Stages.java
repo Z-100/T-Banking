@@ -1,6 +1,8 @@
 package ch.zeiter.marvin.other;
 
 import ch.zeiter.marvin.controller.LoginController;
+import ch.zeiter.marvin.controller.MainController;
+import ch.zeiter.marvin.controller.RegisterController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -8,17 +10,39 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Used to switch between stages easily and super simple
+ */
 public class Stages {
 
+	/**
+	 * Method used to load fxml files and their corresponding controllers
+	 *
+	 * @param primaryStage The stage used by the Application
+	 * @param fxmlFile The name of the fxml file (dynamic)
+	 */
 	public void changeStage(Stage primaryStage, String fxmlFile) {
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(
-					getClass().getResource(String.format("Screens/fxml/%s.fxml", fxmlFile)));
+					getClass().getResource(String.format("/screens/fxml/%s.fxml", fxmlFile)));
 
 			Parent root = fxmlLoader.load();
 
-			LoginController controller = fxmlLoader.getController();
-			controller.init(primaryStage);
+			switch (fxmlFile) {
+				case "Login" -> {
+					LoginController controller = fxmlLoader.getController();
+					controller.init(primaryStage, this);
+				}
+				case "Register" -> {
+					RegisterController controller = fxmlLoader.getController();
+					controller.init(primaryStage, this);
+				}
+				case "Main" -> {
+					MainController controller = fxmlLoader.getController();
+					controller.init(primaryStage, this);
+				}
+				default -> System.exit(1);
+			}
 
 			primaryStage.setScene(new Scene(root));
 			primaryStage.setResizable(false);

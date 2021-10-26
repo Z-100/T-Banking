@@ -12,7 +12,7 @@
                 <Insets />
             </BorderPane.margin>
             <children>
-                <Label fx:id="registerbtn1" style="-fx-text-fill: #adadad;" text="Register a New Account">
+                <Label fx:id="registerButton" style="-fx-text-fill: #adadad;" text="Register a New Account">
                     <font>
                         <Font size="35.0" />
                     </font>

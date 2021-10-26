@@ -1,6 +1,6 @@
 package ch.zeiter.marvin.io;
 
-import ch.zeiter.marvin.Blueprints.Account;
+import ch.zeiter.marvin.blueprints.Account;
 import ch.zeiter.marvin.functions.*;
 import ch.zeiter.marvin.other.RegisteredAccounts;
 import ch.zeiter.marvin.other.UserSession;
@@ -10,6 +10,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Deprecated // This is the CLI page of the whole application
 public class Cli {
 
 
@@ -19,9 +20,7 @@ public class Cli {
     private int choice;
 
     //    private UserChoice choice;
-    @Getter
     private UserSession userSession;
-    @Getter
     private final RegisteredAccounts registeredAccounts;
     private final JsonActions jsonActions;
 
@@ -83,7 +82,7 @@ public class Cli {
     }
 
     /**
-     * The CLI interface process
+     * The CLI interface of Main.fxml
      *
      * @param bankName The applications name
      * @throws Exception Thrown when user enters invalid choice

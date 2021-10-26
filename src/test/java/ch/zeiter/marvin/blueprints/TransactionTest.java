@@ -1,4 +1,4 @@
-package ch.zeiter.marvin.Blueprints;
+package ch.zeiter.marvin.blueprints;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

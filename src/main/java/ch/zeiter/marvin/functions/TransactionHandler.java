@@ -1,7 +1,7 @@
 package ch.zeiter.marvin.functions;
 
-import ch.zeiter.marvin.Blueprints.Account;
-import ch.zeiter.marvin.Blueprints.Transaction;
+import ch.zeiter.marvin.blueprints.Account;
+import ch.zeiter.marvin.blueprints.Transaction;
 import ch.zeiter.marvin.other.UserSession;
 import org.json.simple.parser.ParseException;
 

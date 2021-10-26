@@ -7,19 +7,19 @@ import org.mockito.Mock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class CreateAccountTest {
+class AccountCreatorTest {
 
-    CreateAccount createAccount = new CreateAccount();
+    AccountCreator accountCreator = new AccountCreator();
 
     @Mock
-    AccountPropertyGenerator apg = createAccount.getAcg();
+    AccountPropertyGenerator apg = accountCreator.getAcg();
 
     @Test
     void createAccount() {
 
         String password = "password";
 
-        var result = createAccount.createAccount(password);
+        var result = accountCreator.createAccount(password);
 
         Assertions.assertAll(
                 () -> assertEquals(apg.getUuid(), result.getUuid()),

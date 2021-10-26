@@ -1,7 +1,10 @@
 package ch.zeiter.marvin.other;
 
-import ch.zeiter.marvin.Blueprints.Account;
+import ch.zeiter.marvin.blueprints.Account;
 
+/**
+ * Creates a "session" with an Account
+ */
 public record UserSession(Account loggedUser) {
 
     public static UserSession userSession;

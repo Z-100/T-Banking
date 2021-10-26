@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="500" maxWidth="500" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" scaleShape="false" style="-fx-background-color: #1c1c1c;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.zeiter.marvin.controller.LoginController">
+<BorderPane maxHeight="500" maxWidth="500" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" scaleShape="false" style="-fx-background-color: #1c1c1c;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.zeiter.marvin.controller.LoginController">
     <top>
         <HBox prefHeight="104.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <BorderPane.margin>
@@ -50,11 +50,11 @@
                 </PasswordField>
                 <HBox prefHeight="42.0" prefWidth="316.0">
                     <children>
-                        <Button fx:id="loginBtn" mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" style="-fx-text-fill: #adadad; -fx-background-color: #3b3b3b;" text="Log in">
+                        <Button fx:id="loginButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" style="-fx-text-fill: #adadad; -fx-background-color: #3b3b3b;" text="Log in">
                      <font>
                         <Font size="18.0" />
                      </font></Button>
-                        <Label fx:id="registerbtn" style="-fx-text-fill: #adadad;" text="Register instead">
+                        <Label fx:id="registerInsteadButton" style="-fx-text-fill: #adadad;" text="Register instead">
                             <font>
                                 <Font size="18.0" />
                             </font>
@@ -64,7 +64,7 @@
                         </Label>
                     </children>
                 </HBox>
-                <Label fx:id="check" style="-fx-text-fill: #FF3F4C;" />
+                <Label fx:id="errorLabel" style="-fx-text-fill: #FF3F4C;" />
             </children>
             <BorderPane.margin>
                 <Insets top="40.0" />
