@@ -52,7 +52,7 @@
                 </PasswordField>
             <HBox layoutX="10.0" layoutY="219.0" prefHeight="42.0" prefWidth="316.0">
                <children>
-                  <CheckBox fx:id="termsAndAgreementsCheckbox" mnemonicParsing="false" />
+                  <CheckBox fx:id="termsAndAgreementsCheckbox" mnemonicParsing="false" style="-fx-background-color: #3b3b3b; -fx-text-fill: #E2E2E2;" />
                   <Label fx:id="loginInsteadButton1" style="-fx-text-fill: #adadad;" text="By registering I agree with the terms and agreements">
                      <font>
                         <Font size="11.0" />
@@ -65,7 +65,7 @@
             </HBox>
                 <HBox prefHeight="42.0" prefWidth="316.0">
                     <children>
-                        <Button fx:id="registerButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" style="-fx-text-fill: #adadad; -fx-background-color: #3b3b3b;" text="Register">
+                        <Button fx:id="registerButton" disable="true" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" style="-fx-text-fill: #adadad; -fx-background-color: #3b3b3b;" text="Register">
                             <font>
                                 <Font size="18.0" />
                             </font>
