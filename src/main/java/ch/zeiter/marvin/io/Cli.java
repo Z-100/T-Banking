@@ -4,7 +4,6 @@ import ch.zeiter.marvin.blueprints.Account;
 import ch.zeiter.marvin.functions.*;
 import ch.zeiter.marvin.other.RegisteredAccounts;
 import ch.zeiter.marvin.other.UserSession;
-import lombok.Getter;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
