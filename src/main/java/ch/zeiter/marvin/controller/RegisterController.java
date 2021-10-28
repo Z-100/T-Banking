@@ -48,7 +48,7 @@ public class RegisterController {
 		});
 
 		loginInsteadButton.setOnMouseClicked(mouseEvent -> {
-			stages.changeStage(this.primaryStage, "Login");
+			stages.changeStage(this.primaryStage, null, "Login");
 		});
 	}
 

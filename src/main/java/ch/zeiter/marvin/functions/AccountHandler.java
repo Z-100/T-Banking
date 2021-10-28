@@ -45,7 +45,7 @@ public class AccountHandler {
         return false;
     }
 
-    private boolean deleteAccount(UserSession userSession) {
+    public boolean deleteAccount(UserSession userSession) {
         try {
             jsonActions.saveToJson(userSession.getLoggedUser(),
                     "Accounts/accounts.json", "deleteUser");

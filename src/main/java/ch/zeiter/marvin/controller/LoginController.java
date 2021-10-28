@@ -11,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import lombok.extern.slf4j.Slf4j;
 
 public class LoginController {
 
@@ -50,11 +49,11 @@ public class LoginController {
 
 		loginButton.setOnAction(actionEvent -> {
 			if (loginCheck(usernameField.getText(), passwordField.getText()))
-				stages.changeStage(primaryStage, "Main");
+				stages.changeStage(primaryStage, this.userSession, "Main");
 		});
 
 		registerInsteadButton.setOnMouseClicked(mouseEvent -> {
-			stages.changeStage(this.primaryStage, "Register");
+			stages.changeStage(this.primaryStage, null, "Register");
 		});
 	}
 

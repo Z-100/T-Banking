@@ -1,8 +1,6 @@
 package ch.zeiter.marvin.other;
 
-import ch.zeiter.marvin.controller.LoginController;
-import ch.zeiter.marvin.controller.MainController;
-import ch.zeiter.marvin.controller.RegisterController;
+import ch.zeiter.marvin.controller.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,7 +19,7 @@ public class Stages {
 	 * @param primaryStage The stage used by the Application
 	 * @param fxmlFile The name of the fxml file (dynamic)
 	 */
-	public void changeStage(Stage primaryStage, String fxmlFile) {
+	public void changeStage(Stage primaryStage, UserSession userSession, String fxmlFile) {
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(
 					getClass().getResource(String.format("/screens/fxml/%s.fxml", fxmlFile)));
@@ -39,8 +37,25 @@ public class Stages {
 				}
 				case "Main" -> {
 					MainController controller = fxmlLoader.getController();
-					controller.init(primaryStage, this);
+					controller.init(primaryStage, userSession, this);
 				}
+				case "Deposit" -> {
+					DepositController controller = fxmlLoader.getController();
+					controller.init(primaryStage, userSession, this);
+				}
+				case "Withdrawal" -> {
+					WithdrawalController controller = new WithdrawalController();
+					controller.init(primaryStage, userSession, this);
+				}
+				case "Transferal" -> {
+					TransferalController controller = new TransferalController();
+					controller.init(primaryStage, userSession, this);
+				}
+				case "Delete" -> {
+					DeleteController controller = new DeleteController();
+					controller.init(primaryStage, userSession, this);
+				}
+
 				default -> System.exit(1);
 			}
 

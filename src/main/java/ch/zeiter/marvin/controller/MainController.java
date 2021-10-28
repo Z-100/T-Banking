@@ -5,6 +5,7 @@ import ch.zeiter.marvin.other.Stages;
 import ch.zeiter.marvin.other.UserSession;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 /**
@@ -15,8 +16,13 @@ public class MainController {
 	@FXML private Button depositButton;
 	@FXML private Button withdrawButton;
 	@FXML private Button transferButton;
-	@FXML private Button accountButton;
 	@FXML private Button logoutButton;
+	@FXML private Label uuidLabel;
+	@FXML private Label iBanLabel;
+	@FXML private Label balanceLabel;
+	@FXML private Button changePasswordButton;
+	@FXML private Button deleteAccountButton;
+
 
 	private UserSession userSession;
 	private final JsonActions jsonActions;
@@ -37,8 +43,24 @@ public class MainController {
 	 * @param primaryStage The stage used by the Application
 	 * @param stages The given stages object to change in between stages
 	 */
-	public void init(Stage primaryStage, Stages stages) {
+	public void init(Stage primaryStage, UserSession userSession, Stages stages) {
 
+		this.primaryStage = primaryStage;
 
+		depositButton.setOnAction((actionEvent) -> {
+			stages.changeStage(this.primaryStage, userSession, "Deposit");
+		});
+
+		withdrawButton.setOnAction((actionEvent) -> {
+			stages.changeStage(this.primaryStage, userSession, "Withdrawal");
+		});
+
+		transferButton.setOnAction((actionEvent) -> {
+			stages.changeStage(this.primaryStage, userSession, "Transferal");
+		});
+
+		logoutButton.setOnAction((actionEvent) -> {
+			// ! Logout logic
+		});
 	}
 }
