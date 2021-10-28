@@ -1,6 +1,6 @@
 package ch.zeiter.marvin.functions;
 
-import ch.zeiter.marvin.Blueprints.Account;
+import ch.zeiter.marvin.blueprints.Account;
 
 import java.io.IOException;
 import java.util.ArrayList;

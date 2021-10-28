@@ -1,4 +1,4 @@
-package ch.zeiter.marvin.Blueprints;
+package ch.zeiter.marvin.blueprints;
 
 public class InvalidUserChoiceException extends Exception {
 

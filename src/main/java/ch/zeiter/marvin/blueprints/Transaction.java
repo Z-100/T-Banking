@@ -1,4 +1,4 @@
-package ch.zeiter.marvin.Blueprints;
+package ch.zeiter.marvin.blueprints;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

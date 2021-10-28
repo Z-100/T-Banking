@@ -1,6 +1,6 @@
 package ch.zeiter.marvin.io;
 
-import ch.zeiter.marvin.Blueprints.Account;
+import ch.zeiter.marvin.blueprints.Account;
 import ch.zeiter.marvin.functions.*;
 import ch.zeiter.marvin.other.RegisteredAccounts;
 import ch.zeiter.marvin.other.UserSession;

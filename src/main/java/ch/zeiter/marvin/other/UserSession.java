@@ -1,6 +1,6 @@
 package ch.zeiter.marvin.other;
 
-import ch.zeiter.marvin.Blueprints.Account;
+import ch.zeiter.marvin.blueprints.Account;
 
 public record UserSession(Account loggedUser) {
 
