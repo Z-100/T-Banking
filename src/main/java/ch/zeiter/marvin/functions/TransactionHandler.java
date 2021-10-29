@@ -93,7 +93,7 @@ public class TransactionHandler {
                 if (this.transferAccount != null)
                     jsonActions.saveToJson(this.transferAccount, "Accounts/accounts.json", "github.com/z-100");
                 return "Transaction successful";
-            } catch (IOException | ParseException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
                 return "Something went wrong";
             }

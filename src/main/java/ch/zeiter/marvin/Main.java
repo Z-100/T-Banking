@@ -21,10 +21,11 @@ public class Main extends Application {
      * @param args Starting argument
      */
     public static void main(String[] args) {
+
         String name = "TBZ E-Banking";
 
-//        Cli cli = new Cli();
-//        cli.init(name);
+        Cli cli = new Cli();
+        cli.init(name);
         launch(args);
     }
 

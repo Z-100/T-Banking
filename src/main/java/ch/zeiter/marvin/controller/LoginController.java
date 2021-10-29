@@ -76,7 +76,7 @@ public class LoginController {
 	 * @return Returns true if the login worked
 	 */
 	private boolean loginCheck(String iBan, String password) {
-		Login login = new Login(this.jsonActions);
+		Login login = new Login();
 
 		Account account = login.loginCheck(iBan, password);
 
