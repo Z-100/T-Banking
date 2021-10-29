@@ -65,8 +65,9 @@ public class TransactionHandler {
                     .filter(acc -> acc.getIban().equals(iBan))
                     .toList();
             this.transferAccount = list.get(0);
-        } catch (IOException e) {
+        } catch (IOException | ArrayIndexOutOfBoundsException e) {
             e.printStackTrace();
+            return "Something went wrong";
         }
 
         return saveActions(verifyTransaction

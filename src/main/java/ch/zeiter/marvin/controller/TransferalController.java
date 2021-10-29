@@ -39,20 +39,24 @@ public class TransferalController {
 		logoutButton.setOnAction(actionEvent ->
 				LogoutService.logout("logout_javafx", primaryStage));
 
+		amountMoneyAvailableLabel.setText(String.format("Money available: %s £",
+				userSession.getLoggedUser().getBalance()));
+
 		confirmTransferalButton.setOnAction(actionEvent -> {
 			String receiverIban = receiverIBanField.getText();
 			String transferAmountS = transferalAmountField.getText();
 
 			double transferAmountD = Double.parseDouble(
-					transferAmountS.isEmpty() ? "0.0" : transferAmountS);
+					transferAmountS.equals("") ? "0.0" : transferAmountS);
 
 			boolean nothingMissing = transferAmountD != 0.0 && !receiverIban.isEmpty();
 
 			TransactionHandler transactionHandler = new TransactionHandler(userSession);
 			if (nothingMissing) {
-				transactionHandler.newTransaction(transferAmountD, receiverIban);
+				String s = transactionHandler.newTransaction(transferAmountD, receiverIban);
+				amountMoneyAvailableLabel.setText(s);
+				stages.changeStage(this.primaryStage, userSession, "Transferal");
 			}
-
 			transactionHandler = null;
 		});
 	}
