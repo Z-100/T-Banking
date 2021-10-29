@@ -116,8 +116,8 @@ public class Cli {
             case 3 -> userAction.transfer();
             case 4 -> accountHandler.updatePasswordConfirmation(this.pattern);
             case 5 -> LogoutService.logout("You have been logged out");
-            case 6 -> LogoutService.logout(accountHandler.deleteAccountConfirmation( // * The ? is showing off my knowledge once again
-                    this.userSession) ? "Your account has been deleted" : "");
+            case 6 -> LogoutService.logout(accountHandler.deleteAccountConfirmation() ?
+                    "Your account has been deleted" : "");
             default -> throw new Exception();
         }
         userAction = null;

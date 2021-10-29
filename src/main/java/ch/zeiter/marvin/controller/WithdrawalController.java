@@ -1,6 +1,5 @@
 package ch.zeiter.marvin.controller;
 
-import ch.zeiter.marvin.blueprints.Transaction;
 import ch.zeiter.marvin.functions.LogoutService;
 import ch.zeiter.marvin.functions.TransactionHandler;
 import ch.zeiter.marvin.other.Stages;
@@ -50,7 +49,7 @@ public class WithdrawalController {
 			if (data > 0) {
 				TransactionHandler transactionHandler = new TransactionHandler(userSession);
 				String s = transactionHandler.newTransaction(
-						(-1) * data);
+						(-1) * data, null);
 				if (s.contains("success"))
 					stages.changeStage(this.primaryStage, userSession, "Withdrawal");
 				else

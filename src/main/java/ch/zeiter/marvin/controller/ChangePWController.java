@@ -1,6 +1,5 @@
 package ch.zeiter.marvin.controller;
 
-import ch.zeiter.marvin.blueprints.Account;
 import ch.zeiter.marvin.functions.AccountHandler;
 import ch.zeiter.marvin.functions.JsonActions;
 import ch.zeiter.marvin.functions.LogoutService;
@@ -10,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.util.regex.Matcher;
@@ -56,7 +54,7 @@ public class ChangePWController {
 					.equals(currentPassword)) {
 			//TODO make it somehow show errorLabel
 				String newPassword = newPasswordField.getText();
-				String newPasswordConfirm = newPasswordField.getText();
+				String newPasswordConfirm = newPasswordConfirmField.getText();
 
 				Matcher matcher = RegisterController
 						.pattern.matcher(newPassword);

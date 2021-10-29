@@ -48,7 +48,7 @@ public class DepositController {
 
 			if (data > 0) {
 				TransactionHandler transactionHandler = new TransactionHandler(userSession);
-				String s = transactionHandler.newTransaction(data);
+				String s = transactionHandler.newTransaction(data, null);
 
 				if (s.contains("success"))
 					stages.changeStage(this.primaryStage, userSession, "Deposit");
