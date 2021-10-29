@@ -36,7 +36,7 @@ public record AccountHandler(Scanner scanner, UserSession userSession, JsonActio
     public boolean deleteAccount(UserSession userSession) {
         try {
             jsonActions.saveToJson(userSession.getLoggedUser(), "Accounts/accounts.json", "deleteUser");
-        } catch (IOException | ParseException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             return false;
         }
@@ -85,7 +85,7 @@ public record AccountHandler(Scanner scanner, UserSession userSession, JsonActio
         try {
             userSession.getLoggedUser().setPassword(newPassword);
             jsonActions.saveToJson(userSession.getLoggedUser(), "Accounts/accounts.json", "changeUser");
-        } catch (IOException | ParseException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

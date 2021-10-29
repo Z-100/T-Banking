@@ -1,24 +1,27 @@
 package ch.zeiter.marvin.functions;
 
 import ch.zeiter.marvin.blueprints.Account;
+import ch.zeiter.marvin.other.EncryptionDecryptionService;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class JsonActions {
 
+    private EncryptionDecryptionService eds;
+    private final JSONParser jsonParser;
     private ArrayList<Account> accounts;
 
-    private final JSONParser jsonParser;
-
     public JsonActions() {
-        accounts = new ArrayList<>();
-        jsonParser = new JSONParser();
+        this.eds = new EncryptionDecryptionService();
+        this.jsonParser = new JSONParser();
+        this.accounts = new ArrayList<>();
     }
 
     /**
@@ -30,7 +33,7 @@ public class JsonActions {
      * @throws ParseException Thrown exception
      */
     public void saveToJson(Account jsonAccount, String inputStream, String action)
-            throws IOException, ParseException {
+            throws IOException {
 
         switch (action) {
             case "newUser" -> this.accounts.add(jsonAccount);
@@ -49,16 +52,24 @@ public class JsonActions {
             if (acc.getUuid().equals(jsonAccount.getUuid()))
                 acc.setBalance(jsonAccount.getBalance());
 
-            JSONObject account = new JSONObject();
+            try {
+                Account accEnc = eds.encrypt(new Account(
+                        acc.getUuid(), acc.getIban(), acc.getPassword(),
+                        acc.getBalance(), acc.isAdmin(), acc.isApproved()));
 
-            account.put("uuid", acc.getUuid());
-            account.put("iban", acc.getIban());
-            account.put("password", acc.getPassword());
-            account.put("balance", acc.getBalance());
-            account.put("isAdmin", acc.isAdmin());
-            account.put("isApproved", acc.isApproved());
+                JSONObject account = new JSONObject();
 
-            jsonArrayAccounts.add(account);
+                account.put("uuid", accEnc.getUuid());
+                account.put("iban", accEnc.getIban());
+                account.put("password", accEnc.getPassword());
+                account.put("balance", accEnc.getBalance());
+                account.put("isAdmin", accEnc.isAdmin());
+                account.put("isApproved", accEnc.isApproved());
+
+                jsonArrayAccounts.add(account);
+            } catch (GeneralSecurityException | UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
         });
 
         FileWriter fileWriter = new FileWriter("src/main/resources/" + inputStream);
@@ -91,16 +102,19 @@ public class JsonActions {
         results.forEach(objObject -> {
             JSONObject jsnObj = (JSONObject) objObject;
 
-            this.accounts.add(new Account(
-                    (String) jsnObj.get("uuid"),
-                    (String) jsnObj.get("iban"),
-                    (String) jsnObj.get("password"),
-                    (double) jsnObj.get("balance"),
-                    (boolean) jsnObj.get("isAdmin"),
-                    (boolean) jsnObj.get("isApproved")
-            ));
+            try {
+                this.accounts.add(eds.decrypt(new Account(
+                        (String) jsnObj.get("uuid"),
+                        (String) jsnObj.get("iban"),
+                        (String) jsnObj.get("password"),
+                        (double) jsnObj.get("balance"),
+                        (boolean) jsnObj.get("isAdmin"),
+                        (boolean) jsnObj.get("isApproved")
+                )));
+            } catch (GeneralSecurityException | UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
         });
-
         return this.accounts;
     }
 }

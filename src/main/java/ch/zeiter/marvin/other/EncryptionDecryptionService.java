@@ -24,8 +24,8 @@ public class EncryptionDecryptionService {
      * The constructor
      */
     public EncryptionDecryptionService() {
-        this.aad = "thisProjectShouldntHaveTakenThatLongToProgram";
-        this.key = "iWillBeExtremelySadIfThisProjectIsGettingABadGrade!";
+        this.aad = "These are additional authenticated data (optional)";
+        this.key = "ThisIsThe32ByteKeyForEncryption!";
     }
 
     /**
