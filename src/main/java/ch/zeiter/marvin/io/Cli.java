@@ -110,8 +110,8 @@ public class Cli {
             case 2 -> userAction.deposit();
             case 3 -> userAction.transfer();
             case 4 -> accountHandler.updatePasswordConfirmation(this.pattern);
-            case 5 -> logout("You have been logged out");
-            case 6 -> logout(accountHandler.deleteAccountConfirmation( // * The ? is showing off my knowledge once again
+            case 5 -> LogoutService.logout("You have been logged out");
+            case 6 -> LogoutService.logout(accountHandler.deleteAccountConfirmation( // * The ? is showing off my knowledge once again
                     this.userSession) ? "Your account has been deleted" : "");
             default -> throw new Exception();
         }
@@ -147,8 +147,8 @@ public class Cli {
             case 1 -> adminAction.approveAccount();
             case 2 -> adminAction.viewStats();
             case 3 -> accountHandler.updatePasswordConfirmation(this.pattern);
-            case 4 -> logout("You have been logged out");
-            case 5 -> logout(accountHandler.deleteAccountConfirmation(
+            case 4 -> LogoutService.logout("You have been logged out");
+            case 5 -> LogoutService.logout(accountHandler.deleteAccountConfirmation(
                     this.userSession) ? "Your account has been deleted" : "");
             default -> throw new Exception();
         }
@@ -225,11 +225,5 @@ public class Cli {
                 }
             }
         }
-    }
-
-    private void logout(String message) {
-        this.userSession = null;
-        System.out.println(message);
-        System.exit(0);
     }
 }
