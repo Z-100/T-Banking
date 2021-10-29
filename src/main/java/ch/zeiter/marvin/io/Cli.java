@@ -4,6 +4,7 @@ import ch.zeiter.marvin.blueprints.Account;
 import ch.zeiter.marvin.functions.*;
 import ch.zeiter.marvin.other.RegisteredAccounts;
 import ch.zeiter.marvin.other.UserSession;
+import lombok.Getter;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -19,7 +20,9 @@ public class Cli {
     private int choice;
 
     //    private UserChoice choice;
+    @Getter
     private UserSession userSession;
+    @Getter
     private final RegisteredAccounts registeredAccounts;
     private final JsonActions jsonActions;
 
@@ -92,14 +95,16 @@ public class Cli {
         AccountHandler accountHandler = new AccountHandler(
                 this.scanner, this.userSession, this.jsonActions);
 
-        System.out.printf("----%s----\n" +
-                "[0] View balance\n" +
-                "[1] Withdraw\n" +
-                "[2] Deposit\n" +
-                "[3] Transfer\n" +
-                "[4] Update password\n" +
-                "[5] Log out\n" +
-                "[6] Delete account\n", bankName);
+        System.out.printf("""
+                ----%s----
+                [0] View balance
+                [1] Withdraw
+                [2] Deposit
+                [3] Transfer
+                [4] Update password
+                [5] Log out
+                [6] Delete account
+                """, bankName);
 
         this.choice = Integer.parseInt(this.scanner.nextLine()); /*UserChoice.values()[
                 Integer.parseInt(this.scanner.nextLine()) - 2];*/

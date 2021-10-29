@@ -1,0 +1,18 @@
+[
+  {
+    "password": "Qwertz123456$",
+    "balance": 0.0,
+    "iban": "79582381",
+    "isAdmin": false,
+    "isApproved": true,
+    "uuid": "e653459e-f65b-4954-b157-d2c24648f7ue"
+  },
+  {
+    "password": "WhyDoIHaveToDoThis69$",
+    "balance": 0.0,
+    "iban": "566043147",
+    "isAdmin": false,
+    "isApproved": false,
+    "uuid": "d653889e-f61b-4954-b157-d2c24796f7ee"
+  }
+]

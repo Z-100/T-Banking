@@ -8,24 +8,11 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class AccountHandler {
+public record AccountHandler(Scanner scanner, UserSession userSession, JsonActions jsonActions) {
 
-    private final Scanner scanner;
-
-    private final UserSession userSession;
-    private final JsonActions jsonActions;
-
-    public AccountHandler(Scanner scanner, UserSession userSession, JsonActions jsonActions) {
-        this.scanner = scanner;
-        this.userSession = userSession;
-        this.jsonActions = jsonActions;
-    }
-
-    public boolean deleteAccountConfirmation(UserSession userSession) {
-        String[] really = new String[]{
-                "\nDo you really wanna do this?",
-                "You wanna delete your account?",
-                "Like actually? It will be gone forever"};
+    public boolean deleteAccountConfirmation() {
+        String[] really = new String[] { "\nDo you really wanna do this?", "You wanna delete your account?",
+                "Like actually? It will be gone forever" };
 
         System.out.println("""
                 Enter your password to delete your account
@@ -47,21 +34,19 @@ public class AccountHandler {
 
     public boolean deleteAccount(UserSession userSession) {
         try {
-            jsonActions.saveToJson(userSession.getLoggedUser(),
-                    "Accounts/accounts.json", "deleteUser");
+            jsonActions.saveToJson(userSession.getLoggedUser(), "Accounts/accounts.json", "deleteUser");
         } catch (IOException | ParseException e) {
             e.printStackTrace();
             return false;
         }
         return true;
     }
-                           
+
     public void updatePasswordConfirmation(Pattern pattern) {
         System.out.println("Enter your current password");
         String currentPassword = scanner.nextLine();
 
-        if (currentPassword.equals(
-                this.userSession.getLoggedUser().getPassword())) {
+        if (currentPassword.equals(this.userSession.getLoggedUser().getPassword())) {
 
             System.out.println("""
                     Please choose a password
@@ -98,8 +83,7 @@ public class AccountHandler {
     public void updatePassword(String newPassword) {
         try {
             userSession.getLoggedUser().setPassword(newPassword);
-            jsonActions.saveToJson(userSession.getLoggedUser(),
-                    "Accounts/accounts.json", "changeUser");
+            jsonActions.saveToJson(userSession.getLoggedUser(), "Accounts/accounts.json", "changeUser");
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }

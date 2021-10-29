@@ -27,19 +27,20 @@ public class AdminAction {
         lafa.listAll();
 
         System.out.println("""
-                \nEnter index to approve single account
+                Enter index to approve single account
                 Enter 'all' to approve every account
                 Enter nothing to approve no account""");
         String approveIndex = this.scanner.nextLine();
     }
 
     public void createAccount() {
-        System.out.println("Please choose a password\n" +
-                "1. 8-32 characters\n" +
-                "2. Must at least have:\n\t" +
-                "i.   One letter (UPPER & lower)\n\t" +
-                "ii.  One Number\n\t" +
-                "iii. One special character");
+        System.out.println("""
+                Please choose a password
+                1. 8-32 characters
+                2. Must at least have:
+                \ti.   One letter (UPPER & lower)
+                \tii.  One Number
+                \tiii. One special character""");
 
         Pattern pattern = Pattern.compile(
                 "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
@@ -64,8 +65,10 @@ public class AdminAction {
         try {
             int accountsRegistered = this.jsonActions.getFromJson("Accounts/accounts.json").size();
             int accountsUnregistered = this.jsonActions.getFromJson("Accounts/registeredAccounts.json").size();
-            System.out.printf("\nTotal count of accounts registered:\t %d\n" +
-                            "Total count of accounts unregistered:\t %d\n\n",
+            System.out.printf("""
+                            Total count of accounts registered:\t %d
+                            Total count of accounts unregistered:\t %d
+                            """,
                     accountsRegistered, accountsUnregistered);
         } catch (IOException e) {
             e.printStackTrace();

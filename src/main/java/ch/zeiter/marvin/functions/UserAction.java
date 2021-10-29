@@ -28,7 +28,8 @@ public class UserAction {
         double withdrawAmount = Double.parseDouble(this.scanner.nextLine());
 
         transactionHandler = new TransactionHandler(this.userSession);
-        System.out.println(transactionHandler.newTransaction((-1) * withdrawAmount));
+        System.out.println(transactionHandler.newTransaction((-1) * withdrawAmount, null));
+
         transactionHandler = null;
     }
 
@@ -38,11 +39,22 @@ public class UserAction {
         double depositAmount = Double.parseDouble(this.scanner.nextLine());
 
         transactionHandler = new TransactionHandler(this.userSession);
-        System.out.println(transactionHandler.newTransaction(depositAmount));
+        System.out.println(transactionHandler.newTransaction(depositAmount, null));
+
         transactionHandler = null;
     }
 
     public void transfer() {
+        System.out.println("\n----TRANSFER----\n"
+                + "Enter iBan of the account to be transferred to");
+        String transferIBan = String.valueOf(this.scanner.nextLine());
 
+        System.out.println("\nEnter amount of money to be transferred");
+        double transferAmount = Double.parseDouble(this.scanner.nextLine());
+
+        transactionHandler = new TransactionHandler(this.userSession);
+        System.out.println(transactionHandler.newTransaction(transferAmount, transferIBan));
+
+        transactionHandler = null;
     }
 }
