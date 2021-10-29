@@ -73,8 +73,7 @@ public class Cli {
                 "[0] Login\n" +
                 "[1] Register\n", bankName);
 
-        this.choice = Integer.parseInt(this.scanner.nextLine()); /* UserChoice.values()[
-                Integer.parseInt(this.scanner.nextLine())];*/
+        this.choice = Integer.parseInt(this.scanner.nextLine());
 
         switch (this.choice) {
             case 0 -> login();
@@ -106,8 +105,7 @@ public class Cli {
                 [6] Delete account
                 """, bankName);
 
-        this.choice = Integer.parseInt(this.scanner.nextLine()); /*UserChoice.values()[
-                Integer.parseInt(this.scanner.nextLine()) - 2];*/
+        this.choice = Integer.parseInt(this.scanner.nextLine());
 
         switch (this.choice) {
             case 0 -> userAction.balance();
@@ -162,7 +160,7 @@ public class Cli {
     }
 
     private void login() {
-        Login login = new Login(this.jsonActions);
+        Login login = new Login();
         int accessCounter = 5;
 
         while (true) {

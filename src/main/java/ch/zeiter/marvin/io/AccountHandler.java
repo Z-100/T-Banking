@@ -1,5 +1,6 @@
-package ch.zeiter.marvin.functions;
+package ch.zeiter.marvin.io;
 
+import ch.zeiter.marvin.functions.JsonActions;
 import ch.zeiter.marvin.other.UserSession;
 import org.json.simple.parser.ParseException;
 

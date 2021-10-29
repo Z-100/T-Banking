@@ -13,8 +13,8 @@ public class Login {
     /**
      * Constructor of Login
      */
-    public Login(JsonActions jsonActions) {
-        this.jsonActions = jsonActions;
+    public Login() {
+        this.jsonActions = new JsonActions();
         accounts = getAccountFromJson();
     }
 

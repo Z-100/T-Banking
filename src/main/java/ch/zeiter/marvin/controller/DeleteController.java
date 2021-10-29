@@ -1,6 +1,6 @@
 package ch.zeiter.marvin.controller;
 
-import ch.zeiter.marvin.functions.AccountHandler;
+import ch.zeiter.marvin.io.AccountHandler;
 import ch.zeiter.marvin.functions.JsonActions;
 import ch.zeiter.marvin.other.Stages;
 import ch.zeiter.marvin.other.UserSession;
@@ -14,60 +14,60 @@ import java.util.Stack;
 
 public class DeleteController {
 
-	@FXML private Label deleteAccountTextLabel;
-	@FXML private PasswordField passwordField;
-	@FXML private Button goBackButton;
-	@FXML private Button deleteAccountConfirmButton;
+    @FXML
+    private Label deleteAccountTextLabel;
+    @FXML
+    private PasswordField passwordField;
+    @FXML
+    private Button goBackButton;
+    @FXML
+    private Button deleteAccountConfirmButton;
 
-	private Stage primaryStage;
-	private final JsonActions jsonActions;
+    private Stage primaryStage;
+    private JsonActions jsonActions;
 
-	private final Stack<String> really = new Stack<>();
+    private final Stack<String> really = new Stack<>();
 
-	private int i = 0;
+    private int i = 0;
 
-	public DeleteController() {
-		jsonActions = new JsonActions();
-	}
+    public void init(Stage primaryStage, UserSession userSession, Stages stages) {
+        this.jsonActions = new JsonActions();
+        this.primaryStage = primaryStage;
 
-	public void init(Stage primaryStage, UserSession userSession, Stages stages) {
-		this.primaryStage = primaryStage;
+        deleteAccountTextLabel.setText("You're about to\ndelete your account");
 
-		deleteAccountTextLabel.setText("You're about to\ndelete your account");
+        really.push("Enter pw to confirm");
+        really.push("It will be gone forever");
+        really.push("Like actually?");
+        really.push("U wanna del ur account?");
+        really.push("U rly wanna do this?");
 
-		really.push("Enter pw to confirm");
-		really.push("It will be gone forever");
-		really.push("Like actually?");
-		really.push("U wanna del ur account?");
-		really.push("U rly wanna do this?");
+        goBackButton.setOnAction(actionEvent ->
+                stages.changeStage(this.primaryStage, userSession, "Main"));
 
-		goBackButton.setOnAction(actionEvent ->
-				stages.changeStage(this.primaryStage, userSession, "Main"));
+        deleteAccountConfirmButton.setOnAction(actionEvent -> {
+            deleteAccountTextLabel.setText(really.peek() + "\nIf so, press confirm");
+            really.pop();
 
-		deleteAccountConfirmButton.setOnAction(actionEvent -> {
-			deleteAccountTextLabel.setText(really.peek() + "\nIf so, press confirm");
-			really.pop();
-
-			i++;
-			if (i > 3)
-				passwordField.setVisible(true);
+            i++;
+            if (i > 3)
+                passwordField.setVisible(true);
 
 
-			if (i > 4) {
-				if (deleteAccountConfirmation(userSession)) {
-					stages.changeStage(this.primaryStage, null, "Login");
-				}
-				else
-					stages.changeStage(this.primaryStage, userSession, "Main");
-			}
-		});
-	}
+            if (i > 4) {
+                if (deleteAccountConfirmation(userSession)) {
+                    stages.changeStage(this.primaryStage, null, "Login");
+                } else
+                    stages.changeStage(this.primaryStage, userSession, "Main");
+            }
+        });
+    }
 
-	public boolean deleteAccountConfirmation(UserSession userSession) {
-			if (passwordField.getText().equals(userSession.getLoggedUser().getPassword())) {
-				AccountHandler accountHandler = new AccountHandler(null, userSession, jsonActions);
-				return (accountHandler.deleteAccount(userSession));
-			}
-		return false;
-	}
+    public boolean deleteAccountConfirmation(UserSession userSession) {
+        if (passwordField.getText().equals(userSession.getLoggedUser().getPassword())) {
+            AccountHandler accountHandler = new AccountHandler(null, userSession, jsonActions);
+            return (accountHandler.deleteAccount(userSession));
+        }
+        return false;
+    }
 }

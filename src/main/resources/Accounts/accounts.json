@@ -1,1 +1,10 @@
-[{"password":"123","balance":750.0,"iban":"123","isAdmin":false,"isApproved":false,"uuid":"123"},{"password":"admin","balance":949827.0,"iban":"admin","isAdmin":true,"isApproved":true,"uuid":"admin"},{"password":"$$$69zZzZZ","balance":151123.0,"iban":"nadmin","isAdmin":false,"isApproved":true,"uuid":"nadmin"}]
+[
+  {
+    "password": "\u009B\u000B\u0016ú\u0013èl\u0097\u008C\r]=\b\u0085¤wH\u009FsÑ\t*\u0001tÇxnã\u0017É-½¢",
+    "balance": 0.7202535292422932,
+    "iban": "[Ó\u0011\u0093\u0016=]Hb»h^ýN¾å\u0085\u008B\u009E£,êË\u000B]µÒÕ5ç\u0007ÈÜ",
+    "isAdmin": false,
+    "isApproved": true,
+    "uuid": "\u0007ñ\u0082xk2KÒ§WÐ¯¾pU\u008Bl°B\u0092;\u0006ï.\u0012ë\u0088mÜg\u001Bv\u0089\u009FgØ­ò;\u008C"
+  }
+]

@@ -14,145 +14,134 @@ import java.util.Stack;
  */
 public class EncryptionDecryptionService {
 
-	private final String aad;
-	private final String key;
+    private final String aad;
+    private final String key;
 
-	private boolean isAdmin;
-	private boolean isApproved;
+    private boolean isAdmin;
+    private boolean isApproved;
 
-	/**
-	 * The constructor
-	 */
-	public EncryptionDecryptionService() {
-		this.aad = "These are additional authenticated data (optional)";
-		this.key = "ThisIsThe32ByteKeyForEncryption!";
-	}
+    /**
+     * The constructor
+     */
+    public EncryptionDecryptionService() {
+        this.aad = "thisProjectShouldntHaveTakenThatLongToProgram";
+        this.key = "iWillBeExtremelySadIfThisProjectIsGettingABadGrade!";
+    }
 
-	/**
-	 * Method used to read uuid, iban & password
-	 * from an Account into a Stack
-	 *
-	 * @param account The given Account
-	 * @return The Stack filled with the information
-	 */
-	public Stack<String> readStack(Account account) {
-		Stack<String> textAccInformation = new Stack<>();
+    /**
+     * Method used to read uuid, iban & password
+     * from an Account into a Stack
+     *
+     * @param account The given Account
+     * @return The Stack filled with the information
+     */
+    private Stack<String> readStack(Account account) {
+        Stack<String> textAccInformation = new Stack<>();
 
-		textAccInformation.push(account.getUuid());
-		textAccInformation.push(account.getIban());
-		textAccInformation.push(account.getPassword());
-		this.isAdmin = account.isAdmin();
-		this.isApproved = account.isApproved();
+        textAccInformation.push(account.getUuid());
+        textAccInformation.push(account.getIban());
+        textAccInformation.push(account.getPassword());
+        this.isAdmin = account.isAdmin();
+        this.isApproved = account.isApproved();
 
-		return textAccInformation;
-	}
+        return textAccInformation;
+    }
 
-	/**
-	 * Method used to encrypt an Account
-	 *
-	 * @param account The given account
-	 * @return The encrypted account
-	 * @throws GeneralSecurityException The exception thrown by AesGcmJce
-	 * @throws UnsupportedEncodingException The exception thrown by getStringFromByteArray()
-	 */
-	public Account encrypt(Account account) throws GeneralSecurityException, UnsupportedEncodingException {
-		Stack<Object> encryptedAccInformation = new Stack<>();
-		Stack<String> plaintextAccInformation = readStack(account);
+    /**
+     * Method used to encrypt an Account
+     *
+     * @param account The given account
+     * @return The encrypted account
+     * @throws GeneralSecurityException The exception thrown by AesGcmJce
+     * @throws UnsupportedEncodingException The exception thrown by getStringFromByteArray()
+     */
+    public Account encrypt(Account account) throws GeneralSecurityException, UnsupportedEncodingException {
+        Stack<Object> encryptedAccInformation = new Stack<>();
+        Stack<String> plaintextAccInformation = readStack(account);
 
-		AesGcmJce agjEncryption = new AesGcmJce(key.getBytes());
+        AesGcmJce agjEncryption = new AesGcmJce(key.getBytes());
 
-		Iterator<String> iterator = plaintextAccInformation.iterator();
-		while (iterator.hasNext()) {
-			Byte[] encryptedByte = ArrayUtils.toObject(
-					agjEncryption.encrypt(plaintextAccInformation.peek().getBytes(), aad.getBytes()));
+        Iterator<String> iterator = plaintextAccInformation.iterator();
+        while (iterator.hasNext()) {
+            Byte[] encryptedByte = ArrayUtils.toObject(
+                    agjEncryption.encrypt(plaintextAccInformation.peek().getBytes(), aad.getBytes()));
 
-			encryptedAccInformation.push(encryptedByte);
-			plaintextAccInformation.pop();
-		}
+            encryptedAccInformation.push(encryptedByte);
+            plaintextAccInformation.pop();
+        }
 
-		return getInformation(encryptedAccInformation, account.getBalance());
-	}
+        return getInformation(encryptedAccInformation, account.getBalance(), true);
+    }
 
-	/**
-	 * Method used to decrypt an Account
-	 *
-	 * @param account The given account
-	 * @return The decrypted account
-	 * @throws GeneralSecurityException The exception thrown by AesGcmJce
-	 * @throws UnsupportedEncodingException The exception thrown by getStringFromByteArray()
-	 */
-	public Account decrypt(Account account) throws GeneralSecurityException, UnsupportedEncodingException {
-		Stack<Object> decryptedAccInformation = new Stack<>();
-		Stack<String> encryptedAccInformation = readStack(account);
+    /**
+     * Method used to decrypt an Account
+     *
+     * @param account The given account
+     * @return The decrypted account
+     * @throws GeneralSecurityException The exception thrown by AesGcmJce
+     * @throws UnsupportedEncodingException The exception thrown by getStringFromByteArray()
+     */
+    public Account decrypt(Account account) throws GeneralSecurityException, UnsupportedEncodingException {
+        Stack<Object> decryptedAccInformation = new Stack<>();
+        Stack<String> encryptedAccInformation = readStack(account);
 
-		AesGcmJce agjDecryption = new AesGcmJce(key.getBytes());
+        AesGcmJce agjDecryption = new AesGcmJce(key.getBytes());
 
-		Iterator<String> iterator2 = encryptedAccInformation.iterator();
-		while (iterator2.hasNext()) {
-			Byte[] decryptedByte = ArrayUtils.toObject(
-					agjDecryption.decrypt(encryptedAccInformation.peek().getBytes("ISO-8859-1"), aad.getBytes()));
+        Iterator<String> iterator2 = encryptedAccInformation.iterator();
+        while (iterator2.hasNext()) {
+            Byte[] decryptedByte = ArrayUtils.toObject(
+                    agjDecryption.decrypt(encryptedAccInformation.peek().getBytes("ISO-8859-1"), aad.getBytes()));
 
-			decryptedAccInformation.push(decryptedByte);
-			encryptedAccInformation.pop();
-		}
+            decryptedAccInformation.push(decryptedByte);
+            encryptedAccInformation.pop();
+        }
 
-		return getInformation(decryptedAccInformation, 5.0);
-	}
+        return getInformation(decryptedAccInformation, account.getBalance(), false);
+    }
 
-	/**
-	 * Method used to get Information from Stack
-	 *
-	 * @param stack The given Stack filled with information
-	 * @param balance The balance of the account to be 'encrypted'
-	 * @return The en/de-crypted Account
-	 * @throws UnsupportedEncodingException The exception thrown by getStringFromByteArray
-	 */
-	private Account getInformation(Stack<Object> stack, double balance)
-			throws UnsupportedEncodingException {
+    /**
+     * Method used to get Information from Stack
+     *
+     * @param stack The given Stack filled with information
+     * @param balance The balance of the account to be 'encrypted'
+     * @return The en/de-crypted Account
+     * @throws UnsupportedEncodingException The exception thrown by getStringFromByteArray
+     */
+    private Account getInformation(Stack<Object> stack, double balance, boolean isEnc)
+            throws UnsupportedEncodingException {
 
-		Stack<Object> temp = new Stack<>();
+        Stack<Object> temp = new Stack<>();
+        double bal;
 
-		double bal = balance / 69.420;
+        if (isEnc)
+            bal = balance / 69.420;
+        else
+            bal = balance * 69.420;
 
-		String password = getStringFromByteArray(stack);
-		temp.push(stack.peek());
-		stack.pop();
+        String password = getStringFromByteArray(stack);
+        temp.push(stack.peek());
+        stack.pop();
 
-		String iBan = getStringFromByteArray(stack);
-		temp.push(stack.peek());
-		stack.pop();
+        String iBan = getStringFromByteArray(stack);
+        temp.push(stack.peek());
+        stack.pop();
 
-		String uuid = getStringFromByteArray(stack);
-		temp.push(stack.peek());
-		stack.pop();
+        String uuid = getStringFromByteArray(stack);
+        temp.push(stack.peek());
+        stack.pop();
 
-		return new Account(uuid, iBan, password, bal, this.isAdmin, this.isApproved);
-	}
+        return new Account(uuid, iBan, password, bal, this.isAdmin, this.isApproved);
+    }
 
-	/**
-	 * Method used to convert Object to String with encoding
-	 *
-	 * @param stack The given Stack
-	 * @return The read String from the given stack
-	 * @throws UnsupportedEncodingException The exception thrown by the charSet
-	 */
-	private String getStringFromByteArray(Stack<Object> stack) throws UnsupportedEncodingException {
-		return new String((byte[]) ArrayUtils.toPrimitive(
-				stack.peek()), "ISO-8859-1");
-	}
-}
-
-class Mainn {
-	public static void main(String[] args) {
-		EncryptionDecryptionService eds = new EncryptionDecryptionService();
-		Account sas = new Account("SAS", "lol", "sananas", 50.0, false, true);
-		try {
-			Account sos = eds.encrypt(sas);
-
-			System.out.println(sos.toString());
-			System.out.println(eds.decrypt(sos).toString());
-		} catch (GeneralSecurityException | UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-	}
+    /**
+     * Method used to convert Object to String with encoding
+     *
+     * @param stack The given Stack
+     * @return The read String from the given stack
+     * @throws UnsupportedEncodingException The exception thrown by the charSet
+     */
+    private String getStringFromByteArray(Stack<Object> stack) throws UnsupportedEncodingException {
+        return new String((byte[]) ArrayUtils.toPrimitive(
+                stack.peek()), "ISO-8859-1");
+    }
 }

@@ -10,20 +10,24 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="500" maxWidth="500" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" scaleShape="false" style="-fx-background-color: #1c1c1c;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.zeiter.marvin.controller.DeleteController">
+<BorderPane maxHeight="500" maxWidth="500" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" scaleShape="false" style="-fx-background-color: #1c1c1c;"
+            xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ch.zeiter.marvin.controller.DeleteController">
     <top>
         <HBox prefHeight="78.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <BorderPane.margin>
-                <Insets />
+                <Insets/>
             </BorderPane.margin>
             <children>
-                <Pane prefHeight="85.0" prefWidth="188.0" />
-                <Label prefHeight="51.0" prefWidth="290.0" style="-fx-text-fill: #adadad;" text="Delete Account" textFill="RED">
+                <Pane prefHeight="85.0" prefWidth="188.0"/>
+                <Label prefHeight="51.0" prefWidth="290.0" style="-fx-text-fill: #adadad;" text="Delete Account"
+                       textFill="RED">
                     <font>
-                        <Font size="35.0" />
+                        <Font size="35.0"/>
                     </font>
                     <HBox.margin>
-                        <Insets top="20.0" />
+                        <Insets top="20.0"/>
                     </HBox.margin>
                 </Label>
             </children>
@@ -38,49 +42,55 @@
     <right>
         <Pane prefHeight="285.0" prefWidth="53.0" BorderPane.alignment="CENTER">
             <BorderPane.margin>
-                <Insets left="20.0" />
+                <Insets left="20.0"/>
             </BorderPane.margin>
         </Pane>
     </right>
     <left>
-        <VBox prefHeight="225.0" prefWidth="128.0" BorderPane.alignment="CENTER" />
+        <VBox prefHeight="225.0" prefWidth="128.0" BorderPane.alignment="CENTER"/>
     </left>
     <center>
         <VBox prefHeight="204.0" prefWidth="300.0" BorderPane.alignment="CENTER">
             <children>
-                <Pane prefHeight="71.0" prefWidth="399.0" />
+                <Pane prefHeight="71.0" prefWidth="399.0"/>
                 <HBox layoutX="10.0" layoutY="38.0" prefHeight="53.0" prefWidth="358.0">
                     <children>
-                        <Label fx:id="deleteAccountTextLabel" prefHeight="76.0" prefWidth="200.0" style="-fx-text-fill: #adadad;" text="sananas">
+                        <Label fx:id="deleteAccountTextLabel" prefHeight="76.0" prefWidth="200.0"
+                               style="-fx-text-fill: #adadad;" text="sananas">
                             <font>
-                                <Font size="17.0" />
+                                <Font size="17.0"/>
                             </font>
                         </Label>
-                        <PasswordField fx:id="passwordField" prefHeight="39.0" prefWidth="149.0" promptText="Enter password..." style="-fx-background-color: #3b3b3b; -fx-text-fill: #E2E2E2;" visible="false">
+                        <PasswordField fx:id="passwordField" prefHeight="39.0" prefWidth="149.0"
+                                       promptText="Enter password..."
+                                       style="-fx-background-color: #3b3b3b; -fx-text-fill: #E2E2E2;" visible="false">
                             <font>
-                                <Font name="System Italic" size="18.0" />
+                                <Font name="System Italic" size="18.0"/>
                             </font>
                         </PasswordField>
                     </children>
                 </HBox>
                 <HBox layoutX="10.0" layoutY="94.0" prefHeight="28.0" prefWidth="358.0">
                     <children>
-                        <Button fx:id="goBackButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="146.0" style="-fx-text-fill: #adadad; -fx-background-color: #3b3b3b;" text="Go Back">
+                        <Button fx:id="goBackButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="146.0"
+                                style="-fx-text-fill: #adadad; -fx-background-color: #3b3b3b;" text="Go Back">
                             <font>
-                                <Font size="21.0" />
+                                <Font size="21.0"/>
                             </font>
                         </Button>
-                        <Pane layoutX="10.0" layoutY="10.0" prefHeight="28.0" prefWidth="32.0" />
-                        <Button fx:id="deleteAccountConfirmButton" layoutX="42.0" layoutY="10.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="146.0" style="-fx-text-fill: #adadad; -fx-background-color: #3b3b3b;" text="Confirm">
+                        <Pane layoutX="10.0" layoutY="10.0" prefHeight="28.0" prefWidth="32.0"/>
+                        <Button fx:id="deleteAccountConfirmButton" layoutX="42.0" layoutY="10.0" mnemonicParsing="false"
+                                prefHeight="51.0" prefWidth="146.0"
+                                style="-fx-text-fill: #adadad; -fx-background-color: #3b3b3b;" text="Confirm">
                             <font>
-                                <Font size="14.0" />
+                                <Font size="14.0"/>
                             </font>
                         </Button>
                     </children>
                 </HBox>
             </children>
             <BorderPane.margin>
-                <Insets top="40.0" />
+                <Insets top="40.0"/>
             </BorderPane.margin>
         </VBox>
     </center>

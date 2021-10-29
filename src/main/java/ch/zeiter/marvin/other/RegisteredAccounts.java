@@ -31,7 +31,7 @@ public class RegisteredAccounts {
             this.jsonActions.saveToJson(accountCreator.createAccount(inputPassword), path, "newUser");
 
             return "Account successfully registered. Waiting approval";
-        } catch (IOException | ParseException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             return "Something went wrong. Try again later";
         }

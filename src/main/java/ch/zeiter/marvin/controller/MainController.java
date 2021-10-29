@@ -13,49 +13,56 @@ import javafx.stage.Stage;
  */
 public class MainController {
 
-	@FXML private Button depositButton;
-	@FXML private Button withdrawButton;
-	@FXML private Button transferButton;
-	@FXML private Button logoutButton;
-	@FXML private Label iBanLabel;
-	@FXML private Label balanceLabel;
-	@FXML private Button changePasswordButton;
-	@FXML private Button deleteAccountButton;
+    @FXML
+    private Button depositButton;
+    @FXML
+    private Button withdrawButton;
+    @FXML
+    private Button transferButton;
+    @FXML
+    private Button logoutButton;
+    @FXML
+    private Label iBanLabel;
+    @FXML
+    private Label balanceLabel;
+    @FXML
+    private Button changePasswordButton;
+    @FXML
+    private Button deleteAccountButton;
 
-	private Stage primaryStage;
+    private Stage primaryStage;
 
-	/**
-	 * Method used to control the main process of the application
-	 *
-	 * @param primaryStage The stage used by the Application
-	 * @param stages The given stages object to change in between stages
-	 */
-	public void init(Stage primaryStage, UserSession userSession, Stages stages) {
+    /**
+     * Method used to control the main process of the application
+     *
+     * @param primaryStage The stage used by the Application
+     * @param stages The given stages object to change in between stages
+     */
+    public void init(Stage primaryStage, UserSession userSession, Stages stages) {
+        this.primaryStage = primaryStage;
 
-		this.primaryStage = primaryStage;
+        iBanLabel.setText(String.format("Your IBan:\t%s",
+                userSession.getLoggedUser().getIban()));
 
-		iBanLabel.setText(String.format("Your IBan:\t%s",
-				userSession.getLoggedUser().getIban()));
+        balanceLabel.setText(String.format("Your balance:\t%s £",
+                userSession.getLoggedUser().getBalance()));
 
-		balanceLabel.setText(String.format("Your balance:\t%s £",
-				userSession.getLoggedUser().getBalance()));
+        depositButton.setOnAction(actionEvent ->
+                stages.changeStage(this.primaryStage, userSession, "Deposit"));
 
-		depositButton.setOnAction(actionEvent ->
-				stages.changeStage(this.primaryStage, userSession, "Deposit"));
+        withdrawButton.setOnAction(actionEvent ->
+                stages.changeStage(this.primaryStage, userSession, "Withdrawal"));
 
-		withdrawButton.setOnAction(actionEvent ->
-				stages.changeStage(this.primaryStage, userSession, "Withdrawal"));
+        transferButton.setOnAction(actionEvent ->
+                stages.changeStage(this.primaryStage, userSession, "Transferal"));
 
-		transferButton.setOnAction(actionEvent ->
-				stages.changeStage(this.primaryStage, userSession, "Transferal"));
+        logoutButton.setOnAction(actionEvent ->
+                LogoutService.logout("logout_javafx", primaryStage));
 
-		logoutButton.setOnAction(actionEvent ->
-			LogoutService.logout("logout_javafx", primaryStage));
+        deleteAccountButton.setOnAction(actionEvent ->
+                stages.changeStage(this.primaryStage, userSession, "Delete"));
 
-		deleteAccountButton.setOnAction(actionEvent ->
-				stages.changeStage(this.primaryStage, userSession, "Delete"));
-
-		changePasswordButton.setOnAction(actionEvent ->
-				stages.changeStage(this.primaryStage, userSession, "ChangePW"));
-	}
+        changePasswordButton.setOnAction(actionEvent ->
+                stages.changeStage(this.primaryStage, userSession, "ChangePW"));
+    }
 }
