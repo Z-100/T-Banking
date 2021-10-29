@@ -20,46 +20,54 @@ public class DeleteController {
 	@FXML private Button deleteAccountConfirmButton;
 
 	private Stage primaryStage;
-	private JsonActions jsonActions;
+	private final JsonActions jsonActions;
 
 	private final Stack<String> really = new Stack<>();
+
+	private int i = 0;
 
 	public DeleteController() {
 		jsonActions = new JsonActions();
 	}
 
-	public void init(Stage primaryStage, UserSession userSession, Stages stages) {
+	public void initialize(Stage primaryStage, UserSession userSession, Stages stages) {
 		this.primaryStage = primaryStage;
-		really.push("Enter password to confirm");
-		really.push("Like actually? It will be gone forever");
-		really.push("You wanna delete your account?");
-		really.push("Do you really wanna do this?");
 
-		goBackButton.setOnAction(actionEvent -> {
-			stages.changeStage(this.primaryStage, userSession, "Main");
-		});
+		deleteAccountTextLabel.setText("You're about to\ndelete your account");
+
+		really.push("Enter pw to confirm");
+		really.push("It will be gone forever");
+		really.push("Like actually?");
+		really.push("U wanna del ur account?");
+		really.push("U rly wanna do this?");
+
+		goBackButton.setOnAction(actionEvent ->
+				stages.changeStage(this.primaryStage, userSession, "Main"));
 
 		deleteAccountConfirmButton.setOnAction(actionEvent -> {
-			for (String s : really) {
-				deleteAccountTextLabel.setText(really.peek() + "If so, press confirm");
-				really.pop();
-			}
+			deleteAccountTextLabel.setText(really.peek() + "\nIf so, press confirm");
+			really.pop();
 
-			if (deleteAccountConfirmation(userSession))
-				stages.changeStage(this.primaryStage, null, "Login");
-			else
-				stages.changeStage(this.primaryStage, userSession, "Main");
+			i++;
+			if (i > 3)
+				passwordField.setVisible(true);
+
+
+			if (i > 4) {
+				if (deleteAccountConfirmation(userSession)) {
+					stages.changeStage(this.primaryStage, null, "Login");
+				}
+				else
+					stages.changeStage(this.primaryStage, userSession, "Main");
+			}
 		});
 	}
 
 	public boolean deleteAccountConfirmation(UserSession userSession) {
-		passwordField.setVisible(true);
-		deleteAccountConfirmButton.setDisable(true);
-
-		if (passwordField.getText().equals(userSession.getLoggedUser().getPassword())) {
-			AccountHandler accountHandler = new AccountHandler(null, userSession, jsonActions);
-			return accountHandler.deleteAccount(userSession);
-		}
+			if (passwordField.getText().equals(userSession.getLoggedUser().getPassword())) {
+				AccountHandler accountHandler = new AccountHandler(null, userSession, jsonActions);
+				return (accountHandler.deleteAccount(userSession));
+			}
 		return false;
 	}
 }
