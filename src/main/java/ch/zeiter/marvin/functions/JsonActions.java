@@ -32,11 +32,6 @@ public class JsonActions {
     public void saveToJson(Account jsonAccount, String inputStream, String action)
             throws IOException, ParseException {
 
-        //TODO convert to jackson json
-
-        this.accounts.clear();
-        this.accounts = getFromJson(inputStream);
-
         switch (action) {
             case "newUser" -> this.accounts.add(jsonAccount);
             case "deleteUser" -> this.accounts.removeIf(acc ->
@@ -105,6 +100,7 @@ public class JsonActions {
                     (boolean) jsnObj.get("isApproved")
             ));
         });
+
         return this.accounts;
     }
 }

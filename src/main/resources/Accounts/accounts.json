@@ -1,13 +1,5 @@
 [
   {
-    "password": "nadmin",
-    "balance": 1000.0,
-    "iban": "nadmin",
-    "isAdmin": false,
-    "isApproved": true,
-    "uuid": "nadmin"
-  },
-  {
     "password": "123",
     "balance": 750.0,
     "iban": "123",
@@ -22,5 +14,13 @@
     "isAdmin": true,
     "isApproved": true,
     "uuid": "admin"
+  },
+  {
+    "password": "$$$69zZzZZ",
+    "balance": 1000.0,
+    "iban": "nadmin",
+    "isAdmin": false,
+    "isApproved": true,
+    "uuid": "nadmin"
   }
 ]

@@ -6,14 +6,12 @@
 
 package ch.zeiter.marvin;
 
-import ch.zeiter.marvin.other.Stages;
-import javafx.application.Application;
-import javafx.stage.Stage;
+import ch.zeiter.marvin.io.Cli;
 
 /**
  * Main class
  */
-public class Main extends Application {
+public class Main /*extends Application*/ {
 
     /**
      * Method used to start the program
@@ -22,14 +20,14 @@ public class Main extends Application {
     public static void main(String[] args) {
         String name = "TBZ E-Banking";
 
-//        Cli cli = new Cli();
-//        cli.init(name);
-        launch(args);
+        Cli cli = new Cli();
+        cli.init(name);
+//        launch(args);
     }
 
-    @Override
+    /*@Override
     public void start(Stage primaryStage) {
         Stages stage = new Stages();
         stage.changeStage(primaryStage, null,"Login");
-    }
+    }*/
 }

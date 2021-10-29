@@ -87,6 +87,7 @@ public class TransactionHandler {
     private String saveActions(boolean success) {
         if (success) {
             try {
+                jsonActions.getFromJson("Accounts/accounts.json");
                 jsonActions.saveToJson(this.account, "Accounts/accounts.json", "ICanTypeWhatEverIWant");
                 if (this.transferAccount != null)
                     jsonActions.saveToJson(this.transferAccount, "Accounts/accounts.json", "github.com/z-100");
