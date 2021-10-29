@@ -95,7 +95,7 @@ public class AccountHandler {
         }
     }
 
-    private void updatePassword(String newPassword) {
+    public void updatePassword(String newPassword) {
         try {
             userSession.getLoggedUser().setPassword(newPassword);
             jsonActions.saveToJson(userSession.getLoggedUser(),
