@@ -1,5 +1,7 @@
 package ch.zeiter.marvin.controller;
 
+import ch.zeiter.marvin.functions.LogoutService;
+import ch.zeiter.marvin.functions.TransactionHandler;
 import ch.zeiter.marvin.other.Stages;
 import ch.zeiter.marvin.other.UserSession;
 import javafx.fxml.FXML;
@@ -25,20 +27,33 @@ public class TransferalController {
 
 		this.primaryStage = primaryStage;
 
-		depositButton.setOnAction((actionEvent) -> {
-			stages.changeStage(this.primaryStage, userSession, "Deposit");
-		});
+		depositButton.setOnAction(actionEvent ->
+				stages.changeStage(this.primaryStage, userSession, "Deposit"));
 
-		withdrawButton.setOnAction((actionEvent) -> {
-			stages.changeStage(this.primaryStage, userSession, "Withdrawal");
-		});
+		withdrawButton.setOnAction(actionEvent ->
+				stages.changeStage(this.primaryStage, userSession, "Withdrawal"));
 
-		accountButton.setOnAction((actionEvent) -> {
-			stages.changeStage(this.primaryStage, userSession, "Main");
-		});
+		accountButton.setOnAction(actionEvent ->
+				stages.changeStage(this.primaryStage, userSession, "Main"));
 
-		logoutButton.setOnAction((actionEvent) -> {
-			// ! Logout logic
+		logoutButton.setOnAction(actionEvent ->
+				LogoutService.logout("logout_javafx", primaryStage));
+
+		confirmTransferalButton.setOnAction(actionEvent -> {
+			String receiverIban = receiverIBanField.getText();
+			String transferAmountS = transferalAmountField.getText();
+
+			double transferAmountD = Double.parseDouble(
+					transferAmountS.isEmpty() ? "0.0" : transferAmountS);
+
+			boolean nothingMissing = transferAmountD != 0.0 && !receiverIban.isEmpty();
+
+			TransactionHandler transactionHandler = new TransactionHandler(userSession);
+			if (nothingMissing) {
+				transactionHandler.newTransaction(transferAmountD, receiverIban);
+			}
+
+			transactionHandler = null;
 		});
 	}
 }

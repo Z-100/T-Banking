@@ -30,7 +30,7 @@ public class DeleteController {
 		jsonActions = new JsonActions();
 	}
 
-	public void initialize(Stage primaryStage, UserSession userSession, Stages stages) {
+	public void init(Stage primaryStage, UserSession userSession, Stages stages) {
 		this.primaryStage = primaryStage;
 
 		deleteAccountTextLabel.setText("You're about to\ndelete your account");

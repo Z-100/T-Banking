@@ -25,15 +25,13 @@ public class RegisterController {
 
 	private boolean awaitingApproval;
 
-	private final Pattern pattern;
+	public static final Pattern pattern = Pattern.compile(
+			"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");;
 	private Stage primaryStage;
 
 	public RegisterController() {
 		this.registeredAccounts = new RegisteredAccounts();
 		this.awaitingApproval = false;
-
-		this.pattern = Pattern.compile(
-				"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
 	}
 
 	public void init(Stage primaryStage, UserSession userSession, Stages stages) {

@@ -53,7 +53,11 @@ public class Stages {
 				}
 				case "Delete" -> {
 					DeleteController controller = fxmlLoader.getController();
-					controller.initialize(primaryStage, userSession, this);
+					controller.init(primaryStage, userSession, this);
+				}
+				case "ChangePW" -> {
+					ChangePWController controller = fxmlLoader.getController();
+					controller.init(primaryStage, userSession, this);
 				}
 				default -> System.exit(1);
 			}

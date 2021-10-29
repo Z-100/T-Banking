@@ -1,6 +1,6 @@
 package ch.zeiter.marvin.controller;
 
-import ch.zeiter.marvin.functions.JsonActions;
+import ch.zeiter.marvin.functions.LogoutService;
 import ch.zeiter.marvin.other.Stages;
 import ch.zeiter.marvin.other.UserSession;
 import javafx.fxml.FXML;
@@ -17,25 +17,12 @@ public class MainController {
 	@FXML private Button withdrawButton;
 	@FXML private Button transferButton;
 	@FXML private Button logoutButton;
-	@FXML private Label uuidLabel;
 	@FXML private Label iBanLabel;
 	@FXML private Label balanceLabel;
 	@FXML private Button changePasswordButton;
 	@FXML private Button deleteAccountButton;
 
-
-	private UserSession userSession;
-	private final JsonActions jsonActions;
-
 	private Stage primaryStage;
-
-	/**
-	 * The constructor
-	 */
-	public MainController() {
-		this.userSession = null;
-		this.jsonActions = new JsonActions();
-	}
 
 	/**
 	 * Method used to control the main process of the application
@@ -47,20 +34,28 @@ public class MainController {
 
 		this.primaryStage = primaryStage;
 
-		depositButton.setOnAction((actionEvent) -> {
-			stages.changeStage(this.primaryStage, userSession, "Deposit");
-		});
+		iBanLabel.setText(String.format("Your IBan:\t%s",
+				userSession.getLoggedUser().getIban()));
 
-		withdrawButton.setOnAction((actionEvent) -> {
-			stages.changeStage(this.primaryStage, userSession, "Withdrawal");
-		});
+		balanceLabel.setText(String.format("Your balance:\t%s £",
+				userSession.getLoggedUser().getBalance()));
 
-		transferButton.setOnAction((actionEvent) -> {
-			stages.changeStage(this.primaryStage, userSession, "Transferal");
-		});
+		depositButton.setOnAction(actionEvent ->
+				stages.changeStage(this.primaryStage, userSession, "Deposit"));
 
-		logoutButton.setOnAction((actionEvent) -> {
-			// ! Logout logic
-		});
+		withdrawButton.setOnAction(actionEvent ->
+				stages.changeStage(this.primaryStage, userSession, "Withdrawal"));
+
+		transferButton.setOnAction(actionEvent ->
+				stages.changeStage(this.primaryStage, userSession, "Transferal"));
+
+		logoutButton.setOnAction(actionEvent ->
+			LogoutService.logout("logout_javafx", primaryStage));
+
+		deleteAccountButton.setOnAction(actionEvent ->
+				stages.changeStage(this.primaryStage, userSession, "Delete"));
+
+		changePasswordButton.setOnAction(actionEvent ->
+				stages.changeStage(this.primaryStage, userSession, "ChangePW"));
 	}
 }

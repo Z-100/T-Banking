@@ -50,11 +50,11 @@ public class WithdrawalController {
 			if (data > 0) {
 				TransactionHandler transactionHandler = new TransactionHandler(userSession);
 				String s = transactionHandler.newTransaction(
-						(-1) * Double.parseDouble(withdrawalAmountField.getText()));
+						(-1) * data);
 				if (s.contains("success"))
 					stages.changeStage(this.primaryStage, userSession, "Withdrawal");
 				else
-					amountMoneyAvailableLabel.setText("Balance too small");
+					amountMoneyAvailableLabel.setText(s);
 			} else
 				amountMoneyAvailableLabel.setText("Invalid number");
 		});
