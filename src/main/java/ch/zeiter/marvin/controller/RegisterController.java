@@ -2,6 +2,7 @@ package ch.zeiter.marvin.controller;
 
 import ch.zeiter.marvin.other.RegisteredAccounts;
 import ch.zeiter.marvin.other.Stages;
+import ch.zeiter.marvin.other.UserSession;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,7 +16,7 @@ import java.util.regex.Pattern;
 public class RegisterController {
 
 	@FXML PasswordField createPasswordField;
-	@FXML Checkbox termsAndAgreementsCheckbox;
+//	@FXML Checkbox termsAndAgreementsCheckbox;
 	@FXML Button registerButton;
 	@FXML Label loginInsteadButton;
 	@FXML Label errorLabel;
@@ -35,21 +36,19 @@ public class RegisterController {
 				"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
 	}
 
-	public void init(Stage primaryStage, Stages stages) {
+	public void init(Stage primaryStage, UserSession userSession, Stages stages) {
 		this.primaryStage = primaryStage;
 
-		termsAndAgreementsCheckbox.addItemListener(listener -> {
-			if (termsAndAgreementsCheckbox.getState())
-				registerButton.setDisable(false);
-		});
+//		termsAndAgreementsCheckbox.addItemListener(listener -> {
+//			if (termsAndAgreementsCheckbox.getState())
+//				registerButton.setDisable(false);
+//		});
 
-		registerButton.setOnAction(actionEvent -> {
-			passwordCheck(createPasswordField.getText());
-		});
+		registerButton.setOnAction(actionEvent ->
+				passwordCheck(createPasswordField.getText()));
 
-		loginInsteadButton.setOnMouseClicked(mouseEvent -> {
-			stages.changeStage(this.primaryStage, null, "Login");
-		});
+		loginInsteadButton.setOnMouseClicked(mouseEvent ->
+				stages.changeStage(this.primaryStage, userSession, "Login"));
 	}
 
 	private void passwordCheck(String password) {

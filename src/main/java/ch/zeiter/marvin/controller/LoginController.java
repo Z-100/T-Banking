@@ -12,6 +12,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * The FX-Controller of the Login screen
+ */
 public class LoginController {
 
 	@FXML private TextField usernameField;
@@ -23,7 +26,7 @@ public class LoginController {
 	private UserSession userSession;
 	private final JsonActions jsonActions;
 
-	private int accessCounter = 5;
+	private double accessCounter = 5;
 
 	private Stage primaryStage;
 
@@ -43,18 +46,25 @@ public class LoginController {
 	 * @param primaryStage The stage used by the Application
 	 * @param stages The given stages object to change in between stages
 	 */
-	public void init(Stage primaryStage, Stages stages) {
+	public void init(Stage primaryStage, UserSession userSession, Stages stages) {
 
 		this.primaryStage = primaryStage;
+
+		if (userSession != null) {
+			this.accessCounter = userSession.getLoggedUser().getBalance();
+			errorLabel.setText(String.format(
+					"Nice try, but no. It doesn't work like that.\n%1.0f tries left", accessCounter));
+		}
 
 		loginButton.setOnAction(actionEvent -> {
 			if (loginCheck(usernameField.getText(), passwordField.getText()))
 				stages.changeStage(primaryStage, this.userSession, "Main");
 		});
 
-		registerInsteadButton.setOnMouseClicked(mouseEvent -> {
-			stages.changeStage(this.primaryStage, null, "Register");
-		});
+		registerInsteadButton.setOnMouseClicked(mouseEvent -> stages.changeStage(this.primaryStage,
+				new UserSession(new Account(
+						null, null, null, accessCounter, false, false)),
+				"Register"));
 	}
 
 	/**
@@ -74,8 +84,8 @@ public class LoginController {
 			if (account.isApproved()) {
 				this.userSession = UserSession.session(account);
 				login = null;
-				System.out.println(String.format("UserSession created with UUID {%s}",
-						this.userSession.getLoggedUser().getUuid()));
+				System.out.printf("[INFO]\tUserSession created with UUID {%s}%n",
+						this.userSession.getLoggedUser().getUuid());
 				return true;
 			}
 		} else if (accessCounter <= 0) {
@@ -83,12 +93,10 @@ public class LoginController {
 			usernameField.setEditable(false);
 			passwordField.setEditable(false);
 			loginButton.cancelButtonProperty();
-			//TODO add logic to disable register button
 		} else {
-			errorLabel.setText(String.format("Either IBAN or password is wrong, %d tries left", accessCounter));
+			errorLabel.setText(String.format("Either IBAN or password is wrong.\n%1.1f tries left", accessCounter));
 			accessCounter--;
 		}
-		System.out.println("No user session");
 		return false;
 	}
 }

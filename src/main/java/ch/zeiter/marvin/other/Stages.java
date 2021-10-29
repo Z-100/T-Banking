@@ -29,11 +29,11 @@ public class Stages {
 			switch (fxmlFile) {
 				case "Login" -> {
 					LoginController controller = fxmlLoader.getController();
-					controller.init(primaryStage, this);
+					controller.init(primaryStage, userSession, this);
 				}
 				case "Register" -> {
 					RegisterController controller = fxmlLoader.getController();
-					controller.init(primaryStage, this);
+					controller.init(primaryStage, userSession, this);
 				}
 				case "Main" -> {
 					MainController controller = fxmlLoader.getController();
@@ -44,18 +44,17 @@ public class Stages {
 					controller.init(primaryStage, userSession, this);
 				}
 				case "Withdrawal" -> {
-					WithdrawalController controller = new WithdrawalController();
+					WithdrawalController controller = fxmlLoader.getController();
 					controller.init(primaryStage, userSession, this);
 				}
 				case "Transferal" -> {
-					TransferalController controller = new TransferalController();
+					TransferalController controller =fxmlLoader.getController();
 					controller.init(primaryStage, userSession, this);
 				}
 				case "Delete" -> {
-					DeleteController controller = new DeleteController();
-					controller.init(primaryStage, userSession, this);
+					DeleteController controller = fxmlLoader.getController();
+					controller.initialize(primaryStage, userSession, this);
 				}
-
 				default -> System.exit(1);
 			}
 
