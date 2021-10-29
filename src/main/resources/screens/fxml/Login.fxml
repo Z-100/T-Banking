@@ -13,64 +13,65 @@
 
 <BorderPane maxHeight="500" maxWidth="500" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
             prefWidth="600.0" scaleShape="false" style="-fx-background-color: #1c1c1c;"
-            xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="ch.zeiter.marvin.controller.LoginController">
     <top>
-        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <children>
-                <Button fx:id="logoBtn" mnemonicParsing="false" prefHeight="94.0" prefWidth="105.0"
-                        style="-fx-background-color: transparent; -fx-text-fill: transparent; -fx-border-color: transparent;"
-                        text="Button">
-                    <HBox.margin>
-                        <Insets left="120.0" right="5.0"/>
-                    </HBox.margin>
-                </Button>
-            </children>
+        <HBox prefHeight="104.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <BorderPane.margin>
                 <Insets top="20.0"/>
             </BorderPane.margin>
+            <children>
+                <Label style="-fx-text-fill: #adadad;" text="Log In to Your Account">
+                    <font>
+                        <Font size="35.0"/>
+                    </font>
+                    <HBox.margin>
+                        <Insets left="125.0" top="50.0"/>
+                    </HBox.margin>
+                </Label>
+            </children>
         </HBox>
     </top>
     <center>
-        <VBox prefHeight="200.0" prefWidth="209.0" BorderPane.alignment="CENTER">
+        <VBox prefHeight="204.0" prefWidth="300.0" BorderPane.alignment="CENTER">
             <children>
-                <Label style="-fx-text-fill: #adadad;" text="Enter username">
-                    <VBox.margin>
-                        <Insets bottom="5.0"/>
-                    </VBox.margin>
-                </Label>
-                <TextField fx:id="usernameField" promptText="Enter username"
+                <TextField fx:id="usernameField" prefHeight="45.0" prefWidth="316.0" promptText="Enter iBan..."
                            style="-fx-background-color: #3b3b3b; -fx-text-fill: #E2E2E2;">
                     <VBox.margin>
                         <Insets bottom="10.0"/>
                     </VBox.margin>
+                    <font>
+                        <Font name="System Italic" size="18.0"/>
+                    </font>
                 </TextField>
-                <Label style="-fx-text-fill: #adadad;" text="Enter password">
-                    <VBox.margin>
-                        <Insets bottom="5.0"/>
-                    </VBox.margin>
-                </Label>
-                <PasswordField fx:id="passwordField" prefHeight="25.0" prefWidth="276.0" promptText="Enter password"
+                <PasswordField fx:id="passwordField" prefHeight="45.0" prefWidth="316.0" promptText="Enter password..."
                                style="-fx-background-color: #3b3b3b; -fx-text-fill: #E2E2E2;">
                     <VBox.margin>
                         <Insets bottom="10.0"/>
                     </VBox.margin>
+                    <font>
+                        <Font name="System Italic" size="18.0"/>
+                    </font>
                 </PasswordField>
-                <HBox prefHeight="100.0" prefWidth="200.0">
+                <HBox prefHeight="42.0" prefWidth="316.0">
                     <children>
-                        <Button fx:id="loginBtn" mnemonicParsing="false" prefHeight="77.0" prefWidth="90.0"
-                                style="-fx-text-fill: #adadad; -fx-background-color: #3b3b3b;" text="Log in"/>
-                        <Label fx:id="registerbtn" style="-fx-text-fill: #adadad;" text="Register instead">
+                        <Button fx:id="loginButton" mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0"
+                                style="-fx-text-fill: #adadad; -fx-background-color: #3b3b3b;" text="Log in">
                             <font>
-                                <Font size="16.0"/>
+                                <Font size="18.0"/>
+                            </font>
+                        </Button>
+                        <Label fx:id="registerInsteadButton" style="-fx-text-fill: #adadad;" text="Register instead">
+                            <font>
+                                <Font size="18.0"/>
                             </font>
                             <HBox.margin>
-                                <Insets left="10.0"/>
+                                <Insets left="10.0" top="7.0"/>
                             </HBox.margin>
                         </Label>
                     </children>
                 </HBox>
-                <Label fx:id="check" style="-fx-text-fill: #FF3F4C;"/>
+                <Label fx:id="errorLabel" style="-fx-text-fill: #FF3F4C;"/>
             </children>
             <BorderPane.margin>
                 <Insets top="40.0"/>
@@ -78,20 +79,20 @@
         </VBox>
     </center>
     <bottom>
-        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <HBox prefHeight="47.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <children>
             </children>
         </HBox>
     </bottom>
     <left>
-        <Pane prefHeight="200.0" prefWidth="154.0" BorderPane.alignment="CENTER">
+        <Pane prefHeight="180.0" prefWidth="123.0" BorderPane.alignment="CENTER">
             <BorderPane.margin>
                 <Insets right="20.0"/>
             </BorderPane.margin>
         </Pane>
     </left>
     <right>
-        <Pane prefHeight="200.0" prefWidth="158.0" BorderPane.alignment="CENTER">
+        <Pane prefHeight="180.0" prefWidth="121.0" BorderPane.alignment="CENTER">
             <BorderPane.margin>
                 <Insets left="20.0"/>
             </BorderPane.margin>

@@ -45,7 +45,7 @@ public class AccountHandler {
         return false;
     }
 
-    private boolean deleteAccount(UserSession userSession) {
+    public boolean deleteAccount(UserSession userSession) {
         try {
             jsonActions.saveToJson(userSession.getLoggedUser(),
                     "Accounts/accounts.json", "deleteUser");
@@ -95,7 +95,7 @@ public class AccountHandler {
         }
     }
 
-    private void updatePassword(String newPassword) {
+    public void updatePassword(String newPassword) {
         try {
             userSession.getLoggedUser().setPassword(newPassword);
             jsonActions.saveToJson(userSession.getLoggedUser(),

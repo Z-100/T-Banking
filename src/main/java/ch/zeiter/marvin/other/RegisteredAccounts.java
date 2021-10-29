@@ -1,6 +1,6 @@
 package ch.zeiter.marvin.other;
 
-import ch.zeiter.marvin.functions.CreateAccount;
+import ch.zeiter.marvin.functions.AccountCreator;
 import ch.zeiter.marvin.functions.JsonActions;
 import org.json.simple.parser.ParseException;
 
@@ -9,14 +9,14 @@ import java.io.IOException;
 public class RegisteredAccounts {
 
     private final JsonActions jsonActions;
-    private final CreateAccount createAccount;
+    private final AccountCreator accountCreator;
 
     /**
      * Constructor for RegisteredAccounts
      */
     public RegisteredAccounts() {
         this.jsonActions = new JsonActions();
-        this.createAccount = new CreateAccount();
+        this.accountCreator = new AccountCreator();
     }
 
     /**
@@ -28,7 +28,7 @@ public class RegisteredAccounts {
      */
     public String addRegisteredAccount(String inputPassword, String path) {
         try {
-            this.jsonActions.saveToJson(createAccount.createAccount(inputPassword), path, "newUser");
+            this.jsonActions.saveToJson(accountCreator.createAccount(inputPassword), path, "newUser");
 
             return "Account successfully registered. Waiting approval";
         } catch (IOException | ParseException e) {

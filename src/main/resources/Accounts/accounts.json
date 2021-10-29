@@ -12,12 +12,20 @@
     "balance": 0.0,
     "iban": "238104749",
     "isAdmin": false,
-    "isApproved": false,
+    "isApproved": true,
     "uuid": "f98fba8b-f7a7-4260-b6d2-c4947f054af7"
   },
   {
-    "password": "admin",
+    "password": "a",
     "balance": 1000000.0,
+    "iban": "a",
+    "isAdmin": true,
+    "isApproved": true,
+    "uuid": "a"
+  },
+  {
+    "password": "admin",
+    "balance": 56.0,
     "iban": "admin",
     "isAdmin": true,
     "isApproved": true,

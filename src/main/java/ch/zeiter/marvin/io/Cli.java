@@ -1,15 +1,15 @@
 package ch.zeiter.marvin.io;
 
-import ch.zeiter.marvin.Blueprints.Account;
+import ch.zeiter.marvin.blueprints.Account;
 import ch.zeiter.marvin.functions.*;
 import ch.zeiter.marvin.other.RegisteredAccounts;
 import ch.zeiter.marvin.other.UserSession;
-import lombok.Getter;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Deprecated // This is the CLI page of the whole application
 public class Cli {
 
 
@@ -19,9 +19,7 @@ public class Cli {
     private int choice;
 
     //    private UserChoice choice;
-    @Getter
     private UserSession userSession;
-    @Getter
     private final RegisteredAccounts registeredAccounts;
     private final JsonActions jsonActions;
 
@@ -83,7 +81,7 @@ public class Cli {
     }
 
     /**
-     * The CLI interface process
+     * The CLI interface of Main.fxml
      *
      * @param bankName The applications name
      * @throws Exception Thrown when user enters invalid choice
@@ -112,8 +110,8 @@ public class Cli {
             case 2 -> userAction.deposit();
             case 3 -> userAction.transfer();
             case 4 -> accountHandler.updatePasswordConfirmation(this.pattern);
-            case 5 -> logout("You have been logged out");
-            case 6 -> logout(accountHandler.deleteAccountConfirmation( // * The ? is showing off my knowledge once again
+            case 5 -> LogoutService.logout("You have been logged out");
+            case 6 -> LogoutService.logout(accountHandler.deleteAccountConfirmation( // * The ? is showing off my knowledge once again
                     this.userSession) ? "Your account has been deleted" : "");
             default -> throw new Exception();
         }
@@ -149,8 +147,8 @@ public class Cli {
             case 1 -> adminAction.approveAccount();
             case 2 -> adminAction.viewStats();
             case 3 -> accountHandler.updatePasswordConfirmation(this.pattern);
-            case 4 -> logout("You have been logged out");
-            case 5 -> logout(accountHandler.deleteAccountConfirmation(
+            case 4 -> LogoutService.logout("You have been logged out");
+            case 5 -> LogoutService.logout(accountHandler.deleteAccountConfirmation(
                     this.userSession) ? "Your account has been deleted" : "");
             default -> throw new Exception();
         }
@@ -227,11 +225,5 @@ public class Cli {
                 }
             }
         }
-    }
-
-    private void logout(String message) {
-        this.userSession = null;
-        System.out.println(message);
-        System.exit(0);
     }
 }

@@ -1,13 +1,13 @@
 package ch.zeiter.marvin.functions;
 
-import ch.zeiter.marvin.Blueprints.Account;
+import ch.zeiter.marvin.blueprints.Account;
 import ch.zeiter.marvin.other.AccountPropertyGenerator;
 import lombok.Getter;
 
 import java.io.IOException;
 import java.util.function.Predicate;
 
-public class CreateAccount {
+public class AccountCreator {
 
     @Getter
     private AccountPropertyGenerator acg = new AccountPropertyGenerator();

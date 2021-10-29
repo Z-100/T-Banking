@@ -1,6 +1,6 @@
 package ch.zeiter.marvin.functions;
 
-import ch.zeiter.marvin.Blueprints.Account;
+import ch.zeiter.marvin.blueprints.Account;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -31,6 +31,8 @@ public class JsonActions {
      */
     public void saveToJson(Account jsonAccount, String inputStream, String action)
             throws IOException, ParseException {
+
+        //TODO convert to jackson json
 
         this.accounts.clear();
         this.accounts = getFromJson(inputStream);
