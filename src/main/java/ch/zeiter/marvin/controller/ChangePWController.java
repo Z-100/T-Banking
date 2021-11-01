@@ -13,6 +13,9 @@ import javafx.stage.Stage;
 
 import java.util.regex.Matcher;
 
+/**
+ * Controller for ChangePW.fxml
+ */
 public class ChangePWController {
 
     @FXML
@@ -38,6 +41,14 @@ public class ChangePWController {
 
     private Stage primaryStage;
 
+    /**
+     * Method used for initializing the Change password stage
+     * and sending new password to the backend
+     *
+     * @param primaryStage The given JavaFX:Stage
+     * @param userSession The given session created by login
+     * @param stages the stages object to change between stages
+     */
     public void init(Stage primaryStage, UserSession userSession, Stages stages) {
 
         this.accountHandler = new AccountHandler(null, userSession, new JsonActions());

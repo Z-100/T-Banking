@@ -1,1 +1,10 @@
-[{"password":"ûç\u008E`\u008Bâ#£AR\u007F\u0094ÛsºRk¿»`\u008FÈjQy[\u0080ÖÄ\u0089\u008F@b","balance":144.05070584845865,"iban":"bëñ°9\u008DA\u0085cÛÖ\u0002\u0003Ô\u0012µº±Ýf6\u0095&\u008F\u0007ýJ5<»F£\u0004","isAdmin":false,"isApproved":true,"uuid":"\u0082!pg¬Ãñò\u009D]Í\fQM8Ï*\u0012wïJ1»nàG\u007Fs\u0002\u009F\bs§\u008CaB\u0004²Q\u0082"}]
+[
+  {
+    "password": "ûç\u008E`\u008Bâ#£AR\u007F\u0094ÛsºRk¿»`\u008FÈjQy[\u0080ÖÄ\u0089\u008F@b",
+    "balance": 144.05070584845865,
+    "iban": "bëñ°9\u008DA\u0085cÛÖ\u0002\u0003Ô\u0012µº±Ýf6\u0095&\u008F\u0007ýJ5<»F£\u0004",
+    "isAdmin": false,
+    "isApproved": true,
+    "uuid": "\u0082!pg¬Ãñò\u009D]Í\fQM8Ï*\u0012wïJ1»nàG\u007Fs\u0002\u009F\bs§\u008CaB\u0004²Q\u0082"
+  }
+]

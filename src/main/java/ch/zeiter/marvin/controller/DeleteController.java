@@ -12,62 +12,81 @@ import javafx.stage.Stage;
 
 import java.util.Stack;
 
+/**
+ * Controller for Delete.fxml
+ */
 public class DeleteController {
 
-    @FXML
-    private Label deleteAccountTextLabel;
-    @FXML
-    private PasswordField passwordField;
-    @FXML
-    private Button goBackButton;
-    @FXML
-    private Button deleteAccountConfirmButton;
+	@FXML private Label deleteAccountTextLabel;
+	@FXML private PasswordField passwordField;
+	@FXML private Button goBackButton;
+	@FXML private Button deleteAccountConfirmButton;
 
-    private Stage primaryStage;
-    private JsonActions jsonActions;
+	private Stage primaryStage;
+	private final JsonActions jsonActions;
 
-    private final Stack<String> really = new Stack<>();
+	private final Stack<String> really = new Stack<>();
 
-    private int i = 0;
+	private int i = 0;
 
-    public void init(Stage primaryStage, UserSession userSession, Stages stages) {
-        this.jsonActions = new JsonActions();
-        this.primaryStage = primaryStage;
+	/**
+	 * The constructor
+	 */
+	public DeleteController() {
+		jsonActions = new JsonActions();
+	}
 
-        deleteAccountTextLabel.setText("You're about to\ndelete your account");
+	/**
+	 * Method executed when the controller is being loaded
+	 *
+	 * @param primaryStage The given JavaFX:Stage
+	 * @param userSession The given session created by login
+	 * @param stages the stages object to change between stages
+	 */
+	public void init(Stage primaryStage, UserSession userSession, Stages stages) {
+		this.primaryStage = primaryStage;
 
-        really.push("Enter pw to confirm");
-        really.push("It will be gone forever");
-        really.push("Like actually?");
-        really.push("U wanna del ur account?");
-        really.push("U rly wanna do this?");
+		deleteAccountTextLabel.setText("You're about to\ndelete your account");
 
-        goBackButton.setOnAction(actionEvent ->
-                stages.changeStage(this.primaryStage, userSession, "Main"));
+		really.push("Enter pw to confirm");
+		really.push("It will be gone forever");
+		really.push("Like actually?");
+		really.push("U wanna del ur account?");
+		really.push("U rly wanna do this?");
 
-        deleteAccountConfirmButton.setOnAction(actionEvent -> {
-            deleteAccountTextLabel.setText(really.peek() + "\nIf so, press confirm");
-            really.pop();
+		goBackButton.setOnAction(actionEvent ->
+				stages.changeStage(this.primaryStage, userSession, "Main"));
 
-            i++;
-            if (i > 3)
-                passwordField.setVisible(true);
+		deleteAccountConfirmButton.setOnAction(actionEvent -> {
+			deleteAccountTextLabel.setText(really.peek() + "\nIf so, press confirm");
+			really.pop();
+
+			i++;
+			if (i > 3)
+				passwordField.setVisible(true);
 
 
-            if (i > 4) {
-                if (deleteAccountConfirmation(userSession)) {
-                    stages.changeStage(this.primaryStage, null, "Login");
-                } else
-                    stages.changeStage(this.primaryStage, userSession, "Main");
-            }
-        });
-    }
+			if (i > 4) {
+				if (deleteAccountConfirmation(userSession)) {
+					stages.changeStage(this.primaryStage, null, "Login");
+				}
+				else
+					stages.changeStage(this.primaryStage, userSession, "Main");
+			}
+		});
+	}
 
-    public boolean deleteAccountConfirmation(UserSession userSession) {
-        if (passwordField.getText().equals(userSession.getLoggedUser().getPassword())) {
-            AccountHandler accountHandler = new AccountHandler(null, userSession, jsonActions);
-            return (accountHandler.deleteAccount(userSession));
-        }
-        return false;
-    }
+	/**
+	 * Method used to delete a user account
+	 *
+	 * @param userSession The given session
+	 * @return true if successful
+	 */
+	private boolean deleteAccountConfirmation(UserSession userSession) {
+			if (passwordField.getText().equals(userSession.getLoggedUser().getPassword())) {
+				AccountHandler accountHandler = new AccountHandler(null, userSession, jsonActions);
+				return (accountHandler.deleteAccount(userSession));
+			}
+		return false;
+	}
 }

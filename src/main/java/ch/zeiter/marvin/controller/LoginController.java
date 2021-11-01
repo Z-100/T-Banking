@@ -24,7 +24,6 @@ public class LoginController {
 	@FXML private Label errorLabel;
 
 	private UserSession userSession;
-	private final JsonActions jsonActions;
 
 	private double accessCounter = 5;
 
@@ -35,7 +34,6 @@ public class LoginController {
 	 */
 	public LoginController() {
 		this.userSession = null;
-		jsonActions = new JsonActions();
 	}
 
 	/**
@@ -47,7 +45,6 @@ public class LoginController {
 	 * @param stages The given stages object to change in between stages
 	 */
 	public void init(Stage primaryStage, UserSession userSession, Stages stages) {
-
 		this.primaryStage = primaryStage;
 
 		if (userSession != null) {
@@ -73,7 +70,7 @@ public class LoginController {
 	 *
 	 * @param iBan The entered iBan to be validated
 	 * @param password The entered password to be validated
-	 * @return Returns true if the login worked
+	 * @return true if the login worked
 	 */
 	private boolean loginCheck(String iBan, String password) {
 		Login login = new Login();
