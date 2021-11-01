@@ -32,6 +32,8 @@ public class Main extends Application {
 //        Cli cli = new Cli();
 //        cli.init(name);
 
+//        printEncDecService();
+
         launch(args);
     }
 
@@ -55,9 +57,15 @@ public class Main extends Application {
     static void printEncDecService() {
         EncryptionDecryptionService eds = new EncryptionDecryptionService();
         try {
-            Account encrypt = eds.encrypt(new Account("admin", "admin", "admin", 69420.0, true, true));
-            System.out.println("encrypted: " + encrypt.toString());
-            System.out.println("decrypted: " + eds.decrypt(encrypt).toString());
+            Account encryptAdmin = eds.encrypt(new Account("admin", "admin", "admin", 69420.0, true, true));
+            Account encryptNadmin = eds.encrypt(new Account("nadmin", "nadmin", "nadmin", 69420.0, false, true));
+
+            System.out.println("encrypted admin: " + encryptAdmin.toString());
+            System.out.println();
+            System.out.println("encrypted nadmin: " + encryptNadmin.toString());
+
+            System.out.println("decrypted: " + eds.decrypt(encryptAdmin).toString());
+            System.out.println("decrypted: " + eds.decrypt(encryptNadmin).toString());
 
         } catch (GeneralSecurityException | UnsupportedEncodingException e) {
             e.printStackTrace();

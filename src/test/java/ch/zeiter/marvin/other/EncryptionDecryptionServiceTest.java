@@ -1,6 +1,7 @@
 package ch.zeiter.marvin.other;
 
 import ch.zeiter.marvin.blueprints.Account;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
@@ -24,8 +25,14 @@ class EncryptionDecryptionServiceTest {
 
     // ? The Mock account used for testing
     Account account = new Account(uuid, iban, password, balance, isAdmin, isApproved);
+    Account encryptedAcc;
 
     EncryptionDecryptionService eds = new EncryptionDecryptionService();
+
+    @BeforeEach
+    void start() throws GeneralSecurityException, UnsupportedEncodingException {
+        encryptedAcc = eds.encrypt(account);
+    }
 
     /**
      * Method used to test the encryption feature
@@ -34,8 +41,8 @@ class EncryptionDecryptionServiceTest {
      * @throws UnsupportedEncodingException Exception thrown by Google Tink
      */
     @Test
-    void canEncryptAccount() throws GeneralSecurityException, UnsupportedEncodingException {
-        assertNotNull(eds.encrypt(account));
+    void canEncryptAccount() {
+        assertNotNull(encryptedAcc);
     }
 
     /**
@@ -46,7 +53,7 @@ class EncryptionDecryptionServiceTest {
      */
     @Test
     void canDecryptAccount() throws GeneralSecurityException, UnsupportedEncodingException {
-        Account decryptedAccount = eds.decrypt(account);
+        Account decryptedAccount = eds.decrypt(encryptedAcc);
         assertAll(
                 () -> assertEquals(uuid, decryptedAccount.getUuid()),
                 () -> assertEquals(iban, decryptedAccount.getIban()),
