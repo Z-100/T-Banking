@@ -1,0 +1,42 @@
+[
+  {
+    "password": "L\u0003¿­òÕú\u000E¿\u0082¸\u0098Qy=¨8Ñ6âR`Uv\u0007Ø\u0083\u0019§ù¸\u008E Æ¤àcSÎ§rªìvê8?ËX2OUs\u00158\u0089\u0007\u008Fpô\r\u0086ãð",
+    "balance": 0.0,
+    "iban": "\u0013v2ZÇ\u001Fä\u009AS±`³Åh\u0086NßÏ\u000F´$×ôáÑ\u0094\u0082ª¾)´¡5Na¾\u0014",
+    "isAdmin": false,
+    "isApproved": false,
+    "uuid": "G=\u009EÄ\u0091\u0091·\u0096{É\u0095:\u0002D÷\u008Eãìo\u0002D)ü\u0095F8\\:Þ\u0080äªJ\u0012\u0016¾S\u0092Ê"
+  },
+  {
+    "password": "uò\u001FXà%~îù\u0087E-\u009E$còæ&ên6çvæ\u008FbôBÀ\u0081ïvi\u0087Öß\u0092¹cÜf8R Þ>7\u0014ü­6í+\u0011\b=YáNã£^º\u0095",
+    "balance": 0.0,
+    "iban": "\u0018ú\u0090D\u0007.\u0082Åê©ë¯Ö!b['ã\"*1;Ð½XeY9äQ3ó8û\u008B&´",
+    "isAdmin": false,
+    "isApproved": false,
+    "uuid": "\u0000®\u0005W}\r?Êç¤\u001E¹OÌ,ñ\u009A\u0011\týè\u0002\u0017þ'\u0091>\u001D\u008Aoò\u0097\u0016Ãî´|ú>"
+  },
+  {
+    "password": "(§ö\u008FNhA\u0017 \u0087\u0096O³Y®WV\u0080Ñ^eJÏJ\u000F\u009Fç¢Guí÷\u001Fz(\u000B²Ùr%]§õlm\u0082Sb\u0081Ð¾\n\"³úHbò\u0007\u009E\u0094Ê$;",
+    "balance": 0.0,
+    "iban": "3ÞY\u0018%\u0005?\u007F2ê`\u008BÈ\u009DV\u0090¾\tX\/6\u0014NÝ\u0093ÜqBÿo\u0091\u0017\u0091Q·¤L",
+    "isAdmin": false,
+    "isApproved": false,
+    "uuid": "\u0017\u008F \f8ªGi|Fîj\u0092\"ÿ\rã_T\u00989nT#Ä\u0087*\u0086j¢Ù\u000FI\n°èÄ¦\u009E\/²"
+  },
+  {
+    "password": "¶6¬ý\tÝLqtÚ\u000EÝ\u001Fæ\u0005^#.Ù\u009F\u0097ÅÒp\u0007ó\u0006ð\u0083\u0013\u0080ëè£ðâ$ä\u008Câ+*\u0015Qù²)\u009DòäÄÒR\/\u0097@<¨ÄÏ¶ÊT}",
+    "balance": 0.0,
+    "iban": "\u009Aëôo*®)7\u009C\u009Aé4pd\u0098àÂn\u0007nb\u008An\u0087x\u0001­Y³ÐjJ\u00898+øp",
+    "isAdmin": false,
+    "isApproved": false,
+    "uuid": "\t¿O\u0010 ê\u0088&VÐ\u0003Ìw\u001F\u0086J;\u0080ìÚÿcBAöÔlù\u0099jûB\u0096Ôéù\u0093-òY"
+  },
+  {
+    "password": "â9­\u008EE;\u0095Ü$\u0099SjWý\u0005Ù\u008A\u0094\u0015àp¶%\u007FP¸\u0085¨º»jÊÅ\u0012\u000E·\u0084\u0012\u000F\u0095\u009FX\u0082Ä©È!APñ5\u008EC\u0090H0Ñ\u009Cg\u0000Ï\u0007\u009Bè",
+    "balance": 0.0,
+    "iban": "B\u0088\"OæØä\u0003Z\u0005\rq\u0001\u0091ÎýÑy\u001C`$jB×¥U\u0083TBÎ\u0096oÒÃõ\\B",
+    "isAdmin": false,
+    "isApproved": false,
+    "uuid": "¯\u0017 UêêäEÚy\u0091È.\u0097ÃE Ç`E´y'ã\u009CØ*[&x±\u000B\u000El T|Ê8N"
+  }
+]
