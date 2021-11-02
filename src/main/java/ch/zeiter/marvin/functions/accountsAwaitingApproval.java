@@ -48,7 +48,6 @@ public class accountsAwaitingApproval {
         wipeJson();
     }
 
-    //TODO
     private void wipeJson() {
         jsonActions = new JsonActions();
 

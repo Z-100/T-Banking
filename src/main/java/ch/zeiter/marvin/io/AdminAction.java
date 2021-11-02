@@ -9,6 +9,9 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * The CLI interface for the admin
+ */
 public class AdminAction {
 
     private final Scanner scanner;

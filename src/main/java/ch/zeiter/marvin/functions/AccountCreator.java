@@ -7,6 +7,9 @@ import lombok.Getter;
 import java.io.IOException;
 import java.util.function.Predicate;
 
+/**
+ * Class for account creation
+ */
 public class AccountCreator {
 
     @Getter

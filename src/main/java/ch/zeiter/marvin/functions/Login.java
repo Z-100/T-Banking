@@ -6,6 +6,9 @@ import ch.zeiter.marvin.blueprints.InvalidPasswordException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Class for login stuff
+ */
 public class Login {
 
     private final JsonActions jsonActions;

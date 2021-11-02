@@ -11,16 +11,16 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@Deprecated // This is the CLI page of the whole application
+/**
+ * CLI page of the whole app
+ */
 public class Cli {
-
 
     private final Scanner scanner;
 
     private boolean awaitingApproval;
     private int choice;
 
-    //    private UserChoice choice;
     @Getter
     private UserSession userSession;
     @Getter
@@ -160,6 +160,9 @@ public class Cli {
         accountHandler = null;
     }
 
+    /**
+     * CLI interface of login process
+     */
     private void login() {
         Login login = new Login();
         int accessCounter = 5;
@@ -195,6 +198,9 @@ public class Cli {
         }
     }
 
+    /**
+     * CLI interface of register process
+     */
     private void register() {
         if (this.awaitingApproval)
             System.out.println("Please wait until your account has been approved");

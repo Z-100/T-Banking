@@ -10,6 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * Class for the Transferal.fxml file
+ */
 public class TransferalController {
 
     @FXML
@@ -31,6 +34,13 @@ public class TransferalController {
 
     private Stage primaryStage;
 
+    /**
+     * Method executed when the controller is being loaded
+     *
+     * @param primaryStage The given JavaFX:Stage
+     * @param userSession The given session created by login
+     * @param stages the stages object to change between stages
+     */
     public void init(Stage primaryStage, UserSession userSession, Stages stages) {
 
         this.primaryStage = primaryStage;

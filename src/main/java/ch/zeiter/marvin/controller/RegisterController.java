@@ -12,10 +12,13 @@ import javafx.stage.Stage;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Controller for the Register.fxml file
+ */
 public class RegisterController {
 
     @FXML
-    PasswordField createPasswordField;
+    private PasswordField createPasswordField;
     @FXML
     private Button registerButton;
     @FXML
@@ -24,25 +27,29 @@ public class RegisterController {
     private Label errorLabel;
 
     private final RegisteredAccount registeredAccount;
-    public static final Pattern pattern = Pattern.compile(
-            "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
-
     private Stage primaryStage;
 
     private boolean awaitingApproval;
+    public static final Pattern pattern = Pattern.compile(
+            "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
 
+    /**
+     * The constructor
+     */
     public RegisterController() {
         this.registeredAccount = new RegisteredAccount();
         this.awaitingApproval = false;
     }
 
+    /**
+     * Method executed when the controller is being loaded
+     *
+     * @param primaryStage The given JavaFX:Stage
+     * @param userSession The given session created by login
+     * @param stages the stages object to change between stages
+     */
     public void init(Stage primaryStage, UserSession userSession, Stages stages) {
         this.primaryStage = primaryStage;
-
-//		termsAndAgreementsCheckbox.addItemListener(listener -> {
-//			if (termsAndAgreementsCheckbox.getState())
-//				registerButton.setDisable(false);
-//		});
 
         registerButton.setOnAction(actionEvent ->
                 passwordCheck(createPasswordField.getText()));
@@ -51,12 +58,18 @@ public class RegisterController {
                 stages.changeStage(this.primaryStage, userSession, "Login"));
     }
 
+    /**
+     * Method used to send the password to the backend
+     * which will then validate it
+     *
+     * @param password The entered password
+     */
     private void passwordCheck(String password) {
         Matcher matcher = pattern.matcher(password);
         while (!this.awaitingApproval) {
             if (matcher.matches()) {
-                System.out.println(
-                        this.registeredAccount.addRegisteredAccount(password, "Accounts/registeredAccounts.json"));
+                String s = this.registeredAccount.addRegisteredAccount(password, "Accounts/registeredAccounts.json");
+                System.out.println(s);
                 this.awaitingApproval = true;
                 errorLabel.setVisible(false);
             } else {

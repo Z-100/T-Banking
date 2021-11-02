@@ -9,8 +9,16 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * CLI for a normal user
+ */
 public record AccountHandler(Scanner scanner, UserSession userSession, JsonActions jsonActions) {
 
+    /**
+     * CLI interface of the account deletion process
+     *
+     * @return true if account was deleted
+     */
     public boolean deleteAccountConfirmation() {
         String[] really = new String[] { "\nDo you really wanna do this?", "You wanna delete your account?",
                 "Like actually? It will be gone forever" };
@@ -33,6 +41,12 @@ public record AccountHandler(Scanner scanner, UserSession userSession, JsonActio
         return false;
     }
 
+    /**
+     * Method deletes user from the jsonfile
+     *
+     * @param userSession The given session
+     * @return true if successful
+     */
     public boolean deleteAccount(UserSession userSession) {
         try {
             jsonActions.saveToJson(userSession.getLoggedUser(), "Accounts/accounts.json", "deleteUser");
@@ -43,6 +57,11 @@ public record AccountHandler(Scanner scanner, UserSession userSession, JsonActio
         return true;
     }
 
+    /**
+     * Method used to change the password
+     *
+     * @param pattern The given pattern to validate new password
+     */
     public void updatePasswordConfirmation(Pattern pattern) {
         System.out.println("Enter your current password");
         String currentPassword = scanner.nextLine();
@@ -81,6 +100,11 @@ public record AccountHandler(Scanner scanner, UserSession userSession, JsonActio
         }
     }
 
+    /**
+     * Method used to update and save the password
+     *
+     * @param newPassword The given new password
+     */
     public void updatePassword(String newPassword) {
         try {
             userSession.getLoggedUser().setPassword(newPassword);

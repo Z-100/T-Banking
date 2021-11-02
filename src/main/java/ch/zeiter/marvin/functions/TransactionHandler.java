@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+ * Class for all kinds of transactions
+ */
 public class TransactionHandler {
 
     private final JsonActions jsonActions;

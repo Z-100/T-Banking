@@ -13,16 +13,18 @@ class JsonActionsTest {
     JsonActions jsonActions = new JsonActions();
 
     @Test
-    void saveToJson() {
-        try {
-            assertEquals(getFromJson().get(0).getIban(), "uuid");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    void canEncryptAndDecryptAndSaveAndReadToAndFromJson() {
+        assertAll(
+                () -> assertEquals(getFromJson().get(0).getUuid(), "admin"),
+                () -> assertEquals(getFromJson().get(0).getIban(), "admin"),
+                () -> assertEquals(getFromJson().get(0).getPassword(), "admin"),
+                () -> assertEquals(getFromJson().get(0).getBalance(), 69420.0),
+                () -> assertTrue(getFromJson().get(0).isAdmin()),
+                () -> assertTrue(getFromJson().get(0).isApproved())
+        );
     }
 
     ArrayList<Account> getFromJson() throws IOException {
-
         return jsonActions.getFromJson("Accounts/accounts.json");
     }
 }

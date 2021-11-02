@@ -26,16 +26,15 @@ public class Main extends Application {
      * @param args Starting argument
      */
     public static void main(String[] args) {
-        // ? Not needed
-        printEncDecService();
-
         String name = "TBZ E-Banking";
 
+        // ! to log in as an admin, uncomment these two lines of code
 //        Cli cli = new Cli();
 //        cli.init(name);
 
         launch(args);
     }
+
 
     /**
      * The method used to start the JavaFX Stage
@@ -48,13 +47,18 @@ public class Main extends Application {
         stage.changeStage(primaryStage, null,"Login");
     }
 
-    // ? not needed
+
+    /**
+     * Method used to get encrypted / decrypted account information
+     */
+    @Deprecated
     static void printEncDecService() {
         EncryptionDecryptionService eds = new EncryptionDecryptionService();
         try {
             Account encrypt = eds.encrypt(new Account("admin", "admin", "admin", 69420.0, true, true));
             System.out.println("encrypted: " + encrypt.toString());
             System.out.println("decrypted: " + eds.decrypt(encrypt).toString());
+
         } catch (GeneralSecurityException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }

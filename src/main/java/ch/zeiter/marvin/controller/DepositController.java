@@ -29,6 +29,13 @@ public class DepositController {
 
     private Stage primaryStage;
 
+    /**
+     * Method executed when the controller is being loaded
+     *
+     * @param primaryStage The given JavaFX:Stage
+     * @param userSession The given session created by login
+     * @param stages the stages object to change between stages
+     */
     public void init(Stage primaryStage, UserSession userSession, Stages stages) {
 
         this.primaryStage = primaryStage;

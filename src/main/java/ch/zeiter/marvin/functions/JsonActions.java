@@ -1,7 +1,9 @@
 package ch.zeiter.marvin.functions;
 
 import ch.zeiter.marvin.blueprints.Account;
+import ch.zeiter.marvin.blueprints.InvalidJsonOptionException;
 import ch.zeiter.marvin.other.EncryptionDecryptionService;
+import lombok.SneakyThrows;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -12,6 +14,9 @@ import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * Class for the handling with json files
+ */
 public class JsonActions {
 
     private EncryptionDecryptionService eds;
@@ -32,6 +37,7 @@ public class JsonActions {
      * @throws IOException Thrown exception
      * @throws ParseException Thrown exception
      */
+    @SneakyThrows
     public void saveToJson(Account jsonAccount, String inputStream, String action)
             throws IOException {
 
@@ -44,6 +50,7 @@ public class JsonActions {
                         acc.getUuid().equals(jsonAccount.getUuid()));
                 this.accounts.add(jsonAccount);
             }
+            default -> throw new InvalidJsonOptionException("Wrong option");
         }
 
         JSONArray jsonArrayAccounts = new JSONArray();
