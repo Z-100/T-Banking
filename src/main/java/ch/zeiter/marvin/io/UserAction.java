@@ -5,6 +5,9 @@ import ch.zeiter.marvin.other.UserSession;
 
 import java.util.Scanner;
 
+/**
+ * CLI interface for 'normal'-user actions
+ */
 public class UserAction {
 
     private final UserSession userSession;
@@ -12,17 +15,29 @@ public class UserAction {
 
     private TransactionHandler transactionHandler;
 
+    /**
+     * The constructor
+     *
+     * @param userSession The given session
+     * @param scanner An already existing scanner
+     */
     public UserAction(UserSession userSession, Scanner scanner) {
         this.userSession = userSession;
         this.scanner = scanner;
     }
 
+    /**
+     * CLI for viewing balance screen
+     */
     public void balance() {
         System.out.printf("\n----BALANCE----\n" +
                 "Your current account balance is:\n" +
                 "%s", this.userSession.getLoggedUser().getBalance());
     }
 
+    /**
+     * CLI for withdrawal screen
+     */
     public void withdraw() {
         System.out.println("\n----WITHDRAW----\n" +
                 "Enter amount of money to be withdrawn");
@@ -34,6 +49,9 @@ public class UserAction {
         transactionHandler = null;
     }
 
+    /**
+     * CLI for deposit screen
+     */
     public void deposit() {
         System.out.println("\n----DEPOSIT----\n" +
                 "Enter amount of money to be deposited");
@@ -45,6 +63,9 @@ public class UserAction {
         transactionHandler = null;
     }
 
+    /**
+     * CLI for transferal screen
+     */
     public void transfer() {
         System.out.println("\n----TRANSFER----\n"
                 + "Enter iBan of the account to be transferred to");

@@ -26,27 +26,37 @@ public class Main extends Application {
      * @param args Starting argument
      */
     public static void main(String[] args) {
-
-        EncryptionDecryptionService eds = new EncryptionDecryptionService();
-        try {
-            Account encrypt = eds.encrypt(new Account("uuid", "iban", "pw", 10, true, true));
-            System.out.println(encrypt.toString());
-        } catch (GeneralSecurityException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+        // ? Not needed
+        printEncDecService();
 
         String name = "TBZ E-Banking";
 
 //        Cli cli = new Cli();
 //        cli.init(name);
+
         launch(args);
     }
 
+    /**
+     * The method used to start the JavaFX Stage
+     *
+     * @param primaryStage The stage used by FX
+     */
     @Override
     public void start(Stage primaryStage) {
         Stages stage = new Stages();
         stage.changeStage(primaryStage, null,"Login");
+    }
+
+    // ? not needed
+    static void printEncDecService() {
+        EncryptionDecryptionService eds = new EncryptionDecryptionService();
+        try {
+            Account encrypt = eds.encrypt(new Account("admin", "admin", "admin", 69420.0, true, true));
+            System.out.println("encrypted: " + encrypt.toString());
+            System.out.println("decrypted: " + eds.decrypt(encrypt).toString());
+        } catch (GeneralSecurityException | UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 }

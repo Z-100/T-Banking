@@ -1,6 +1,7 @@
 package ch.zeiter.marvin.functions;
 
 import ch.zeiter.marvin.blueprints.Account;
+import ch.zeiter.marvin.blueprints.InvalidPasswordException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,12 +26,14 @@ public class Login {
      * @param password input of the users password
      * @return the matched account
      */
-    public Account loginCheck(String iBan, String password) {
+    public Account loginCheck(String iBan, String password) throws InvalidPasswordException {
         for (Account account : this.accounts) {
             if (iBan.equals(account.getIban())
                     && password.equals(account.getPassword())) {
                 return account;
-            }
+            } else
+                throw new InvalidPasswordException(
+                        String.format("The entered password %s is wrong", password));
         }
         return null;
     }

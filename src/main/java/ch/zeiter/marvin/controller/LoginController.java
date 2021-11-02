@@ -1,6 +1,7 @@
 package ch.zeiter.marvin.controller;
 
 import ch.zeiter.marvin.blueprints.Account;
+import ch.zeiter.marvin.blueprints.InvalidPasswordException;
 import ch.zeiter.marvin.functions.JsonActions;
 import ch.zeiter.marvin.functions.Login;
 import ch.zeiter.marvin.other.Stages;
@@ -75,15 +76,23 @@ public class LoginController {
 	private boolean loginCheck(String iBan, String password) {
 		Login login = new Login();
 
-		Account account = login.loginCheck(iBan, password);
+		Account account = null;
+		try {
+			account = login.loginCheck(iBan, password);
+		} catch (InvalidPasswordException e) {
+			e.printStackTrace();
+		}
 
 		if (account != null) {
 			if (account.isApproved()) {
-				this.userSession = UserSession.session(account);
-				login = null;
-				System.out.printf("[INFO]\tUserSession created with UUID {%s}%n",
-						this.userSession.getLoggedUser().getUuid());
-				return true;
+				if (!account.isAdmin()) {
+					this.userSession = UserSession.session(account);
+					login = null;
+					System.out.printf("[INFO]\tUserSession created with UUID {%s}%n",
+							this.userSession.getLoggedUser().getUuid());
+					return true;
+				} else
+					errorLabel.setText("Admins have to use the CLI!");
 			}
 		} else if (accessCounter <= 0) {
 			errorLabel.setText("Too many attempts, try again later");

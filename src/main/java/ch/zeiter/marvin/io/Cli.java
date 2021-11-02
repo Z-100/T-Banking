@@ -1,8 +1,9 @@
 package ch.zeiter.marvin.io;
 
 import ch.zeiter.marvin.blueprints.Account;
+import ch.zeiter.marvin.blueprints.InvalidPasswordException;
 import ch.zeiter.marvin.functions.*;
-import ch.zeiter.marvin.other.RegisteredAccounts;
+import ch.zeiter.marvin.other.RegisteredAccount;
 import ch.zeiter.marvin.other.UserSession;
 import lombok.Getter;
 
@@ -23,7 +24,7 @@ public class Cli {
     @Getter
     private UserSession userSession;
     @Getter
-    private final RegisteredAccounts registeredAccounts;
+    private final RegisteredAccount registeredAccount;
     private final JsonActions jsonActions;
 
     private final Pattern pattern;
@@ -35,7 +36,7 @@ public class Cli {
         this.scanner = new Scanner(System.in);
         this.awaitingApproval = false;
         this.userSession = null;
-        this.registeredAccounts = new RegisteredAccounts();
+        this.registeredAccount = new RegisteredAccount();
         jsonActions = new JsonActions();
         this.pattern = Pattern.compile(
                 "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
@@ -130,7 +131,7 @@ public class Cli {
      */
     private void cliPageAdmin(String bankName) throws Exception {
         AdminAction adminAction = new AdminAction(
-                this.scanner, this.registeredAccounts);
+                this.scanner, this.registeredAccount);
         AccountHandler accountHandler = new AccountHandler(
                 this.scanner, this.userSession, this.jsonActions);
 
@@ -170,7 +171,12 @@ public class Cli {
             System.out.println("Enter password");
             String inputPassword = this.scanner.nextLine();
 
-            Account account = login.loginCheck(inputIban, inputPassword);
+            Account account = null;
+            try {
+                account = login.loginCheck(inputIban, inputPassword);
+            } catch (InvalidPasswordException e) {
+                e.printStackTrace();
+            }
 
             if (account != null) {
                 if (account.isApproved()) {
@@ -219,7 +225,7 @@ public class Cli {
                 matcher = pattern.matcher(inputPassword);
 
                 if (matcher.matches()) {
-                    System.out.println(this.registeredAccounts.
+                    System.out.println(this.registeredAccount.
                             addRegisteredAccount(inputPassword, "Accounts/registeredAccounts.json"));
                     this.awaitingApproval = true;
                     break;

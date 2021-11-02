@@ -9,12 +9,23 @@ public record UserSession(Account loggedUser) {
 
     public static UserSession userSession;
 
+    /**
+     * Method used to create or return the entire session
+     *
+     * @param account The given account
+     * @return The given account
+     */
     public static UserSession session(Account account) {
         if (userSession == null)
             userSession = new UserSession(account);
         return userSession;
     }
 
+    /**
+     * Returns the logged user
+     *
+     * @return The logged user
+     */
     public Account getLoggedUser() {
         return loggedUser;
     }

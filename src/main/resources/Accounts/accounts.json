@@ -1,10 +1,26 @@
 [
   {
-    "password": "ûç\u008E`\u008Bâ#£AR\u007F\u0094ÛsºRk¿»`\u008FÈjQy[\u0080ÖÄ\u0089\u008F@b",
-    "balance": 144.05070584845865,
-    "iban": "bëñ°9\u008DA\u0085cÛÖ\u0002\u0003Ô\u0012µº±Ýf6\u0095&\u008F\u0007ýJ5<»F£\u0004",
-    "isAdmin": false,
+    "password": "Í\u0095Òe\u00868ë\u00017VrÕ>dS\bÓ\u007FGðn@÷\u0001V])£¥=Ô\u0004A",
+    "balance": 1000.0,
+    "iban": "ýwNêíðÄ\t\u008F\u0011S½=\u0081Ô(\b\u0014\u0090ñ\u0007 ;ä´<÷ÆÛîW_G",
+    "isAdmin": true,
     "isApproved": true,
-    "uuid": "\u0082!pg¬Ãñò\u009D]Í\fQM8Ï*\u0012wïJ1»nàG\u007Fs\u0002\u009F\bs§\u008CaB\u0004²Q\u0082"
+    "uuid": "ó¹óÕä\u0090\u001Cþ\u0082\u008E\u0080Y}©q£þp\u0007Øñ0Ea¹þ\u001DN\tL\u0086ó\u0018"
+  },
+  {
+    "password": "4ù,Ç7\u009D0\u0015\u0095\u0091m@5þ¶¥8²\u0089V\u0096Ø\u0004?\u0083¥\f\u0016§Â\u0010H\u008AtÜ1\/(\u0094°±3-äïð»\u0081M¹\u0004éÛÇ\u000Bëo\u009B\u0086¡TJ\u0099·",
+    "balance": 6.0,
+    "iban": "û^±9L-Ì\u0011N°¢ÈÏ%»\u0004ké\u0001P:\u008BIXíÚ\u0085s¡p\u0098Ús.\u007F\u0014a",
+    "isAdmin": false,
+    "isApproved": false,
+    "uuid": "\u001C&¦\u0013!òËw\u0010\u0001<A<\u0096HÅ%Å1 äàÆ5³Q«\u008F\u0018!}n©XAì'e\u009C5"
+  },
+  {
+    "password": "\/\u0081¹t0­9èÃeÏá¯GÉâ|DY°\u0084\u0007\u0095\u001EH\u0019\u00076»-ïí57\u007F\u001B¡h¦'«=\u0005&\u008B¤E\u001B#\u0092]å-³öVÇJ»Göv\u0094\u0082",
+    "balance": 5.0,
+    "iban": "Âa7ê¶6A¶¶7\u008A\u009AôB\u000E{\u0088ü\u0084-Ü\u0088\u001F\\ë\u009A1î±­\u0016*ÞDo>\u0018",
+    "isAdmin": false,
+    "isApproved": false,
+    "uuid": "V\u0003\u0095å\u0012»yç\u0007\u001F\u0098øÞ{Ô\u0014ä?%\u001Fêä%ì»\u008F\u009FÿÇ\u0003û\n~²\u0093¶\u009Di§Í\u001F"
   }
 ]
