@@ -15,7 +15,7 @@ class AccountCreatorTest {
     AccountPropertyGenerator apg = accountCreator.getAcg();
 
     @Test
-    void createAccount() {
+    void canCreateNewAccount() {
 
         String password = "password";
 

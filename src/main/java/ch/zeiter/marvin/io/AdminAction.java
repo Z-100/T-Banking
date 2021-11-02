@@ -1,8 +1,8 @@
 package ch.zeiter.marvin.io;
 
 import ch.zeiter.marvin.functions.JsonActions;
-import ch.zeiter.marvin.functions.ListAccountsForApproval;
-import ch.zeiter.marvin.other.RegisteredAccounts;
+import ch.zeiter.marvin.functions.accountsAwaitingApproval;
+import ch.zeiter.marvin.other.RegisteredAccount;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -14,27 +14,42 @@ public class AdminAction {
     private final Scanner scanner;
 
     private final JsonActions jsonActions;
-    private RegisteredAccounts registeredAccounts;
+    private RegisteredAccount registeredAccount;
 
-    public AdminAction(Scanner scanner, RegisteredAccounts registeredAccounts) {
+    /**
+     * The constructor
+     *
+     * @param scanner The given scanner
+     * @param registeredAccount The given RegisteredAccount object
+     */
+    public AdminAction(Scanner scanner, RegisteredAccount registeredAccount) {
         this.scanner = scanner;
         this.jsonActions = new JsonActions();
-        this.registeredAccounts = registeredAccounts;
+        this.registeredAccount = registeredAccount;
     }
 
+    /**
+     * CLI interface to approve unregistered accounts
+     */
     public void approveAccount() {
-        System.out.println("\nAll accounts waiting for approval\n");
+        System.out.println("\nAll accounts waiting for approval");
 
-        ListAccountsForApproval lafa = new ListAccountsForApproval();
+        accountsAwaitingApproval lafa = new accountsAwaitingApproval();
         lafa.listAll();
 
         System.out.println("""
-                Enter index to approve single account
+                
                 Enter 'all' to approve every account
                 Enter nothing to approve no account""");
         String approveIndex = this.scanner.nextLine();
+
+        if (approveIndex.equals("all"))
+            lafa.approveAll();
     }
 
+    /**
+     * CLI interface for account creation
+     */
     public void createAccount() {
         System.out.println("""
                 Please choose a password
@@ -55,7 +70,7 @@ public class AdminAction {
             matcher = pattern.matcher(inputPassword);
 
             if (matcher.matches()) {
-                System.out.println(this.registeredAccounts.addRegisteredAccount(inputPassword, "Accounts/accounts.json"));
+                System.out.println(this.registeredAccount.addRegisteredAccount(inputPassword, "Accounts/accounts.json"));
                 break;
             } else {
                 System.out.println("Enter valid password\n");
@@ -63,12 +78,16 @@ public class AdminAction {
         }
     }
 
+    /**
+     * CLI interface to view statistics
+     */
     public void viewStats() {
         try {
             int accountsRegistered = this.jsonActions.getFromJson("Accounts/accounts.json").size();
             int accountsUnregistered = this.jsonActions.getFromJson("Accounts/registeredAccounts.json").size();
+
             System.out.printf("""
-                            Total count of accounts registered:\t %d
+                            Total count of accounts registered:  \t %d
                             Total count of accounts unregistered:\t %d
                             """,
                     accountsRegistered, accountsUnregistered);

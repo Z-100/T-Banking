@@ -1,6 +1,6 @@
 package ch.zeiter.marvin.controller;
 
-import ch.zeiter.marvin.other.RegisteredAccounts;
+import ch.zeiter.marvin.other.RegisteredAccount;
 import ch.zeiter.marvin.other.Stages;
 import ch.zeiter.marvin.other.UserSession;
 import javafx.fxml.FXML;
@@ -23,7 +23,7 @@ public class RegisterController {
     @FXML
     private Label errorLabel;
 
-    private final RegisteredAccounts registeredAccounts;
+    private final RegisteredAccount registeredAccount;
     public static final Pattern pattern = Pattern.compile(
             "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
 
@@ -32,7 +32,7 @@ public class RegisterController {
     private boolean awaitingApproval;
 
     public RegisterController() {
-        this.registeredAccounts = new RegisteredAccounts();
+        this.registeredAccount = new RegisteredAccount();
         this.awaitingApproval = false;
     }
 
@@ -56,7 +56,7 @@ public class RegisterController {
         while (!this.awaitingApproval) {
             if (matcher.matches()) {
                 System.out.println(
-                        this.registeredAccounts.addRegisteredAccount(password, "Accounts/registeredAccounts.json"));
+                        this.registeredAccount.addRegisteredAccount(password, "Accounts/registeredAccounts.json"));
                 this.awaitingApproval = true;
                 errorLabel.setVisible(false);
             } else {
