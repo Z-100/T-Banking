@@ -50,7 +50,6 @@ public class JsonActions {
                         acc.getUuid().equals(jsonAccount.getUuid()));
                 this.accounts.add(jsonAccount);
             }
-            default -> throw new InvalidJsonOptionException("Wrong option");
         }
 
         JSONArray jsonArrayAccounts = new JSONArray();
