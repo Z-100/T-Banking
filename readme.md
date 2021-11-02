@@ -12,8 +12,8 @@ Grade 5: 30p
 ## Class diagram
 1. Exists [:heavy_check_mark:]
 ## Sketch
-1. Rough at beginning [ ]
-2. Detailed in the end [ ]
+1. Rough at beginning [:heavy_check_mark:]
+2. Detailed in the end [:heavy_check_mark:]
 
 ****
 # Requirements code
@@ -24,23 +24,23 @@ Grade 5: 30p
       1. jsonActions, txt, dat
 4. JavaDoc 0 / 100% (must be at least 80%) [:heavy_check_mark:]
    1. @param, descriptions
-5. JUnit 100% coverage [ ]
+5. JUnit 100% coverage [:heavy_check_mark:]
    1. Min. 1 class & 2 methods [:heavy_check_mark:]
-6. Object-oriented stuff [ ]
+6. Object-oriented stuff [:heavy_check_mark:]
    1. Encapsulation / Information-hiding[:heavy_check_mark:]
-   2. Delegation [ ]
+   2. Delegation [:heavy_check_mark:]
    3. Aggregations / Composition [:heavy_check_mark:]
-   4. Well-structured [ ]
+   4. Well-structured [:heavy_check_mark:]
       1. Calc / data / I/O stuff
-   5. Clean code [ ]
+   5. Clean code [:heavy_check_mark:]
 
 ****
 # Documentation
-1. Design [ ]
-2. Planning [ ]
-3. Test cases [ ]
+1. Design [:heavy_check_mark:]
+2. Planning [:heavy_check_mark:]
+3. Test cases [:heavy_check_mark:]
 
 ****
 # Extra stuff
-1. Presentable to class [ ]
+1. Presentable to class [:heavy_check_mark:]
 
