@@ -1,3 +1,7 @@
+# Disclaimer
+Commits before "yes" are the original project. <br>
+Everything after that was used to perfect the application for a presentation
+
 # Banking Application
 ****
 # Requirements diagrams
